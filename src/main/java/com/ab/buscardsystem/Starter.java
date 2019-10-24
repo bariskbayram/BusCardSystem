@@ -6,8 +6,6 @@ public class Starter {
 
         System start = new System();
 
-
-
     }
 
 }
