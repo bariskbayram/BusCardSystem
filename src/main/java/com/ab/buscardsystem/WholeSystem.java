@@ -19,10 +19,10 @@ public class WholeSystem {
 
         DBFacade dbFacade = new DBFacade();
         this.dbFacade = dbFacade;
-        System.out.println("Wholesystem dbfacade nesnesini oluşturdu." + dbFacade);
+        System.out.println("Wholesystem dbfacade nesnesini oluşturdu: " + dbFacade);
         BusConsole busConsole = new BusConsole(dbFacade);
         this.busConsole = busConsole;
-        System.out.println("Wholesystem busconsole nesnesini oluşturdu." + busConsole);
+        System.out.println("Wholesystem busconsole nesnesini oluşturdu: " + busConsole);
 
     }
 
