@@ -3,6 +3,19 @@ package com.ab.buscardsystem;
 public class DBFacade {
 
     private Mapper mapper;
+    private IMapper DBMapper;
+
+    public void setMapper(Mapper mapper) {
+        this.mapper = mapper;
+    }
+
+    public void setDBMapper(IMapper DBMapper) {
+        this.DBMapper = DBMapper;
+    }
+
+    public IMapper getDBMapper() {
+        return DBMapper;
+    }
 
     public Mapper getMapper() {
         return mapper;
@@ -16,7 +29,7 @@ public class DBFacade {
 
     public Object get(int id, Class<?> parameterClass){
         System.out.println("dbFacade get fonksiyonu çalıştı.");
-        IMapper DBMapper = mapper.get(parameterClass);
+        DBMapper = mapper.get(parameterClass);
         System.out.println("Hangi mapperda tutulduğunu buldu.");
         return DBMapper.get(id);
     }

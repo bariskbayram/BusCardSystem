@@ -13,7 +13,7 @@ public class CardDBMapper implements IMapper {
     public CardDBMapper() {
         HashMap<Integer, Object> cardDBMapper = new HashMap<>();
         this.cardDBMapper = cardDBMapper;
-        Card card = new Card();
+        Card card = new Card(31);
         cardDBMapper.put(card.getId(), card);
     }
 
