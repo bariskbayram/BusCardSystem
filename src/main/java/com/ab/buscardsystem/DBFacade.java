@@ -12,18 +12,18 @@ public class DBFacade {
         this.DBMapper = DBMapper;
     }
 
-    public IMapper getDBMapper() {
-        return DBMapper;
-    }
     public Mapper getMapper() {
         return mapper;
     }
+    public IMapper getDBMapper() {
+        return DBMapper;
+    }
 
+    public DBFacade(){
+    }
 
     public Object get(int id, Class<?> parameterClass){
-        System.out.println("dbFacade get fonksiyonu çalıştı.");
         DBMapper = mapper.getMapper(parameterClass);
-        System.out.println("Hangi mapperda tutulduğunu buldu.");
         return DBMapper.getItem(id);
     }
 

@@ -19,15 +19,16 @@ public class Mapper {
         this.tappingCardDBMapper = tappingCardDBMapper;
     }
 
+    public HashMap<Class<?>, IMapper> getMapper() {
+        return mapper;
+    }
     public CardDBMapper getCardDBMapper() {
         return cardDBMapper;
     }
     public TappingCardDBMapper getTappingCardDBMapper() {
         return tappingCardDBMapper;
     }
-    public HashMap<Class<?>, IMapper> getMapper() {
-        return mapper;
-    }
+
 
     public Mapper() {
 

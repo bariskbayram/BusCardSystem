@@ -34,7 +34,7 @@ class DBFacadeTest {
 
         when(mapper.getMapper(Card.class)).thenReturn(cardDBMapper);
         when(cardDBMapper.getItem(anyInt())).thenReturn(card);
-
+        
         assertEquals(card, dbFacade.get(anyInt(), Card.class));
 
         verify(mapper).getMapper(Card.class);
@@ -52,6 +52,7 @@ class DBFacadeTest {
         assertEquals(tappingCard, dbFacade.get(anyInt(), TappingCard.class));
         assertEquals(tappingCard, dbFacade.get(anyInt(), TappingCard.class));
         assertEquals(tappingCard, dbFacade.get(anyInt(), TappingCard.class));
+
         verify(mapper, times(3)).getMapper(TappingCard.class);
         verify(tappingCardDBMapper, times(3)).getItem(anyInt());
     }

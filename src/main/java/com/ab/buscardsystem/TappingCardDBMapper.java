@@ -14,6 +14,9 @@ public class TappingCardDBMapper implements IMapper {
         return tappingCardDBMapper;
     }
 
+    public TappingCardDBMapper(){
+    }
+
     @Override
     public Object getItem(int id) {
         return tappingCardDBMapper.get(id);

@@ -7,6 +7,6 @@ public class Starter {
         WholeSystem start = new WholeSystem();
         System.out.println("Bütün sistem oluşturuldu: " + start);
         start.start();
-    }
 
+    }
 }

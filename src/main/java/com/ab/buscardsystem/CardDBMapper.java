@@ -15,11 +15,9 @@ public class CardDBMapper implements IMapper {
     }
 
     public CardDBMapper() {
-
         Card card = new Card(31);
         cardDBMapper.put(card.getId(), card);
     }
-
 
     @Override
     public Object getItem(int id) {

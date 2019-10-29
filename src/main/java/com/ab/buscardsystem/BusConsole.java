@@ -19,11 +19,11 @@ public class BusConsole {
     public Card getCard() {
         return card;
     }
-    public DBFacade getDbFacade() {
-        return dbFacade;
-    }
     public TappingCard getTappingCard() {
         return tappingCard;
+    }
+    public DBFacade getDbFacade() {
+        return dbFacade;
     }
 
     public BusConsole(DBFacade dbFacade){
@@ -32,15 +32,10 @@ public class BusConsole {
 
     public void enterCardId(int cardId){
 
-        tappingCard = new TappingCard();
-
-        card = (Card) dbFacade.get(cardId, Card.class);  //spesifik obje
-
-        tappingCard.set(card);  //tapping cardın set fonksiyonu bu spesifik card objesi ile calıstırıldı
-                                //tapping card nesnesinden hesaplamalar yapıldı ve tappingCard degistirildi
-        dbFacade.put(tappingCard); //bu tapping card nesnesi dbfacace yardımı ile gerekli yere konuldu
-
-        System.out.println("işlem kaydedildi ama henüz CardId kontrolü yok");
+        tappingCard = new TappingCard(3);
+        card = (Card) dbFacade.get(cardId, Card.class);
+        tappingCard.set(card);
+        dbFacade.put(tappingCard);
 
     }
 
