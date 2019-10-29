@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CardDBMapperTest {
+class CardDBTableMapperTest {
 
     @InjectMocks
-    TappingCardDBMapper cardDBMapperTest;
+    TappingCardDB cardDBMapperTest;
 
     @Mock
     HashMap hashMapTest;

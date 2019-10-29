@@ -8,6 +8,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.sql.SQLException;
+
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 
@@ -22,12 +24,12 @@ class WholeSystemTest {
 
     @Test
     @DisplayName("Yaraklara geldik")
-    public void startTest(){
+    public void startTest() throws SQLException {
 
-        doNothing().when(busConsole).enterCardId(32);
+        doNothing().when(busConsole).enterCardId(1, true);
         wholeSystem.start();
 
-        verify(busConsole).enterCardId(32);
+        verify(busConsole).enterCardId(1, true);
 
     }
 

@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class TappingCardDBMapperTest {
+class TappingCardDBTableMapperTest {
 
     @InjectMocks
-    TappingCardDBMapper tappingCardDBMapperTest;
+    TappingCardDB tappingCardDBTest;
 
     @Mock
     HashMap hashMapTest;
@@ -25,14 +25,14 @@ class TappingCardDBMapperTest {
     @DisplayName("getMapperMethod of TappingCardDBMapper Test")
     public void getMapperMethodTest(){
 
-        TappingCard tappingCardTest1 = new TappingCard(1);
-        TappingCard tappingCardTest2 = new TappingCard(2);
+        TappingCard tappingCardTest1 = new TappingCard(1, 1);
+        TappingCard tappingCardTest2 = new TappingCard(2, 2);
 
         when(hashMapTest.get(tappingCardTest1.getId())).thenReturn(tappingCardTest1);
         when(hashMapTest.get(tappingCardTest2.getId())).thenReturn(tappingCardTest2);
 
-        assertEquals(tappingCardTest1,tappingCardDBMapperTest.getItem(1));
-        assertEquals(tappingCardTest2,tappingCardDBMapperTest.getItem(2));
+        assertEquals(tappingCardTest1, tappingCardDBTest.getItem(1));
+        assertEquals(tappingCardTest2, tappingCardDBTest.getItem(2));
 
 
     }

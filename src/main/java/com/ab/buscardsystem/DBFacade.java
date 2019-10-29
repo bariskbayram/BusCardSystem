@@ -2,34 +2,33 @@ package com.ab.buscardsystem;
 
 public class DBFacade {
 
-    private Mapper mapper = new Mapper();
-    private IMapper DBMapper;
-
-    public void setMapper(Mapper mapper) {
-        this.mapper = mapper;
-    }
-    public void setDBMapper(IMapper DBMapper) {
-        this.DBMapper = DBMapper;
-    }
-
-    public Mapper getMapper() {
-        return mapper;
-    }
-    public IMapper getDBMapper() {
-        return DBMapper;
-    }
+    private TableMapper tableMapper = new TableMapper();
+    private IDataBase iDataBase;
 
     public DBFacade(){
     }
 
     public Object get(int id, Class<?> parameterClass){
-        DBMapper = mapper.getMapper(parameterClass);
-        return DBMapper.getItem(id);
+        iDataBase = tableMapper.getMapper(parameterClass);
+        return iDataBase.getItem(id);
     }
 
     public void put(ParentObject object){
-        IMapper DBMapper = mapper.getMapper(object.getClass());
+        IDataBase DBMapper = tableMapper.getMapper(object.getClass());
         DBMapper.putItem(object);
+    }
+
+    public void setTableMapper(TableMapper tableMapper) {
+        this.tableMapper = tableMapper;
+    }
+    public void setiDataBase(IDataBase iDataBase) {
+        this.iDataBase = iDataBase;
+    }
+    public TableMapper getTableMapper() {
+        return tableMapper;
+    }
+    public IDataBase getiDataBase() {
+        return iDataBase;
     }
 
 }
