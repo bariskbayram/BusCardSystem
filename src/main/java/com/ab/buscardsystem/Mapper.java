@@ -5,9 +5,19 @@ import java.util.Map;
 
 public class Mapper {
 
-    private HashMap<Class<?>, IMapper> mapper;
-    private CardDBMapper cardDBMapper;
-    private TappingCardDBMapper tappingCardDBMapper;
+    private HashMap<Class<?>, IMapper> mapper = new HashMap<>();
+    private CardDBMapper cardDBMapper = new CardDBMapper();
+    private TappingCardDBMapper tappingCardDBMapper = new TappingCardDBMapper();
+
+    public void setMapper(HashMap<Class<?>, IMapper> mapper) {
+        this.mapper = mapper;
+    }
+    public void setCardDBMapper(CardDBMapper cardDBMapper) {
+        this.cardDBMapper = cardDBMapper;
+    }
+    public void setTappingCardDBMapper(TappingCardDBMapper tappingCardDBMapper) {
+        this.tappingCardDBMapper = tappingCardDBMapper;
+    }
 
     public CardDBMapper getCardDBMapper() {
         return cardDBMapper;
@@ -21,20 +31,12 @@ public class Mapper {
 
     public Mapper() {
 
-        HashMap<Class<?>, IMapper> mapper = new HashMap<>(); //Object tutmak yerine IMapper tipi de tutulabilir.
-        this.mapper = mapper;
-
-        CardDBMapper cardDBMapper = new CardDBMapper();
-        this.cardDBMapper = cardDBMapper;
-        TappingCardDBMapper tappingCardDBMapper = new TappingCardDBMapper();
-        this.tappingCardDBMapper = tappingCardDBMapper;
-
         mapper.put(Card.class, cardDBMapper);
         mapper.put(TappingCard.class, tappingCardDBMapper);
 
     }
 
-    public IMapper get(Class<?> parameterClass){
+    public IMapper getMapper(Class<?> parameterClass){
         return mapper.get(parameterClass);
     }
 }

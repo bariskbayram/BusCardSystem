@@ -12,11 +12,6 @@ class BusConsoleTest {
     @DisplayName("StartingTest for enterCardId Method")
     void enterCardIdTest() {
 
-        BusConsole busConsole = mock(BusConsole.class);
-        doNothing().when(busConsole).enterCardId(anyInt());
-
-        busConsole.enterCardId(anyInt());
-        verify(busConsole).enterCardId(anyInt());
 
     }
 }

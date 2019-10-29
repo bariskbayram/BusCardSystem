@@ -4,33 +4,26 @@ import java.util.Scanner;
 
 public class WholeSystem {
 
-    private DBFacade dbFacade;
-    private BusConsole busConsole;
+    private DBFacade dbFacade  = new DBFacade();
+    private BusConsole busConsole = new BusConsole(dbFacade);
+
+    public void setDbFacade(DBFacade dbFacade) {
+        this.dbFacade = dbFacade;
+    }
+    public void setBusConsole(BusConsole busConsole) {
+        this.busConsole = busConsole;
+    }
 
     public DBFacade getDbFacade() {
         return dbFacade;
     }
-
     public BusConsole getBusConsole() {
         return busConsole;
     }
 
-    public WholeSystem() {
-
-        DBFacade dbFacade = new DBFacade();
-        this.dbFacade = dbFacade;
-        System.out.println("Wholesystem dbfacade nesnesini oluşturdu: " + dbFacade);
-        BusConsole busConsole = new BusConsole(dbFacade);
-        this.busConsole = busConsole;
-        System.out.println("Wholesystem busconsole nesnesini oluşturdu: " + busConsole);
-
-    }
-
     public void start(){
-        int cardId;
-        System.out.print("CardId giriniz: ");
-        Scanner deneme = new Scanner(System.in);
-        cardId = deneme.nextInt();
+
+        int cardId = 32;
 
         busConsole.enterCardId(cardId);
     }

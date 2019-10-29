@@ -2,8 +2,8 @@ package com.ab.buscardsystem;
 
 public interface IMapper {
 
-    public Object get(int id);
-    public void put(ParentObject object);
+    public Object getItem(int id);
+    public void putItem(ParentObject object);
 
 
 }

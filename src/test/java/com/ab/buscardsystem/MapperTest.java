@@ -2,31 +2,24 @@ package com.ab.buscardsystem;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@ExtendWith(MockitoExtension.class)
 class MapperTest {
 
-    @Test
-    @DisplayName("MapperCreationTest")
-    void getMapper() {
-        Mapper mapper = new Mapper();
-        assertNotNull(mapper.getMapper());
-    }
+   @InjectMocks
+    Mapper mapper;
+   @Mock
+    HashMap mapperHashmap;
 
-    @Test
-    @DisplayName("CardDBMapperCreationTest")
-    void getCardDBMapper() {
-        Mapper mapper = new Mapper();
-        assertNotNull(mapper.getCardDBMapper());
-    }
 
-    @Test
-    @DisplayName("TappingCardDBMapperCreationTest")
-    void getTappingCardDBMapper() {
-        Mapper mapper = new Mapper();
-        assertNotNull(mapper.getTappingCardDBMapper());
-    }
+   @Test
+    void
+
 }
