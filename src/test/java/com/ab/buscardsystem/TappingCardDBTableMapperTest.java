@@ -25,8 +25,8 @@ class TappingCardDBTableMapperTest {
     @DisplayName("getMapperMethod of TappingCardDBMapper Test")
     public void getMapperMethodTest(){
 
-        TappingCard tappingCardTest1 = new TappingCard(1);
-        TappingCard tappingCardTest2 = new TappingCard(2);
+        TappingCard tappingCardTest1 = new TappingCard(1, 1);
+        TappingCard tappingCardTest2 = new TappingCard(2, 2);
 
         when(hashMapTest.get(tappingCardTest1.getId())).thenReturn(tappingCardTest1);
         when(hashMapTest.get(tappingCardTest2.getId())).thenReturn(tappingCardTest2);

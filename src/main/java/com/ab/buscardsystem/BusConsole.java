@@ -1,11 +1,58 @@
 package com.ab.buscardsystem;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.HashMap;
+
 public class BusConsole {
 
     private Card card;
+    private HashMap<Integer, LocalTime> invalidList = new HashMap<>();
     private TappingCard tappingCard;
     private DBFacade dbFacade;
+    private int busConsoleId = 1;
+    private LocalDate localDate = LocalDate.now();
+    private LocalTime localTime = LocalTime.now();
 
+    public BusConsole(DBFacade dbFacade){
+        this.dbFacade = dbFacade;
+    }
+
+    public void enterCardId(int cardId, boolean tamBasılmışMı){
+
+        System.out.println(tamBasılmışMı);
+        if(tamBasılmışMı == true) {
+            tappingCard = new TappingCard(busConsoleId, 3.25);
+        }else {
+            if(invalidList.containsKey(cardId) == true &&
+                    (localTime.getMinute() - invalidList.get(cardId).getMinute()) < 90 ){
+                System.out.println("Gösterilmiş Kart!");
+                return;
+            }
+            tappingCard = new TappingCard(busConsoleId);
+        }
+        card = (Card) dbFacade.get(cardId, Card.class);
+        tappingCard.set(card);
+        if(tappingCard.getAmount() > tappingCard.getCurrentBalance())
+            return;
+        dbFacade.put(card);
+        dbFacade.put(tappingCard);
+        invalidList.put(cardId, localTime);
+    }
+
+    public int getBusConsoleId() {
+        return busConsoleId;
+    }
+    public void setBusConsoleId(int busConsoleId) {
+        this.busConsoleId = busConsoleId;
+    }
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+    public LocalTime getLocalTime() {
+        return localTime;
+    }
     public void setCard(Card card) {
         this.card = card;
     }
@@ -15,7 +62,6 @@ public class BusConsole {
     public void setDbFacade(DBFacade dbFacade) {
         this.dbFacade = dbFacade;
     }
-
     public Card getCard() {
         return card;
     }
@@ -25,18 +71,11 @@ public class BusConsole {
     public DBFacade getDbFacade() {
         return dbFacade;
     }
-
-    public BusConsole(DBFacade dbFacade){
-        this.dbFacade = dbFacade; //BusConsole bizim oluşturduğumuz dbFacade'i bilmiyordu.Bilir hale geldi.
+    public HashMap<Integer, LocalTime> getInvalidList() {
+        return invalidList;
     }
-
-    public void enterCardId(int cardId){
-
-        tappingCard = new TappingCard(3);
-        card = (Card) dbFacade.get(cardId, Card.class);
-        tappingCard.set(card);
-        dbFacade.put(tappingCard);
-
+    public void setInvalidList(HashMap<Integer, LocalTime> invalidList) {
+        this.invalidList = invalidList;
     }
 
 }

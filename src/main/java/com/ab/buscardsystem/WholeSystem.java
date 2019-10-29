@@ -7,29 +7,31 @@ public class WholeSystem {
     private DBFacade dbFacade = new DBFacade();
     private BusConsole busConsole = new BusConsole(dbFacade);
 
-    public void setDbFacade(DBFacade dbFacade) {
-        this.dbFacade = dbFacade;
-    }
-
-    public void setBusConsole(BusConsole busConsole) {
-        this.busConsole = busConsole;
-    }
-
-    public DBFacade getDbFacade() {
-        return dbFacade;
-    }
-
-    public BusConsole getBusConsole() {
-        return busConsole;
-    }
-
     public WholeSystem() {
     }
 
     public void start() {
 
-        int cardId = 1;
-        busConsole.enterCardId(cardId);
+        while (true) {
+            boolean tamBasılmışMı = false;
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Tam kart özelliği aktif edilsin mi?Aktif etmek için 1 yazınız.");
+            if(scanner.nextInt() == 1)
+                tamBasılmışMı = true;
+            busConsole.enterCardId(1, tamBasılmışMı);
+        }
+    }
 
+    public void setDbFacade(DBFacade dbFacade) {
+        this.dbFacade = dbFacade;
+    }
+    public void setBusConsole(BusConsole busConsole) {
+        this.busConsole = busConsole;
+    }
+    public DBFacade getDbFacade() {
+        return dbFacade;
+    }
+    public BusConsole getBusConsole() {
+        return busConsole;
     }
 }

@@ -46,7 +46,7 @@ class TableMapperTest {
     @DisplayName("getMethod of Mapper Test")
     public void getMethodTest(){
 
-        TappingCardDB tappingCardDB = new TappingCardDB();
+        TappingCardDB tappingCardDB = new TappingCardDB(new SqliteDB());
         CardDB cardDB = new CardDB(new SqliteDB());
 
         when(hashMapTest.get(TappingCard.class)).thenReturn(tappingCardDB);
