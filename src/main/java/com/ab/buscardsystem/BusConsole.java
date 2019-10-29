@@ -6,14 +6,24 @@ public class BusConsole {
     private TappingCard tappingCard;
     private DBFacade dbFacade;
 
+    public void setCard(Card card) {
+        this.card = card;
+    }
+    public void setTappingCard(TappingCard tappingCard) {
+        this.tappingCard = tappingCard;
+    }
+    public void setDbFacade(DBFacade dbFacade) {
+        this.dbFacade = dbFacade;
+    }
+
     public Card getCard() {
         return card;
     }
-    public DBFacade getDbFacade() {
-        return dbFacade;
-    }
     public TappingCard getTappingCard() {
         return tappingCard;
+    }
+    public DBFacade getDbFacade() {
+        return dbFacade;
     }
 
     public BusConsole(DBFacade dbFacade){
@@ -22,13 +32,10 @@ public class BusConsole {
 
     public void enterCardId(int cardId){
 
-        tappingCard = new TappingCard();
-        System.out.println("Busconsole tappingCard nesnesini oluşturdu: " + tappingCard);
+        tappingCard = new TappingCard(3);
         card = (Card) dbFacade.get(cardId, Card.class);
-        System.out.println("Bus console card nesnesini çekti: " + card);
         tappingCard.set(card);
         dbFacade.put(tappingCard);
-        System.out.println("işlem kaydedildi ama henüz CardId kontrolü yok");
 
     }
 

@@ -8,9 +8,8 @@ public class TappingCard extends ParentObject {
         return id;
     }
 
-    public TappingCard(){
-        int tappingCardId = 31;
-        this.id = tappingCardId;
+    public TappingCard(int inputId){
+        this.id = inputId;
     }
 
     public void set(Card card){

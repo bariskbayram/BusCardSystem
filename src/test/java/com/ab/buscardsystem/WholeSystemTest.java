@@ -2,22 +2,33 @@ package com.ab.buscardsystem;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
+
+@ExtendWith(MockitoExtension.class)
 class WholeSystemTest {
 
-    @Test
-    @DisplayName("CreationDBFacadeConsoleTest")
-    void getDbFacade() {
-        WholeSystem wholeSystem = new WholeSystem();
-        assertNotNull(wholeSystem.getDbFacade());
-    }
+    @InjectMocks
+    WholeSystem wholeSystem;
+
+    @Mock
+    BusConsole busConsole;
 
     @Test
-    @DisplayName("CreationBusConsoleTest")
-    void getBusConsole() {
-        WholeSystem wholeSystem = new WholeSystem();
-        assertNotNull(wholeSystem.getBusConsole());
+    @DisplayName("Yaraklara geldik")
+    public void startTest(){
+
+        doNothing().when(busConsole).enterCardId(32);
+        wholeSystem.start();
+
+        verify(busConsole).enterCardId(32);
+
     }
 
 }

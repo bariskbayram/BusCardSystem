@@ -32,13 +32,13 @@ class DBFacadeTest {
     @DisplayName("getTest with Card")
     public void getCardTest() {
 
-        when(mapper.get(Card.class)).thenReturn(cardDBMapper);
-        when(cardDBMapper.get(anyInt())).thenReturn(card);
-
-        verify(mapper).get(Card.class);
-        verify(cardDBMapper).get(anyInt());
+        when(mapper.getMapper(Card.class)).thenReturn(cardDBMapper);
+        when(cardDBMapper.getItem(anyInt())).thenReturn(card);
         
         assertEquals(card, dbFacade.get(anyInt(), Card.class));
+
+        verify(mapper).getMapper(Card.class);
+        verify(cardDBMapper).getItem(anyInt());
 
     }
 
@@ -46,13 +46,14 @@ class DBFacadeTest {
     @DisplayName("getTest with TappingCard")
     void getTappingCardTest() {
 
-        when(mapper.get(TappingCard.class)).thenReturn(tappingCardDBMapper);
-        when(tappingCardDBMapper.get(anyInt())).thenReturn(tappingCard);
+        when(mapper.getMapper(TappingCard.class)).thenReturn(tappingCardDBMapper);
+        when(tappingCardDBMapper.getItem(anyInt())).thenReturn(tappingCard);
 
         assertEquals(tappingCard, dbFacade.get(anyInt(), TappingCard.class));
         assertEquals(tappingCard, dbFacade.get(anyInt(), TappingCard.class));
         assertEquals(tappingCard, dbFacade.get(anyInt(), TappingCard.class));
-        verify(mapper, times(3)).get(TappingCard.class);
-        verify(tappingCardDBMapper, times(3)).get(anyInt());
+
+        verify(mapper, times(3)).getMapper(TappingCard.class);
+        verify(tappingCardDBMapper, times(3)).getItem(anyInt());
     }
 }
