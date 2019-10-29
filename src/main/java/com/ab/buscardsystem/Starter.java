@@ -5,13 +5,13 @@ import java.sql.SQLException;
 
 public class Starter {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args){
 
         WholeSystem start = new WholeSystem();
         System.out.println("Bütün sistem oluşturuldu: " + start);
         start.start();
 
-        String find = "Allah";
+        /*String find = "Zillah";
         String query1 = "INSERT INTO Card (Name, Surname, Bakiye) VALUES ('Zillah', 'ü-teala', 999)";
         SqliteDB sqliteDB = new SqliteDB();
 
@@ -31,5 +31,6 @@ public class Starter {
 
         sqliteDB.closeDB();
 
+*/
     }
 }

@@ -8,6 +8,10 @@ public class SqliteDB {
 
 
     SqliteDB(){
+
+    }
+
+    public void connectDB(){
         try{
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:BusCardSystemDB");

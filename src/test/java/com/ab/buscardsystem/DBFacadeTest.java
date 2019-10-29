@@ -15,15 +15,15 @@ import static org.mockito.Mockito.*;
 class DBFacadeTest {
 
     @Mock
-    private IMapper cardDBMapper;
+    private IDataBase cardDBMapper;
     @Mock
-    private Mapper mapper;
+    private TableMapper tableMapper;
     @Mock
     private Card card;
     @Mock
     private TappingCard tappingCard;
     @Mock
-    private TappingCardDBMapper tappingCardDBMapper;
+    private TappingCardDB tappingCardDB;
 
     @InjectMocks
     private DBFacade dbFacade;
@@ -32,12 +32,12 @@ class DBFacadeTest {
     @DisplayName("getTest with Card")
     public void getCardTest() {
 
-        when(mapper.getMapper(Card.class)).thenReturn(cardDBMapper);
+        when(tableMapper.getMapper(Card.class)).thenReturn(cardDBMapper);
         when(cardDBMapper.getItem(anyInt())).thenReturn(card);
         
         assertEquals(card, dbFacade.get(anyInt(), Card.class));
 
-        verify(mapper).getMapper(Card.class);
+        verify(tableMapper).getMapper(Card.class);
         verify(cardDBMapper).getItem(anyInt());
 
     }
@@ -46,14 +46,14 @@ class DBFacadeTest {
     @DisplayName("getTest with TappingCard")
     void getTappingCardTest() {
 
-        when(mapper.getMapper(TappingCard.class)).thenReturn(tappingCardDBMapper);
-        when(tappingCardDBMapper.getItem(anyInt())).thenReturn(tappingCard);
+        when(tableMapper.getMapper(TappingCard.class)).thenReturn(tappingCardDB);
+        when(tappingCardDB.getItem(anyInt())).thenReturn(tappingCard);
 
         assertEquals(tappingCard, dbFacade.get(anyInt(), TappingCard.class));
         assertEquals(tappingCard, dbFacade.get(anyInt(), TappingCard.class));
         assertEquals(tappingCard, dbFacade.get(anyInt(), TappingCard.class));
 
-        verify(mapper, times(3)).getMapper(TappingCard.class);
-        verify(tappingCardDBMapper, times(3)).getItem(anyInt());
+        verify(tableMapper, times(3)).getMapper(TappingCard.class);
+        verify(tappingCardDB, times(3)).getItem(anyInt());
     }
 }

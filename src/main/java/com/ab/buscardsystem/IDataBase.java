@@ -1,6 +1,8 @@
 package com.ab.buscardsystem;
 
-public interface IMapper {
+import java.sql.SQLException;
+
+public interface IDataBase {
 
     Object getItem(int id);
     void putItem(ParentObject object);

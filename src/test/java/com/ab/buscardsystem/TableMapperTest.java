@@ -13,31 +13,31 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class MapperTest {
+class TableMapperTest {
 
     @Test
     @DisplayName("MapperCreationTest")
     void getMapper() {
-        Mapper mapper = new Mapper();
-        assertNotNull(mapper.getMapper());
+        TableMapper tableMapper = new TableMapper();
+        assertNotNull(tableMapper.getMapper());
     }
 
     @Test
     @DisplayName("CardDBMapperCreationTest")
     void getCardDBMapper() {
-        Mapper mapper = new Mapper();
-        assertNotNull(mapper.getCardDBMapper());
+        TableMapper tableMapper = new TableMapper();
+        assertNotNull(tableMapper.getCardDB());
     }
 
     @Test
     @DisplayName("TappingCardDBMapperCreationTest")
     void getTappingCardDBMapper() {
-        Mapper mapper = new Mapper();
-        assertNotNull(mapper.getTappingCardDBMapper());
+        TableMapper tableMapper = new TableMapper();
+        assertNotNull(tableMapper.getTappingCardDB());
     }
 
     @InjectMocks
-    Mapper mapperTest;
+    TableMapper tableMapperTest;
 
     @Mock
     HashMap hashMapTest;
@@ -46,14 +46,14 @@ class MapperTest {
     @DisplayName("getMethod of Mapper Test")
     public void getMethodTest(){
 
-        TappingCardDBMapper tappingCardDBMapper = new TappingCardDBMapper();
-        CardDBMapper cardDBMapper = new CardDBMapper();
+        TappingCardDB tappingCardDB = new TappingCardDB();
+        CardDB cardDB = new CardDB(new SqliteDB());
 
-        when(hashMapTest.get(TappingCard.class)).thenReturn(tappingCardDBMapper);
-        when(hashMapTest.get(Card.class)).thenReturn(cardDBMapper);
+        when(hashMapTest.get(TappingCard.class)).thenReturn(tappingCardDB);
+        when(hashMapTest.get(Card.class)).thenReturn(cardDB);
 
-        assertEquals(tappingCardDBMapper,mapperTest.getMapper(TappingCard.class));
-        assertEquals(cardDBMapper,mapperTest.getMapper(Card.class));
+        assertEquals(tappingCardDB, tableMapperTest.getMapper(TappingCard.class));
+        assertEquals(cardDB, tableMapperTest.getMapper(Card.class));
 
     }
 

@@ -28,7 +28,7 @@ public class WholeSystem {
 
     public void start() {
 
-        int cardId = 32;
+        int cardId = 1;
         busConsole.enterCardId(cardId);
 
     }

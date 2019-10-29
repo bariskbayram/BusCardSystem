@@ -2,7 +2,7 @@ package com.ab.buscardsystem;
 
 import java.util.HashMap;
 
-public class TappingCardDBMapper implements IMapper {
+public class TappingCardDB implements IDataBase {
 
     private HashMap<Integer, Object> tappingCardDBMapper = new HashMap<>();
 
@@ -14,7 +14,7 @@ public class TappingCardDBMapper implements IMapper {
         return tappingCardDBMapper;
     }
 
-    public TappingCardDBMapper(){
+    public TappingCardDB(){
     }
 
     @Override
