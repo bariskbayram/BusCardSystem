@@ -12,7 +12,7 @@ public class Starter {
         start.start();
 
         String find = "Allah";
-        String query1 = "INSERT INTO Card (Name, Surname, Bakiye) VALUES ('Allah', 'ü-teala', 999)";
+        String query1 = "INSERT INTO Card (Name, Surname, Bakiye) VALUES ('Zillah', 'ü-teala', 999)";
         SqliteDB sqliteDB = new SqliteDB();
 
 
@@ -20,6 +20,7 @@ public class Starter {
         PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query2);
         preparedStatement.setString(1,find);
         preparedStatement.executeUpdate();
+
 
         sqliteDB.listCards();
 
