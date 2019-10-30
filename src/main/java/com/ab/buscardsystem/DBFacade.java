@@ -4,9 +4,8 @@ public class DBFacade {
 
     private TableMapper tableMapper = new TableMapper();
     private IDataBase iDataBase;
-
-    public DBFacade(){
-    }
+    private BusConsole busConsole;
+    private DepositCenterConsole depositCenterConsole;
 
     public Object get(int id, Class<?> parameterClass){
         iDataBase = tableMapper.getMapper(parameterClass);
@@ -29,6 +28,21 @@ public class DBFacade {
     }
     public IDataBase getiDataBase() {
         return iDataBase;
+    }
+    public BusConsole getBusConsole() {
+        return busConsole;
+    }
+
+    public void setBusConsole(BusConsole busConsole) {
+        this.busConsole = busConsole;
+    }
+
+    public DepositCenterConsole getDepositCenterConsole() {
+        return depositCenterConsole;
+    }
+
+    public void setDepositCenterConsole(DepositCenterConsole depositCenterConsole) {
+        this.depositCenterConsole = depositCenterConsole;
     }
 
 }

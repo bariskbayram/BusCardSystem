@@ -2,12 +2,12 @@ package com.ab.buscardsystem;
 
 import java.sql.PreparedStatement;
 
-public class ReceiptDB implements IDataBase {
+public class CardDepositReceiptDB implements IDataBase {
 
     private SqliteDB sqliteDB;
-    private Receipt receipt;
+    private CardDepositReceipt cardDepositReceipt;
 
-    public ReceiptDB(SqliteDB sqliteDB){
+    public CardDepositReceiptDB(SqliteDB sqliteDB){
         this.sqliteDB = sqliteDB;
     }
 
@@ -41,23 +41,23 @@ public class ReceiptDB implements IDataBase {
         }
         System.out.println("TapingCard döndürüldü.");
         return tappingCard;*/
-       return receipt;
+       return cardDepositReceipt;
     }
 
     @Override
     public void putItem(ParentObject object) {
         try {
             sqliteDB.connectDB();
-            String query = "INSERT INTO Receipt (CardId, DepositConsoleId, Date, Time, Payment, Change, Amount) VALUES (?,?,?,?,?,?,?)";
+            String query = "INSERT INTO CardDepositReceipt (CardId, DepositConsoleId, Date, Time, Payment, Change, Amount) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
-            Receipt receipt = (Receipt) object;
-            preparedStatement.setString(1, String.valueOf(receipt.getCardId()));
-            preparedStatement.setString(2, String.valueOf(receipt.getDepositConsoleId()));
-            preparedStatement.setString(3, String.valueOf(receipt.getLocalDate()));
-            preparedStatement.setString(4, String.valueOf(receipt.getLocalTime()));
-            preparedStatement.setString(5, String.valueOf(receipt.getPayment()));
-            preparedStatement.setString(6, String.valueOf(receipt.getChange()));
-            preparedStatement.setString(7, String.valueOf(receipt.getAmount()));
+            CardDepositReceipt cardDepositReceipt = (CardDepositReceipt) object;
+            preparedStatement.setString(1, String.valueOf(cardDepositReceipt.getCardId()));
+            preparedStatement.setString(2, String.valueOf(cardDepositReceipt.getDepositCenterConsoleId()));
+            preparedStatement.setString(3, String.valueOf(cardDepositReceipt.getLocalDate()));
+            preparedStatement.setString(4, String.valueOf(cardDepositReceipt.getLocalTime()));
+            preparedStatement.setString(5, String.valueOf(cardDepositReceipt.getPayment()));
+            preparedStatement.setString(6, String.valueOf(cardDepositReceipt.getChange()));
+            preparedStatement.setString(7, String.valueOf(cardDepositReceipt.getAmount()));
             preparedStatement.executeUpdate();
             sqliteDB.closeDB();
         }catch (Exception e){
@@ -71,10 +71,10 @@ public class ReceiptDB implements IDataBase {
     public void setSqliteDB(SqliteDB sqliteDB) {
         this.sqliteDB = sqliteDB;
     }
-    public Receipt getReceipt() {
-        return receipt;
+    public CardDepositReceipt getCardDepositReceipt() {
+        return cardDepositReceipt;
     }
-    public void setReceipt(Receipt receipt) {
-        this.receipt = receipt;
+    public void setCardDepositReceipt(CardDepositReceipt cardDepositReceipt) {
+        this.cardDepositReceipt = cardDepositReceipt;
     }
 }

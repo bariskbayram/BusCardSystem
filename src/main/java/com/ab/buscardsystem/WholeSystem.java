@@ -6,7 +6,9 @@ public class WholeSystem {
 
     private DBFacade dbFacade = new DBFacade();
     private BusConsole busConsole = new BusConsole(dbFacade);
-    private DepositConsole depositConsole = new DepositConsole(dbFacade);
+    private DepositCenterConsole depositCenterConsole = new DepositCenterConsole(dbFacade);
+    private CityCardConsole cityCardConsole = new CityCardConsole(dbFacade);
+
 
     public WholeSystem() {
     }
@@ -31,7 +33,15 @@ public class WholeSystem {
         Scanner scanner = new Scanner(System.in);
         System.out.print("CardId giriniz: ");
         int id = scanner.nextInt();
-        depositConsole.enterCardId(id);
+        depositCenterConsole.enterCardId(id);
+    }
+
+    public void startDepositToDepositCenter(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Deposit Center Id giriniz : ");
+        int id = scanner.nextInt();
+        cityCardConsole.enterDepositCenterId(id);
+
     }
 
     public void setDbFacade(DBFacade dbFacade) {
@@ -45,5 +55,20 @@ public class WholeSystem {
     }
     public BusConsole getBusConsole() {
         return busConsole;
+    }
+    public DepositCenterConsole getDepositCenterConsole() {
+        return depositCenterConsole;
+    }
+
+    public void setDepositCenterConsole(DepositCenterConsole depositCenterConsole) {
+        this.depositCenterConsole = depositCenterConsole;
+    }
+
+    public CityCardConsole getCityCardConsole() {
+        return cityCardConsole;
+    }
+
+    public void setCityCardConsole(CityCardConsole cityCardConsole) {
+        this.cityCardConsole = cityCardConsole;
     }
 }

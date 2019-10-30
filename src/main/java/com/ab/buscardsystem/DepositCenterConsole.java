@@ -5,23 +5,26 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
 
-public class DepositConsole extends ParentObject{
+public class DepositCenterConsole extends ParentObject{
 
     private DepositToCard depositToCard;
-    private int depositConsoleId = 1;
-    private double depositConsoleBalance = 20;
+    private int depositCenterConsoleId;
+    private double depositCenterConsoleBalance;
     private DBFacade dbFacade;
     private Card card;
     private double amount;
     private LocalDate localDate = LocalDate.now();
     private LocalTime localTime = LocalTime.now();
 
-    public DepositConsole(DBFacade dbFacade){
+    public DepositCenterConsole(DBFacade dbFacade){
         this.dbFacade = dbFacade;
+    }
+    public DepositCenterConsole(){
     }
 
     public void enterCardId(int cardId){
         depositToCard = new DepositToCard();
+        getAndEquals();
         card = (Card) dbFacade.get(cardId, Card.class);
         if(card == null)
             return;
@@ -37,21 +40,29 @@ public class DepositConsole extends ParentObject{
         Scanner scanner = new Scanner(System.in);
         System.out.print("Verilecek tutarı giriniz: ");
         double payment = scanner.nextDouble();
-        if(depositConsoleBalance < amount) {
+        if(depositCenterConsoleBalance < amount) {
             System.out.println("Dolum Merkezinin bakiyesi yetersiz.");
             return;
         }
         depositToCard.setPayment(payment);
-        depositToCard.createReceipt(amount, payment);
-        depositToCard.getReceipt().setCardId(card.getId());
-        depositToCard.getReceipt().setDepositConsoleId(depositConsoleId);
+        depositToCard.createCardDepositReceipt(amount, payment);
+        depositToCard.getCardDepositReceipt().setCardId(card.getId());
+        depositToCard.getCardDepositReceipt().setDepositCenterConsoleId(depositCenterConsoleId);
         card.setBalance(card.getBalance() + amount);
-        setDepositConsoleBalance(getDepositConsoleBalance() - amount);
+        setDepositCenterConsoleBalance(getDepositCenterConsoleBalance() - amount);
         System.out.println("Önceki Bakiye: " + new DecimalFormat("##.##").format(card.getBalance() - amount));
         System.out.println("Güncel Bakiye: " + new DecimalFormat("##.##").format(card.getBalance()));
         dbFacade.put(card);
-        dbFacade.put(DepositConsole.this);
-        dbFacade.put(depositToCard.getReceipt());
+        dbFacade.put(DepositCenterConsole.this);
+        dbFacade.put(depositToCard.getCardDepositReceipt());
+    }
+
+    public void getAndEquals(){
+        DepositCenterConsole depositCenterConsoleWithoutDB = (DepositCenterConsole) dbFacade.get(1, DepositCenterConsole.class);
+        DepositCenterConsole depositCenterConsoleWithDB = DepositCenterConsole.this;
+
+        depositCenterConsoleWithDB.setDepositCenterConsoleId(depositCenterConsoleWithoutDB.getDepositCenterConsoleId());
+        depositCenterConsoleWithDB.setDepositCenterConsoleBalance(depositCenterConsoleWithoutDB.getDepositCenterConsoleBalance());
     }
 
     public DepositToCard getDepositToCard() {
@@ -60,17 +71,17 @@ public class DepositConsole extends ParentObject{
     public void setDepositToCard(DepositToCard depositToCard) {
         this.depositToCard = depositToCard;
     }
-    public int getDepositConsoleId() {
-        return depositConsoleId;
+    public int getDepositCenterConsoleId() {
+        return depositCenterConsoleId;
     }
-    public void setDepositConsoleId(int depositConsoleId) {
-        this.depositConsoleId = depositConsoleId;
+    public void setDepositCenterConsoleId(int depositCenterConsoleId) {
+        this.depositCenterConsoleId = depositCenterConsoleId;
     }
-    public double getDepositConsoleBalance() {
-        return depositConsoleBalance;
+    public double getDepositCenterConsoleBalance() {
+        return depositCenterConsoleBalance;
     }
-    public void setDepositConsoleBalance(double depositConsoleBalance) {
-        this.depositConsoleBalance = depositConsoleBalance;
+    public void setDepositCenterConsoleBalance(double depositCenterConsoleBalance) {
+        this.depositCenterConsoleBalance = depositCenterConsoleBalance;
     }
     public LocalDate getLocalDate() {
         return localDate;
