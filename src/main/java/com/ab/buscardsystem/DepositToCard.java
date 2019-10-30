@@ -1,17 +1,15 @@
 package com.ab.buscardsystem;
 
-import java.util.Scanner;
-
 public class DepositToCard {
 
     private int cardId;
     private double amount;
     private Card card;
-    private Receipt receipt;
+    private CardDepositReceipt cardDepositReceipt;
     private double payment;
 
-    public void createReceipt(double amount, double payment) {
-        receipt = new Receipt(amount, payment);
+    public void createCardDepositReceipt(double amount, double payment) {
+        cardDepositReceipt = new CardDepositReceipt(amount, payment);
         System.out.println("Verilen tutar: " + payment + " Yüklenecek tutar: " + amount + " Para üstü: " + (payment-amount));
     }
 
@@ -33,11 +31,11 @@ public class DepositToCard {
     public void setCard(Card card) {
         this.card = card;
     }
-    public Receipt getReceipt() {
-        return receipt;
+    public CardDepositReceipt getCardDepositReceipt() {
+        return cardDepositReceipt;
     }
-    public void setReceipt(Receipt receipt) {
-        this.receipt = receipt;
+    public void setCardDepositReceipt(CardDepositReceipt cardDepositReceipt) {
+        this.cardDepositReceipt = cardDepositReceipt;
     }
     public double getPayment() {
         return payment;

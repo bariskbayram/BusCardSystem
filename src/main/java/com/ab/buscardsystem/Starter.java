@@ -8,7 +8,8 @@ public class Starter {
 
         WholeSystem start = new WholeSystem();
         //start.startTappingCard();
-        start.startDepositToCard();
+        //start.startDepositToCard();
+        start.startDepositToDepositCenter();
 
     }
 }

@@ -8,14 +8,18 @@ public class TableMapper {
     private SqliteDB sqliteDB = new SqliteDB();
     private CardDB cardDB = new CardDB(sqliteDB);
     private TappingCardDB tappingCardDB = new TappingCardDB(sqliteDB);
-    private ReceiptDB receiptDB = new ReceiptDB(sqliteDB);
-    private DepositConsoleDB depositConsoleDB = new DepositConsoleDB(sqliteDB);
+    private CardDepositReceiptDB cardDepositReceiptDB = new CardDepositReceiptDB(sqliteDB);
+    private DepositCenterConsoleDB depositCenterConsoleDB = new DepositCenterConsoleDB(sqliteDB);
+    private DepositToDepositCenterReceiptDB depositToDepositCenterReceiptDB = new DepositToDepositCenterReceiptDB(sqliteDB);
+    private BusConsoleDB busConsoleDB = new BusConsoleDB(sqliteDB);
 
     public TableMapper() {
         mapper.put(Card.class, cardDB);
         mapper.put(TappingCard.class, tappingCardDB);
-        mapper.put(Receipt.class, receiptDB);
-        mapper.put(DepositConsole.class, depositConsoleDB);
+        mapper.put(CardDepositReceipt.class, cardDepositReceiptDB);
+        mapper.put(DepositCenterConsole.class, depositCenterConsoleDB);
+        mapper.put(BusConsole.class,busConsoleDB);
+        mapper.put(DepositToDepositCenterReceipt.class,depositToDepositCenterReceiptDB);
     }
 
     public IDataBase getMapper(Class<?> parameterClass){
@@ -46,5 +50,28 @@ public class TableMapper {
     }
     public TappingCardDB getTappingCardDB() {
         return tappingCardDB;
+    }
+    public CardDepositReceiptDB getCardDepositReceiptDB() {
+        return cardDepositReceiptDB;
+    }
+
+    public void setCardDepositReceiptDB(CardDepositReceiptDB cardDepositReceiptDB) {
+        this.cardDepositReceiptDB = cardDepositReceiptDB;
+    }
+
+    public DepositCenterConsoleDB getDepositCenterConsoleDB() {
+        return depositCenterConsoleDB;
+    }
+
+    public void setDepositCenterConsoleDB(DepositCenterConsoleDB depositCenterConsoleDB) {
+        this.depositCenterConsoleDB = depositCenterConsoleDB;
+    }
+
+    public BusConsoleDB getBusConsoleDB() {
+        return busConsoleDB;
+    }
+
+    public void setBusConsoleDB(BusConsoleDB busConsoleDB) {
+        this.busConsoleDB = busConsoleDB;
     }
 }
