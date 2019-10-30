@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.SQLException;
@@ -27,7 +26,7 @@ class WholeSystemTest {
     public void startTest() throws SQLException {
 
         doNothing().when(busConsole).enterCardId(1, true);
-        wholeSystem.start();
+        wholeSystem.startTappingCard();
 
         verify(busConsole).enterCardId(1, true);
 

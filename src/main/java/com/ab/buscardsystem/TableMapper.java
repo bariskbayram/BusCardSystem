@@ -8,10 +8,14 @@ public class TableMapper {
     private SqliteDB sqliteDB = new SqliteDB();
     private CardDB cardDB = new CardDB(sqliteDB);
     private TappingCardDB tappingCardDB = new TappingCardDB(sqliteDB);
+    private ReceiptDB receiptDB = new ReceiptDB(sqliteDB);
+    private DepositConsoleDB depositConsoleDB = new DepositConsoleDB(sqliteDB);
 
     public TableMapper() {
         mapper.put(Card.class, cardDB);
         mapper.put(TappingCard.class, tappingCardDB);
+        mapper.put(Receipt.class, receiptDB);
+        mapper.put(DepositConsole.class, depositConsoleDB);
     }
 
     public IDataBase getMapper(Class<?> parameterClass){

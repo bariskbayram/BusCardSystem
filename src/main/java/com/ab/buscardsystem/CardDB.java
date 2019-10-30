@@ -40,10 +40,10 @@ public class CardDB implements IDataBase {
     }
 
     @Override
-    public void putItem(ParentObject object) {
+    public void putItem(ParentObject object) { //kart yaratılırken id autoincrement olmuyor biz giriyoruz.
         try {
             sqliteDB.connectDB();
-            String queryDelete = "DELETE FROM Card WHERE Id = ?";
+            String queryDelete = "DELETE FROM Card WHERE Id = ?"; //Eğer olmayan kart ekleme senaryosu çalışırsa delete sorun çıkarabilir.
             PreparedStatement preparedStatementDelete = sqliteDB.connection.prepareStatement(queryDelete);
             preparedStatementDelete.setString(1,String.valueOf(card.getId()));
             preparedStatementDelete.executeUpdate();

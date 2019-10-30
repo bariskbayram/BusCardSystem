@@ -9,14 +9,6 @@ public class TappingCardDB implements IDataBase {
     private SqliteDB sqliteDB;
     private TappingCard tappingCard;
 
-    public void setSqliteDB(SqliteDB sqliteDB) {
-        this.sqliteDB = sqliteDB;
-    }
-
-    public SqliteDB getSqliteDB() {
-        return sqliteDB;
-    }
-
     public TappingCardDB(SqliteDB sqliteDB){
         this.sqliteDB = sqliteDB;
     }
@@ -61,5 +53,12 @@ public class TappingCardDB implements IDataBase {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void setSqliteDB(SqliteDB sqliteDB) {
+        this.sqliteDB = sqliteDB;
+    }
+    public SqliteDB getSqliteDB() {
+        return sqliteDB;
     }
 }

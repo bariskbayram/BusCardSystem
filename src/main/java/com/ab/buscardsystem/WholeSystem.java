@@ -6,20 +6,32 @@ public class WholeSystem {
 
     private DBFacade dbFacade = new DBFacade();
     private BusConsole busConsole = new BusConsole(dbFacade);
+    private DepositConsole depositConsole = new DepositConsole(dbFacade);
 
     public WholeSystem() {
     }
 
-    public void start() {
+    public void startTappingCard() {
 
         while (true) {
             boolean tamBasılmışMı = false;
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Tam kart özelliği aktif edilsin mi?Aktif etmek için 1 yazınız.");
-            if(scanner.nextInt() == 1)
+            Scanner scannerOne = new Scanner(System.in);
+            System.out.print("Tam kart özelliği aktif edilsin mi?\nAktif etmek için 1 yazınız, " +
+                    "aktif etmeden devam etmemek için 0 yazınız: ");
+            if(scannerOne.nextInt() == 1)
                 tamBasılmışMı = true;
-            busConsole.enterCardId(1, tamBasılmışMı);
+            Scanner scannerTwo = new Scanner(System.in);
+            System.out.print("Lütfen CardId giriniz: ");
+            int cardId = scannerTwo.nextInt();
+            busConsole.enterCardId(cardId, tamBasılmışMı);
         }
+    }
+
+    public void startDepositToCard(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("CardId giriniz: ");
+        int id = scanner.nextInt();
+        depositConsole.enterCardId(id);
     }
 
     public void setDbFacade(DBFacade dbFacade) {
