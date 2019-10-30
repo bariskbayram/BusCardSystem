@@ -8,18 +8,18 @@ public class TableMapper {
     private SqliteDB sqliteDB = new SqliteDB();
     private CardDB cardDB = new CardDB(sqliteDB);
     private TappingCardDB tappingCardDB = new TappingCardDB(sqliteDB);
-    private CardDepositReceiptDB cardDepositReceiptDB = new CardDepositReceiptDB(sqliteDB);
-    private DepositCenterConsoleDB depositCenterConsoleDB = new DepositCenterConsoleDB(sqliteDB);
-    private DepositToDepositCenterReceiptDB depositToDepositCenterReceiptDB = new DepositToDepositCenterReceiptDB(sqliteDB);
+    private CardReceiptDB cardReceiptDB = new CardReceiptDB(sqliteDB);
+    private CenterConsoleDB centerConsoleDB = new CenterConsoleDB(sqliteDB);
+    private CenterReceiptDB centerReceiptDB = new CenterReceiptDB(sqliteDB);
     private BusConsoleDB busConsoleDB = new BusConsoleDB(sqliteDB);
 
     public TableMapper() {
         mapper.put(Card.class, cardDB);
         mapper.put(TappingCard.class, tappingCardDB);
-        mapper.put(CardDepositReceipt.class, cardDepositReceiptDB);
-        mapper.put(DepositCenterConsole.class, depositCenterConsoleDB);
+        mapper.put(CardReceipt.class, cardReceiptDB);
+        mapper.put(CenterConsole.class, centerConsoleDB);
         mapper.put(BusConsole.class,busConsoleDB);
-        mapper.put(DepositToDepositCenterReceipt.class,depositToDepositCenterReceiptDB);
+        mapper.put(CenterReceipt.class, centerReceiptDB);
     }
 
     public IDataBase getMapper(Class<?> parameterClass){
@@ -51,26 +51,21 @@ public class TableMapper {
     public TappingCardDB getTappingCardDB() {
         return tappingCardDB;
     }
-    public CardDepositReceiptDB getCardDepositReceiptDB() {
-        return cardDepositReceiptDB;
+    public CardReceiptDB getCardReceiptDB() {
+        return cardReceiptDB;
     }
-
-    public void setCardDepositReceiptDB(CardDepositReceiptDB cardDepositReceiptDB) {
-        this.cardDepositReceiptDB = cardDepositReceiptDB;
+    public void setCardReceiptDB(CardReceiptDB cardReceiptDB) {
+        this.cardReceiptDB = cardReceiptDB;
     }
-
-    public DepositCenterConsoleDB getDepositCenterConsoleDB() {
-        return depositCenterConsoleDB;
+    public CenterConsoleDB getCenterConsoleDB() {
+        return centerConsoleDB;
     }
-
-    public void setDepositCenterConsoleDB(DepositCenterConsoleDB depositCenterConsoleDB) {
-        this.depositCenterConsoleDB = depositCenterConsoleDB;
+    public void setCenterConsoleDB(CenterConsoleDB centerConsoleDB) {
+        this.centerConsoleDB = centerConsoleDB;
     }
-
     public BusConsoleDB getBusConsoleDB() {
         return busConsoleDB;
     }
-
     public void setBusConsoleDB(BusConsoleDB busConsoleDB) {
         this.busConsoleDB = busConsoleDB;
     }

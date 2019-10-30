@@ -8,20 +8,19 @@ public class CityCardConsole {
 
     private LocalDate localDate = LocalDate.now();
     private LocalTime localTime = LocalTime.now();
-    private DepositToDepositCenter depositToDepositCenter;
-    private DepositCenterConsole depositCenterConsole;
+    private AddingMoneyToCenter addingMoneyToCenter;
+    private CenterConsole centerConsole;
     private DBFacade dbFacade;
     private double amount;
-
 
     public CityCardConsole(DBFacade dbFacade){
         this.dbFacade = dbFacade;
     }
 
-    public void enterDepositCenterId (int depositCenterId){
-        depositToDepositCenter = new DepositToDepositCenter();
-        depositCenterConsole =(DepositCenterConsole) dbFacade.get(depositCenterId,DepositCenterConsole.class);
-        depositToDepositCenter.setDepositCenterConsole(depositCenterConsole);
+    public void enterCenterId (int depositCenterId){
+        addingMoneyToCenter = new AddingMoneyToCenter();
+        centerConsole =(CenterConsole) dbFacade.get(depositCenterId, CenterConsole.class);
+        addingMoneyToCenter.setCenterConsole(centerConsole);
         System.out.println("Yuklenecek tutarı giriniz: ");
         Scanner scanner = new Scanner(System.in);
         amount = scanner.nextDouble();
@@ -29,16 +28,16 @@ public class CityCardConsole {
     }
 
     public void enterAmount (double amount){
-        depositToDepositCenter.setAmount(amount);
+        addingMoneyToCenter.setAmount(amount);
         System.out.println("Verilen parayı giriniz: ");
         Scanner scanner = new Scanner(System.in);
         double payment = scanner.nextDouble();
-        depositToDepositCenter.setPayment(payment);
-        depositToDepositCenter.createDepositToDepositCenterReceipt(amount,payment);
-        depositToDepositCenter.getDepositToDepositCenterReceipt().setDepositCenterConsoleId(depositCenterConsole.getDepositCenterConsoleId());
-        depositCenterConsole.setDepositCenterConsoleBalance(depositCenterConsole.getDepositCenterConsoleBalance()+amount);
-        dbFacade.put(depositCenterConsole);
-        dbFacade.put(depositToDepositCenter.getDepositToDepositCenterReceipt());
+        addingMoneyToCenter.setPayment(payment);
+        addingMoneyToCenter.createCenterReceipt(amount,payment);
+        addingMoneyToCenter.getCenterReceipt().setCenterConsoleId(centerConsole.getId());
+        centerConsole.setBalance(centerConsole.getBalance()+amount);
+        dbFacade.put(centerConsole);
+        dbFacade.put(addingMoneyToCenter.getCenterReceipt());
 
     }
 }

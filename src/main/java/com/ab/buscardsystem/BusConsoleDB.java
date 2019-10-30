@@ -2,14 +2,11 @@ package com.ab.buscardsystem;
 
 public class BusConsoleDB implements IDataBase {
 
-
-
     private SqliteDB sqliteDB;
 
     public BusConsoleDB(SqliteDB sqliteDB){
         this.sqliteDB = sqliteDB;
     }
-
 
     @Override
     public Object getItem(int id) {
@@ -21,12 +18,11 @@ public class BusConsoleDB implements IDataBase {
 
     }
 
-
     public SqliteDB getSqliteDB() {
         return sqliteDB;
     }
-
     public void setSqliteDB(SqliteDB sqliteDB) {
         this.sqliteDB = sqliteDB;
     }
+
 }

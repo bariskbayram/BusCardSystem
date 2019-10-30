@@ -3,34 +3,27 @@ package com.ab.buscardsystem;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class CardDepositReceipt extends ParentObject {
+public class CardReceipt extends ParentObject {
 
-    private int cardDepositReceiptId;
     private int cardId;
     private LocalDate localDate = LocalDate.now();
     private LocalTime localTime = LocalTime.now();
     private double payment;
     private double change;
     private double amount;
-    private int depositCenterConsoleId;
+    private int centerConsoleId;
 
-    public CardDepositReceipt(double amount, double payment){
+    public CardReceipt(double amount, double payment){
         this.amount = amount;
         this.payment = payment;
         this.change = (payment - amount);
     }
 
-    public int getDepositCenterConsoleId() {
-        return depositCenterConsoleId;
+    public int getCenterConsoleId() {
+        return centerConsoleId;
     }
-    public void setDepositCenterConsoleId(int depositCenterConsoleId) {
-        this.depositCenterConsoleId = depositCenterConsoleId;
-    }
-    public int getCardDepositReceiptId() {
-        return cardDepositReceiptId;
-    }
-    public void setCardDepositReceiptId(int cardDepositReceiptId) {
-        this.cardDepositReceiptId = cardDepositReceiptId;
+    public void setCenterConsoleId(int centerConsoleId) {
+        this.centerConsoleId = centerConsoleId;
     }
     public int getCardId() {
         return cardId;

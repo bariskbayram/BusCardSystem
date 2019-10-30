@@ -1,12 +1,10 @@
 package com.ab.buscardsystem;
 
-public class DepositToDepositCenterReceiptDB implements IDataBase {
-
+public class CenterReceiptDB implements IDataBase {
 
     private SqliteDB sqliteDB;
 
-
-    public DepositToDepositCenterReceiptDB (SqliteDB sqliteDB){
+    public CenterReceiptDB(SqliteDB sqliteDB){
         this.sqliteDB = sqliteDB;
     }
     @Override
@@ -22,7 +20,6 @@ public class DepositToDepositCenterReceiptDB implements IDataBase {
     public SqliteDB getSqliteDB() {
         return sqliteDB;
     }
-
     public void setSqliteDB(SqliteDB sqliteDB) {
         this.sqliteDB = sqliteDB;
     }

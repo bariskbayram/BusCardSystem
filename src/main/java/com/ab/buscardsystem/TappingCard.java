@@ -83,4 +83,5 @@ public class TappingCard extends ParentObject {
     public double getCurrentBalance() {
         return currentBalance;
     }
+
 }

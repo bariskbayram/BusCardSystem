@@ -1,15 +1,15 @@
 package com.ab.buscardsystem;
 
-public class DepositToCard {
+public class AddingMoneyToCard {
 
     private int cardId;
     private double amount;
     private Card card;
-    private CardDepositReceipt cardDepositReceipt;
+    private CardReceipt cardReceipt;
     private double payment;
 
-    public void createCardDepositReceipt(double amount, double payment) {
-        cardDepositReceipt = new CardDepositReceipt(amount, payment);
+    public void createCardReceipt(double amount, double payment) {
+        cardReceipt = new CardReceipt(amount, payment);
         System.out.println("Verilen tutar: " + payment + " Yüklenecek tutar: " + amount + " Para üstü: " + (payment-amount));
     }
 
@@ -31,11 +31,11 @@ public class DepositToCard {
     public void setCard(Card card) {
         this.card = card;
     }
-    public CardDepositReceipt getCardDepositReceipt() {
-        return cardDepositReceipt;
+    public CardReceipt getCardReceipt() {
+        return cardReceipt;
     }
-    public void setCardDepositReceipt(CardDepositReceipt cardDepositReceipt) {
-        this.cardDepositReceipt = cardDepositReceipt;
+    public void setCardReceipt(CardReceipt cardReceipt) {
+        this.cardReceipt = cardReceipt;
     }
     public double getPayment() {
         return payment;

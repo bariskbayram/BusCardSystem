@@ -1,6 +1,5 @@
 package com.ab.buscardsystem;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
@@ -11,7 +10,6 @@ public class BusConsole extends ParentObject {
     private HashMap<Integer, LocalTime> invalidList = new HashMap<>();
     private TappingCard tappingCard;
     private DBFacade dbFacade;
-    private int busConsoleId = 1;
     private LocalDate localDate = LocalDate.now();
     private LocalTime localTime = LocalTime.now();
 
@@ -23,14 +21,14 @@ public class BusConsole extends ParentObject {
 
         System.out.println(tamBasılmışMı);
         if(tamBasılmışMı == true) {
-            tappingCard = new TappingCard(busConsoleId, 3.25);
+            tappingCard = new TappingCard(getId(), 3.25);
         }else {
             if(invalidList.containsKey(cardId) == true &&
                     (localTime.getMinute() - invalidList.get(cardId).getMinute()) < 90 ){
                 System.out.println("Gösterilmiş Kart!");
                 return;
             }
-            tappingCard = new TappingCard(busConsoleId);
+            tappingCard = new TappingCard(getId());
         }
         card = (Card) dbFacade.get(cardId, Card.class);
         if(card == null)
@@ -44,12 +42,6 @@ public class BusConsole extends ParentObject {
         invalidList.put(cardId, localTime);
     }
 
-    public int getBusConsoleId() {
-        return busConsoleId;
-    }
-    public void setBusConsoleId(int busConsoleId) {
-        this.busConsoleId = busConsoleId;
-    }
     public LocalDate getLocalDate() {
         return localDate;
     }
