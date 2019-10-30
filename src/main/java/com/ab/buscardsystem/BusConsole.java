@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
 
-public class BusConsole {
+public class BusConsole extends ParentObject {
 
     private Card card;
     private HashMap<Integer, LocalTime> invalidList = new HashMap<>();
@@ -33,9 +33,12 @@ public class BusConsole {
             tappingCard = new TappingCard(busConsoleId);
         }
         card = (Card) dbFacade.get(cardId, Card.class);
+        if(card == null)
+            return;
         tappingCard.set(card);
         if(tappingCard.getAmount() > tappingCard.getCurrentBalance())
             return;
+        tappingCard.setCardId(card.getId());
         dbFacade.put(card);
         dbFacade.put(tappingCard);
         invalidList.put(cardId, localTime);
