@@ -12,6 +12,16 @@ public class DBFacade {
         return iDataBase.getItem(id);
     }
 
+    public void delete(int id, Class<?> parameterClass){
+        iDataBase = tableMapper.getMapper(parameterClass);
+        iDataBase.deleteItem(id);
+    }
+
+    public void update(ParentObject object){
+        IDataBase DBMapper = tableMapper.getMapper(object.getClass());
+        DBMapper.updateItem(object);
+    }
+
     public void put(ParentObject object){
         IDataBase DBMapper = tableMapper.getMapper(object.getClass());
         DBMapper.putItem(object);

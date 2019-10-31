@@ -9,7 +9,11 @@ public class Starter {
         WholeSystem start = new WholeSystem();
         //start.startTappingCard();
         //start.startAddingMoneyToCard();
-        start.startAddingMoneyToCenter();
-
+        //start.startAddingMoneyToCenter();
+        //start.startAddingCard();
+        //start.startAddingCenter();
+        //start.startAddingDriver();
+        //start.startRemovingDriver();
+        //start.startRemovingCenter();
     }
 }

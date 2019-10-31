@@ -36,6 +36,13 @@ public class TappingCardDB implements IDataBase {
         System.out.println("TapingCard döndürüldü.");
         return tappingCard;
     }
+
+    @Override
+    public void deleteItem(int id) {}
+
+    @Override
+    public void updateItem(ParentObject object) {}
+
     @Override
     public void putItem(ParentObject object) {
         try {

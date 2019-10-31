@@ -12,14 +12,15 @@ public class CenterConsole extends ParentObject{
     private DBFacade dbFacade;
     private Card card;
     private double amount;
+    private String name;
+    private String address;
     private LocalDate localDate = LocalDate.now();
     private LocalTime localTime = LocalTime.now();
 
     public CenterConsole(DBFacade dbFacade){
         this.dbFacade = dbFacade;
     }
-    public CenterConsole(){
-    }
+    public CenterConsole(){}
 
     public void enterCardId(int cardId){
         addingMoneyToCard = new AddingMoneyToCard();
@@ -51,8 +52,8 @@ public class CenterConsole extends ParentObject{
         setBalance(getBalance() - amount);
         System.out.println("Önceki Bakiye: " + new DecimalFormat("##.##").format(card.getBalance() - amount));
         System.out.println("Güncel Bakiye: " + new DecimalFormat("##.##").format(card.getBalance()));
-        dbFacade.put(card);
-        dbFacade.put(CenterConsole.this);
+        dbFacade.update(card);
+        dbFacade.update(CenterConsole.this);
         dbFacade.put(addingMoneyToCard.getCardReceipt());
     }
 
@@ -87,6 +88,36 @@ public class CenterConsole extends ParentObject{
     }
     public void setLocalTime(LocalTime localTime) {
         this.localTime = localTime;
+    }
+    public DBFacade getDbFacade() {
+        return dbFacade;
+    }
+    public void setDbFacade(DBFacade dbFacade) {
+        this.dbFacade = dbFacade;
+    }
+    public Card getCard() {
+        return card;
+    }
+    public void setCard(Card card) {
+        this.card = card;
+    }
+    public double getAmount() {
+        return amount;
+    }
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
     }
 
 }

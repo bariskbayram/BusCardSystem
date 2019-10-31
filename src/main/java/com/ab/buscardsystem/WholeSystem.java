@@ -37,11 +37,20 @@ public class WholeSystem {
 
     public void startAddingMoneyToCenter(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Deposit Center Id giriniz : ");
+        System.out.println("Center Id giriniz : ");
         int id = scanner.nextInt();
         cityCardConsole.enterCenterId(id);
-
     }
+
+    public void startAddingCard(){
+        cityCardConsole.enterCardInfo();
+    }
+    public void startAddingCenter(){ cityCardConsole.enterCenterInfo();}
+    public void startAddingDriver(){cityCardConsole.enterDriverInfo();}
+    public void startRemovingDriver(){
+        cityCardConsole.deleteDriver();
+    }
+    public void startRemovingCenter(){ cityCardConsole.deleteCenter();}
 
     public void setDbFacade(DBFacade dbFacade) {
         this.dbFacade = dbFacade;

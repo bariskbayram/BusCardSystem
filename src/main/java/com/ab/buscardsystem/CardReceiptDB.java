@@ -45,10 +45,16 @@ public class CardReceiptDB implements IDataBase {
     }
 
     @Override
+    public void deleteItem(int id) {}
+
+    @Override
+    public void updateItem(ParentObject object) {}
+
+    @Override
     public void putItem(ParentObject object) {
         try {
             sqliteDB.connectDB();
-            String query = "INSERT INTO CardReceipt (CardId, DepositConsoleId, Date, Time, Payment, Change, Amount) VALUES (?,?,?,?,?,?,?)";
+            String query = "INSERT INTO CardReceipt (CardId, CenterConsoleId, Date, Time, Payment, Change, Amount) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
             CardReceipt cardReceipt = (CardReceipt) object;
             preparedStatement.setString(1, String.valueOf(cardReceipt.getCardId()));

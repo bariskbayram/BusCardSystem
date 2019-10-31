@@ -12,6 +12,10 @@ public class TableMapper {
     private CenterConsoleDB centerConsoleDB = new CenterConsoleDB(sqliteDB);
     private CenterReceiptDB centerReceiptDB = new CenterReceiptDB(sqliteDB);
     private BusConsoleDB busConsoleDB = new BusConsoleDB(sqliteDB);
+    private AddingCardDB addingCardDB = new AddingCardDB(sqliteDB);
+    private AddingCenterDB addingCenterDB = new AddingCenterDB(sqliteDB);
+    private AddingDriverDB addingDriverDB = new AddingDriverDB(sqliteDB);
+    private DriverDB driverDB = new DriverDB(sqliteDB);
 
     public TableMapper() {
         mapper.put(Card.class, cardDB);
@@ -20,6 +24,10 @@ public class TableMapper {
         mapper.put(CenterConsole.class, centerConsoleDB);
         mapper.put(BusConsole.class,busConsoleDB);
         mapper.put(CenterReceipt.class, centerReceiptDB);
+        mapper.put(AddingCard.class, addingCardDB);
+        mapper.put(AddingCenter.class, addingCenterDB);
+        mapper.put(AddingDriver.class, addingDriverDB);
+        mapper.put(Driver.class, driverDB);
     }
 
     public IDataBase getMapper(Class<?> parameterClass){
@@ -68,5 +76,17 @@ public class TableMapper {
     }
     public void setBusConsoleDB(BusConsoleDB busConsoleDB) {
         this.busConsoleDB = busConsoleDB;
+    }
+    public CenterReceiptDB getCenterReceiptDB() {
+        return centerReceiptDB;
+    }
+    public void setCenterReceiptDB(CenterReceiptDB centerReceiptDB) {
+        this.centerReceiptDB = centerReceiptDB;
+    }
+    public AddingCardDB getAddingCardDB() {
+        return addingCardDB;
+    }
+    public void setAddingCardDB(AddingCardDB addingCardDB) {
+        this.addingCardDB = addingCardDB;
     }
 }

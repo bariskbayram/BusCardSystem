@@ -27,7 +27,7 @@ public class CenterConsoleDB implements IDataBase {
                 centerConsole.setBalance(resultSet.getDouble("Balance"));
                 this.centerConsole = centerConsole;
             }
-
+            sqliteDB.closeDB();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -35,18 +35,46 @@ public class CenterConsoleDB implements IDataBase {
     }
 
     @Override
+    public void deleteItem(int id) {
+        try {
+            sqliteDB.connectDB();
+            String queryDelete = "DELETE FROM CenterConsole WHERE Id = ?";
+            PreparedStatement preparedStatementDelete = sqliteDB.connection.prepareStatement(queryDelete);
+            preparedStatementDelete.setString(1,String.valueOf(id));
+            preparedStatementDelete.executeUpdate();
+            sqliteDB.closeDB();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateItem(ParentObject object) {
+        try{
+            sqliteDB.connectDB();
+            centerConsole = (CenterConsole) object;
+            String query = "UPDATE CenterConsole SET Balance = ? WHERE Id = ?";
+            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            preparedStatement.setString(1, String.valueOf(centerConsole.getBalance()));
+            preparedStatement.setString(2, String.valueOf(centerConsole.getId()));
+            preparedStatement.executeUpdate();
+            sqliteDB.closeDB();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void putItem(ParentObject object) {
         try {
             sqliteDB.connectDB();
             CenterConsole centerConsole = (CenterConsole) object;
-            String queryDelete = "DELETE FROM CenterConsole WHERE Id = ?"; //Eğer olmayan kart ekleme senaryosu çalışırsa delete sorun çıkarabilir.
-            PreparedStatement preparedStatementDelete = sqliteDB.connection.prepareStatement(queryDelete);
-            preparedStatementDelete.setString(1,String.valueOf(centerConsole.getId()));
-            preparedStatementDelete.executeUpdate();
-            String query = "INSERT INTO CenterConsole (Id, Balance) VALUES (?,?)";
+            String query = "INSERT INTO CenterConsole (Id, Name, Address, Balance) VALUES (?,?,?,?)";
             PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
             preparedStatement.setString(1, String.valueOf(centerConsole.getId()));
-            preparedStatement.setString(2, String.valueOf(centerConsole.getBalance()));
+            preparedStatement.setString(2, String.valueOf(centerConsole.getName()));
+            preparedStatement.setString(3, String.valueOf(centerConsole.getAddress()));
+            preparedStatement.setString(4, String.valueOf(centerConsole.getBalance()));
             preparedStatement.executeUpdate();
             sqliteDB.closeDB();
         }catch (Exception e){

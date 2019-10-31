@@ -40,13 +40,34 @@ public class CardDB implements IDataBase {
     }
 
     @Override
-    public void putItem(ParentObject object) { //kart yaratılırken id autoincrement olmuyor biz giriyoruz.
+    public void deleteItem(int id) {
+        /* Card silme senaryosu
+        String queryDelete = "DELETE FROM Card WHERE Id = ?";
+        PreparedStatement preparedStatementDelete = sqliteDB.connection.prepareStatement(queryDelete);
+        preparedStatementDelete.setString(1,String.valueOf(card.getId()));
+        preparedStatementDelete.executeUpdate();*/
+    }
+
+    @Override
+    public void updateItem(ParentObject object) {
+        try{
+            sqliteDB.connectDB();
+            card = (Card) object;
+            String query = "UPDATE Card SET Balance = ? WHERE Id = ?";
+            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            preparedStatement.setString(1, String.valueOf(card.getBalance()));
+            preparedStatement.setString(2, String.valueOf(card.getId()));
+            preparedStatement.executeUpdate();
+            sqliteDB.closeDB();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void putItem(ParentObject object) {
         try {
             sqliteDB.connectDB();
-            String queryDelete = "DELETE FROM Card WHERE Id = ?"; //Eğer olmayan kart ekleme senaryosu çalışırsa delete sorun çıkarabilir.
-            PreparedStatement preparedStatementDelete = sqliteDB.connection.prepareStatement(queryDelete);
-            preparedStatementDelete.setString(1,String.valueOf(card.getId()));
-            preparedStatementDelete.executeUpdate();
             String query = "INSERT INTO Card (Id, Name, Surname, Balance, Tip) VALUES (?,?,?,?,?)";
             PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
             Card card = (Card) object;

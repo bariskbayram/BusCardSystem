@@ -16,6 +16,7 @@ public class BusConsole extends ParentObject {
     public BusConsole(DBFacade dbFacade){
         this.dbFacade = dbFacade;
     }
+    public BusConsole(){}
 
     public void enterCardId(int cardId, boolean tamBasılmışMı){
 
@@ -37,10 +38,16 @@ public class BusConsole extends ParentObject {
         if(tappingCard.getAmount() > tappingCard.getCurrentBalance())
             return;
         tappingCard.setCardId(card.getId());
-        dbFacade.put(card);
+        dbFacade.update(card);
         dbFacade.put(tappingCard);
         invalidList.put(cardId, localTime);
     }
+
+   /* public void getAndEquals(){
+        BusConsole busConsoleWithDB = BusConsole.this;
+        BusConsole busConsoleWithoutDB = dbFacade.get();
+
+    }*/
 
     public LocalDate getLocalDate() {
         return localDate;
