@@ -4,6 +4,9 @@ public class Driver extends ParentObject{
 
     private String name;
     private String surname;
+    public Driver(int driverId){
+        setId(driverId);
+    }
 
     public String getName() {
         return name;

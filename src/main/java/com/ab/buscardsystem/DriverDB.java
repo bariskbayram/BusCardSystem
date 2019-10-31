@@ -1,6 +1,8 @@
 package com.ab.buscardsystem;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DriverDB implements IDataBase {
 
@@ -13,7 +15,26 @@ public class DriverDB implements IDataBase {
 
     @Override
     public Object getItem(int id) {
-        return null;
+        try {
+            sqliteDB.connectDB();
+            String query = "SELECT * FROM Driver WHERE Id = ?";
+            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            preparedStatement.setString(1, String.valueOf(id));
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int driverId = resultSet.getInt("Id");
+                Driver driver = new Driver(driverId);
+                driver.setName(resultSet.getString("Name"));
+                driver.setSurname(resultSet.getString("Surname"));
+                this.driver = driver;
+            }
+            sqliteDB.closeDB();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return driver;
     }
 
     @Override

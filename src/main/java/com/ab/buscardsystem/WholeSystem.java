@@ -15,15 +15,19 @@ public class WholeSystem {
     public void startTappingCard() {
 
         while (true) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Soför LogOut olmak istiyor mu?Devam etmek için 0'a, " +
+                    "LogOut olmak için 1'e basınız: ");
+            int logOut = scanner.nextInt();
+            if(logOut == 1)
+                return;
             boolean tamBasılmışMı = false;
-            Scanner scannerOne = new Scanner(System.in);
             System.out.print("Tam kart özelliği aktif edilsin mi?\nAktif etmek için 1 yazınız, " +
                     "aktif etmeden devam etmemek için 0 yazınız: ");
-            if(scannerOne.nextInt() == 1)
+            if(scanner.nextInt() == 1)
                 tamBasılmışMı = true;
-            Scanner scannerTwo = new Scanner(System.in);
             System.out.print("Lütfen CardId giriniz: ");
-            int cardId = scannerTwo.nextInt();
+            int cardId = scanner.nextInt();
             busConsole.enterCardId(cardId, tamBasılmışMı);
         }
     }
@@ -51,6 +55,7 @@ public class WholeSystem {
         cityCardConsole.deleteDriver();
     }
     public void startRemovingCenter(){ cityCardConsole.deleteCenter();}
+    public void startDriverLogIn(){ busConsole.enterDriverId();}
 
     public void setDbFacade(DBFacade dbFacade) {
         this.dbFacade = dbFacade;

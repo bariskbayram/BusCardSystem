@@ -21,7 +21,7 @@ public class AddingDriver extends ParentObject {
         surname = scanner.nextLine();
         System.out.print("Id giriniz: ");
         driverId = scanner.nextInt();
-        driver = new Driver();
+        driver = new Driver(driverId);
         driver.setName(name);
         driver.setSurname(surname);
         driver.setId(driverId);

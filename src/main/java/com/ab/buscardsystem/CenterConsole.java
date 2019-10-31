@@ -58,7 +58,7 @@ public class CenterConsole extends ParentObject{
     }
 
     public void getAndEquals(){
-        CenterConsole centerConsoleWithoutDB = (CenterConsole) dbFacade.get(1, CenterConsole.class);
+        CenterConsole centerConsoleWithoutDB = (CenterConsole) dbFacade.get(17005, CenterConsole.class);
         CenterConsole centerConsoleWithDB = CenterConsole.this;
 
         centerConsoleWithDB.setId(centerConsoleWithoutDB.getId());

@@ -16,6 +16,7 @@ public class TableMapper {
     private AddingCenterDB addingCenterDB = new AddingCenterDB(sqliteDB);
     private AddingDriverDB addingDriverDB = new AddingDriverDB(sqliteDB);
     private DriverDB driverDB = new DriverDB(sqliteDB);
+    private DriverLogInDB driverLogInDB = new DriverLogInDB(sqliteDB);
 
     public TableMapper() {
         mapper.put(Card.class, cardDB);
@@ -28,6 +29,7 @@ public class TableMapper {
         mapper.put(AddingCenter.class, addingCenterDB);
         mapper.put(AddingDriver.class, addingDriverDB);
         mapper.put(Driver.class, driverDB);
+        mapper.put(DriverLogIn.class, driverLogInDB);
     }
 
     public IDataBase getMapper(Class<?> parameterClass){
