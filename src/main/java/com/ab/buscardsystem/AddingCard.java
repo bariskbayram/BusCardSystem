@@ -42,7 +42,7 @@ public class AddingCard extends ParentObject {
         isCorrect = 0;
         for(int i=0; i<3; i++) {
             System.out.print("Please enter name: ");
-            name = factoryInput.inputStringName().toUpperCase();
+            name = factoryInput.inputStringName();
             if (name.length() < 15) {
                 isCorrect = 1;
                 break;
@@ -56,7 +56,7 @@ public class AddingCard extends ParentObject {
         isCorrect = 0;
         for(int i=0; i<3; i++) {
             System.out.print("Please enter surname: ");
-            surname = factoryInput.inputStringSurname().toUpperCase();
+            surname = factoryInput.inputStringSurname();
             if (surname.length() < 15) {
                 isCorrect = 1;
                 break;
