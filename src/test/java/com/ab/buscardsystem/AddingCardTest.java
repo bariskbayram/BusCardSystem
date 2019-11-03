@@ -198,7 +198,7 @@ class AddingCardTest {
         doNothing().when(card).setBalance(0);
         doNothing().when(card).setName("Barış");
         doNothing().when(card).setSurname("Osman");
-        doNothing().when(card).setType("Student");
+        doNothing().when(card).setType("STUDENT");
         //When
         addingCard.setCardInfo(card);
         //Then
@@ -206,7 +206,7 @@ class AddingCardTest {
         verify(card).setBalance(0);
         verify(card).setName("Barış");
         verify(card).setSurname("Osman");
-        verify(card).setType("Student");
+        verify(card).setType("STUDENT");
         verify(factoryInput).inputStringName();
         verify(factoryInput).inputStringType();
         verify(factoryInput).inputIntegerId();

@@ -15,9 +15,9 @@ public class AddingCenter extends ParentObject {
 
     public CenterConsole setCenterInfo(CenterConsole centerConsole){
         System.out.print("Please enter name: ");
-        name = factoryInput.inputStringName().toUpperCase();
+        name = factoryInput.inputStringName();
         System.out.print("Please enter address: ");
-        address = factoryInput.inputStringAddress().toUpperCase();
+        address = factoryInput.inputStringAddress();
         System.out.print("Please enter center ID: ");
         centerId = factoryInput.inputIntegerId();
         centerConsole.setId(centerId);
