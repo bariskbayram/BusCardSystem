@@ -16,9 +16,8 @@ public class AddingCard extends ParentObject {
     private FactoryInput factoryInput = new FactoryInput();
 
     public Card setCardInfo(Card card){
-        if(card == null){
+        if(card == null)
             throw new NullPointerException("Card is null");
-        }
         isCorrect = 1;
         takeName();
         if(isCorrect == 0)
@@ -40,7 +39,6 @@ public class AddingCard extends ParentObject {
         this.card = card;
         return card;
     }
-
 
     public void takeName(){
         isCorrect = 0;
@@ -140,6 +138,5 @@ public class AddingCard extends ParentObject {
     public void setIsCorrect(int isCorrect) {
         this.isCorrect = isCorrect;
     }
-
 
 }

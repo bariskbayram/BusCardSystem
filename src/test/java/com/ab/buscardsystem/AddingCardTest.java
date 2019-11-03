@@ -71,18 +71,46 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("Incorrect Tip Input")
-    void takeTipWithIncorrectInput() {
+    @DisplayName("3 Times Incorrect Tip Input")
+    void takeTipWithIncorrectInput3Times() {
         //Given
-        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("HUMAN").thenReturn("ANİMAL");
+        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("Pilot").thenReturn("Child");
 
        //When
         addingCard.takeType();
 
         //Then
-         assertEquals(0, addingCard.getIsCorrect());
-        verify(factoryInput,times(3)).inputStringType();
+       assertEquals(0, addingCard.getIsCorrect());
+       verify(factoryInput, times(3)).inputStringType();
 
+    }
+
+    @Test
+    @DisplayName("2 Times Incorrect Tip Input")
+    void takeTipWithIncorrectInput2Times(){
+        //Given
+        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("Pilot").thenReturn("Normal");
+
+        //When
+        addingCard.takeType();
+
+        //Then
+        assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput, times(3)).inputStringType();
+    }
+
+    @Test
+    @DisplayName("1 Times Incorrect Tip Input")
+    void takeTipWithIncorrectInput1Times(){
+        //Given
+        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("Normal");
+
+        //When
+        addingCard.takeType();
+
+        //Then
+        assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput, times(2)).inputStringType();
     }
 
     @Test
@@ -97,16 +125,44 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("Incorrect Name Input With More Than 14 Letters")
-    void takeNameWithIncorrectInput(){
+    @DisplayName("3 Times Incorrect Name Input With More Than 14 Letters")
+    void takeNameWithIncorrectInput3Times(){
         //Given
-        when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah").thenReturn("SeyfiCan Oktay HALİME MURAT")
-                .thenReturn("TOLGA BARIS Haqim elvanovic");
+        when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah")
+                                            .thenReturn("Barış Kaan Bayram")
+                                            .thenReturn("Ata Osman Özgüz");
+
         //When
         addingCard.takeName();
         //Then
         assertEquals(0, addingCard.getIsCorrect());
-        verify(factoryInput,times(3)).inputStringName();
+        verify(factoryInput, times(3)).inputStringName();
+    }
+
+    @Test
+    @DisplayName("2 Times Incorrect Name Input With More Than 14 Letters")
+    void takeNameWithIncorrectInput2Times(){
+        //Given
+        when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah")
+                                            .thenReturn("Barış Kaan Bayram")
+                                            .thenReturn("Kemal");
+        //When
+        addingCard.takeName();
+        //Then
+        assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput, times(3)).inputStringName();
+    }
+
+    @Test
+    @DisplayName("1 Times Incorrect Name Input With More Than 14 Letters")
+    void takeNameWithIncorrectInput1Times(){
+        //Given
+        when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah").thenReturn("Kemal");
+        //When
+        addingCard.takeName();
+        //Then
+        assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput, times(2)).inputStringName();
     }
 
     @Test
@@ -121,16 +177,43 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("Incorrect Surname Input With More Than 14 Letters")
-    void takeSurnameWithIncorrectInput(){
+    @DisplayName("3 Times Incorrect Surname Input With More Than 14 Letters")
+    void takeSurnameWithIncorrectInput3Times(){
         //Given
-        when(factoryInput.inputStringSurname()).thenReturn("Muhammed Bekir Cinnah").thenReturn("SeyfiCan Oktay HALİME MURAT")
-                .thenReturn("TOLGA BARIS Haqim elvanovic");
+        when(factoryInput.inputStringSurname()).thenReturn("Muhammed Bekir Cinnah")
+                                                .thenReturn("Joseph Henry Blackburn")
+                                                .thenReturn("Zlatan Kennedy Ibrahimovic");
         //When
         addingCard.takeSurname();
         //Then
         assertEquals(0, addingCard.getIsCorrect());
-        verify(factoryInput,times(3)).inputStringSurname();
+        verify(factoryInput, times(3)).inputStringSurname();
+    }
+
+    @Test
+    @DisplayName("2 Times Incorrect Surname Input With More Than 14 Letters")
+    void takeSurnameWithIncorrectInput2Times(){
+        //Given
+        when(factoryInput.inputStringSurname()).thenReturn("Muhammed Bekir Cinnah")
+                .thenReturn("Barış Kaan Bayram")
+                .thenReturn("Kemal");
+        //When
+        addingCard.takeSurname();
+        //Then
+        assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput, times(3)).inputStringSurname();
+    }
+
+    @Test
+    @DisplayName("1 Times Incorrect Surname Input With More Than 14 Letters")
+    void takeSurnameWithIncorrectInput1Times(){
+        //Given
+        when(factoryInput.inputStringSurname()).thenReturn("Muhammed Bekir Cinnah").thenReturn("Mehmet");
+        //When
+        addingCard.takeSurname();
+        //Then
+        assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput, times(2)).inputStringSurname();
     }
 
     @Test
@@ -153,6 +236,7 @@ class AddingCardTest {
         addingCard.takeId();
         //Then
         assertEquals(0, addingCard.getIsCorrect());
+        verify(factoryInput, times(3)).inputIntegerId();
     }
 
     @Test
@@ -164,31 +248,55 @@ class AddingCardTest {
         addingCard.takeId();
         //Then
         assertEquals(0, addingCard.getIsCorrect());
+        verify(factoryInput, times(3)).inputIntegerId();
     }
 
     @Test
     @DisplayName("Incorrect CardId Input -23")
     void takeIdWithIncorrectInputWithNegativeInteger(){
         //Given
-        when(factoryInput.inputIntegerId()).thenReturn(-23).thenReturn(-101).thenReturn(-808);
+        when(factoryInput.inputIntegerId()).thenReturn(-23).thenReturn(-40).thenReturn(-132);
         //When
         addingCard.takeId();
         //Then
         assertEquals(0, addingCard.getIsCorrect());
-        verify(factoryInput,times(3)).inputIntegerId();
+        verify(factoryInput, times(3)).inputIntegerId();
     }
 
     @Test
     @DisplayName("Incorrect CardId Input Plus 10.000")
     void takeIdWithIncorrectInputWithPlus10000(){
         //Given
-        when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(15000).thenReturn(400000);
+        when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(15000).thenReturn(234243);
         //When
         addingCard.takeId();
         //Then
         assertEquals(0, addingCard.getIsCorrect());
-        verify(factoryInput,times(3)).inputIntegerId();
+        verify(factoryInput, times(3)).inputIntegerId();
+    }
 
+    @Test
+    @DisplayName("2 Times Incorrect CardId Input")
+    void takeIdWithIncorrectInput2Times(){
+        //Given
+        when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(15000).thenReturn(4);
+        //When
+        addingCard.takeId();
+        //Then
+        assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput, times(3)).inputIntegerId();
+    }
+
+    @Test
+    @DisplayName("1 Times Incorrect CardId Input")
+    void takeIdWithIncorrectInput1Times(){
+        //Given
+        when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(4);
+        //When
+        addingCard.takeId();
+        //Then
+        assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput, times(2)).inputIntegerId();
     }
 
 
@@ -196,7 +304,7 @@ class AddingCardTest {
     @DisplayName("Verify setCardInfo Method Calls")
     void setCardInfoMethodCallsVerify(){
         //Given
-        Card card = new Card(5);
+        Card card = new Card(0);
         when(factoryInput.inputStringName()).thenReturn("Barış");
         when(factoryInput.inputStringType()).thenReturn("Student");
         when(factoryInput.inputIntegerId()).thenReturn(11);
@@ -206,16 +314,15 @@ class AddingCardTest {
         addingCard.setCardInfo(card);
 
         //Then
-
-
         assertAll("SetUp Card's Info",
-                ()->assertEquals(11,card.getId()),
-                ()->assertEquals(0,card.getBalance()),
-                ()->assertEquals("Barış",card.getName()),
-                ()->assertEquals("Osman",card.getSurname()),
-                ()->assertEquals("STUDENT",card.getType()),
-                ()->assertEquals(addingCard.getCard(),card)
+                ()-> assertEquals(11, card.getId()),
+                ()-> assertEquals("Barış", card.getName()),
+                ()->assertEquals("Osman", card.getSurname()),
+                ()->assertEquals("STUDENT", card.getType()),
+                ()->assertEquals(0, card.getBalance()),
+                ()->assertEquals(addingCard.getCard(), card)
         );
+
         verify(factoryInput).inputStringName();
         verify(factoryInput).inputStringType();
         verify(factoryInput).inputIntegerId();
@@ -223,17 +330,12 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("NULL Card Test")
-    void setCardInfoNULLCardTest(){
+    @DisplayName("Verify SetCardInfo Parameter with Null Throw Exception")
+    void verifySetCardInfoParameterWithNullThrowException(){
         //Given
-
         Card card = null;
-        //When
-
-        //Then
-        assertThrows(NullPointerException.class,()->addingCard.setCardInfo(card));
-
+        //When - Then
+        assertThrows(NullPointerException.class, ()->addingCard.setCardInfo(card), "Card is null");
     }
-
 
 }
