@@ -125,16 +125,16 @@ class AddingDriverTest {
     @DisplayName("Verify setCardInfo Method Calls")
     void setCardInfoMethodCallsVerify(){
         //Given
-        when(factoryInput.inputStringName()).thenReturn("Baris");
+        when(factoryInput.inputStringName()).thenReturn("Barış");
         when(factoryInput.inputStringSurname()).thenReturn("Osman");
         when(factoryInput.inputIntegerId()).thenReturn(1);
-        doNothing().when(driver).setName("Baris");
+        doNothing().when(driver).setName("Barış");
         doNothing().when(driver).setSurname("Osman");
         doNothing().when(driver).setId(1);
         //When
         addingDriver.setDriverInfo(driver);
         //Then
-        verify(driver).setName("Baris");
+        verify(driver).setName("Barış");
         verify(driver).setSurname("Osman");
         verify(driver).setId(1);
         verify(factoryInput).inputStringName();
