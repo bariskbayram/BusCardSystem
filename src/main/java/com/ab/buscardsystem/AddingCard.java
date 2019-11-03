@@ -13,11 +13,6 @@ public class AddingCard extends ParentObject {
     private String tip;
     private int cardId;
     private Card card;
-
-    public void setIsCorrect(int isCorrect) {
-        this.isCorrect = isCorrect;
-    }
-
     private int isCorrect;
     private FactoryInput factoryInput = new FactoryInput();
 
@@ -95,7 +90,7 @@ public class AddingCard extends ParentObject {
                 isCorrect = 1;
                 break;
             } else {
-                System.out.println("Yanlış tip girdiniz, tekrar deneyin!");
+                System.out.println("Yanlış Kart Id girdiniz, tekrar deneyin!");
             }
         }
     }
@@ -139,4 +134,8 @@ public class AddingCard extends ParentObject {
     public int getIsCorrect() {
         return isCorrect;
     }
+    public void setIsCorrect(int isCorrect) {
+        this.isCorrect = isCorrect;
+    }
+
 }

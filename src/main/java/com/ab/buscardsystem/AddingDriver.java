@@ -2,7 +2,6 @@ package com.ab.buscardsystem;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Scanner;
 
 public class AddingDriver extends ParentObject {
 
@@ -12,21 +11,67 @@ public class AddingDriver extends ParentObject {
     private String surname;
     private int driverId;
     private Driver driver;
+    private int isCorrect;
     private FactoryInput factoryInput = new FactoryInput();
 
     public Driver setDriverInfo(Driver driver){
-        System.out.print("İsim giriniz: ");
-        name = factoryInput.inputStringName();
-        System.out.print("Surname giriniz: ");
-        surname = factoryInput.inputStringSurname();
-        System.out.print("Id giriniz: ");
-        driverId = factoryInput.inputIntegerId();
+        isCorrect = 1;
+        takeName();
+        if(isCorrect == 0)
+            return null;
+        takeSurname();
+        if(isCorrect == 0)
+            return null;
+        takeId();
+        if(isCorrect == 0)
+            return null;
         driver.setId(driverId);
         driver.setName(name);
         driver.setSurname(surname);
-        driver.setId(driverId);
         this.driver = driver;
         return driver;
+    }
+
+    public void takeName(){
+        isCorrect = 0;
+        for(int i=0; i<3; i++) {
+            System.out.print("İsim giriniz: ");
+            name = factoryInput.inputStringName();
+            if (name.length() < 15) {
+                isCorrect = 1;
+                break;
+            } else {
+                System.out.println("Çok uzun isim girdiniz, tekrar deneyin!");
+            }
+        }
+    }
+
+    public void takeSurname(){
+        isCorrect = 0;
+        for(int i=0; i<3; i++) {
+            System.out.print("Soyad giriniz: ");
+            surname = factoryInput.inputStringSurname();
+            if (surname.length() < 15) {
+                isCorrect = 1;
+                break;
+            } else {
+                System.out.println("Çok uzun soyad girdiniz, tekrar deneyin!");
+            }
+        }
+    }
+
+    public void takeId(){
+        isCorrect = 0;
+        for(int i=0; i<3; i++) {
+            System.out.print("Id giriniz: ");
+            driverId = factoryInput.inputIntegerId();
+            if (driverId > 0 && driverId < 10.000 && driverId != 7 && driverId != 18) {
+                isCorrect = 1;
+                break;
+            } else {
+                System.out.println("Yanlış sürücü Id girdiniz, tekrar deneyin!");
+            }
+        }
     }
 
     public LocalTime getLocalTime() {
@@ -59,4 +104,11 @@ public class AddingDriver extends ParentObject {
     public void setDriver(Driver driver) {
         this.driver = driver;
     }
+    public int getIsCorrect() {
+        return isCorrect;
+    }
+    public void setIsCorrect(int isCorrect) {
+        this.isCorrect = isCorrect;
+    }
+
 }
