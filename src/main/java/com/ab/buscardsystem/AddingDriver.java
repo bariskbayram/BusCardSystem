@@ -15,6 +15,8 @@ public class AddingDriver extends ParentObject {
     private FactoryInput factoryInput = new FactoryInput();
 
     public Driver setDriverInfo(Driver driver){
+        if(driver == null)
+            throw new NullPointerException("Driver is null");
         isCorrect = 1;
         takeName();
         if(isCorrect == 0)
@@ -37,11 +39,11 @@ public class AddingDriver extends ParentObject {
         for(int i=0; i<3; i++) {
             System.out.print("Please enter name: ");
             name = factoryInput.inputStringName();
-            if (name.length() < 15) {
+            if (name.length() < 15 && !name.equals("") && !name.startsWith(" ")) {
                 isCorrect = 1;
                 break;
             } else {
-                System.out.println("Name is too long, please try again!");
+                System.out.println("Incorrect name, please try again!");
             }
         }
     }
@@ -51,11 +53,11 @@ public class AddingDriver extends ParentObject {
         for(int i=0; i<3; i++) {
             System.out.print("Please enter surname: ");
             surname = factoryInput.inputStringSurname();
-            if (surname.length() < 15) {
+            if (surname.length() < 15 & !surname.equals("") && !surname.startsWith(" ")) {
                 isCorrect = 1;
                 break;
             } else {
-                System.out.println("Surname is too long, please try again!");
+                System.out.println("Incorrect surname, please try again!");
             }
         }
     }
@@ -65,7 +67,7 @@ public class AddingDriver extends ParentObject {
         for(int i=0; i<3; i++) {
             System.out.print("Please enter Driver ID: ");
             driverId = factoryInput.inputIntegerId();
-            if (driverId > 0 && driverId < 10.000 && driverId != 7 && driverId != 18) {
+            if (driverId > 0 && driverId < 10000) {
                 isCorrect = 1;
                 break;
             } else {

@@ -18,8 +18,6 @@ class AddingDriverTest {
     AddingDriver addingDriver;
     @Mock
     FactoryInput factoryInput;
-    @Mock
-    Driver driver;
 
     @Test
     @DisplayName("Correct Name Input With Barış")
@@ -33,14 +31,53 @@ class AddingDriverTest {
     }
 
     @Test
-    @DisplayName("Incorrect Name Input With More Than 14 Letters")
-    void takeNameWithIncorrectInput(){
+    @DisplayName("Incorrect Name Input With NoName or Start With Space")
+    void takeNameWithCorrectInputNoNameOrStartWithSpace(){
         //Given
-        when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah");
+        when(factoryInput.inputStringName()).thenReturn("").thenReturn(" ").thenReturn("  ");
         //When
         addingDriver.takeName();
         //Then
         assertEquals(0, addingDriver.getIsCorrect());
+        verify(factoryInput, times(3)).inputStringName();
+    }
+
+    @Test
+    @DisplayName("Incorrect Name Input With More Than 14 Letters")
+    void takeNameWithIncorrectInputWithMoreThan14Letters(){
+        //Given
+        when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah")
+                                            .thenReturn("Lionel Rodriguez Messi")
+                                            .thenReturn("Cristiano Bekir Ronaldo");
+        //When
+        addingDriver.takeName();
+        //Then
+        assertEquals(0, addingDriver.getIsCorrect());
+        verify(factoryInput, times(3)).inputStringName();
+    }
+
+    @Test
+    @DisplayName("2 Times Incorrect Name Input")
+    void takeNameWithIncorrectInput2Times(){
+        //Given
+        when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah").thenReturn("").thenReturn("Selami");
+        //When
+        addingDriver.takeName();
+        //Then
+        assertEquals(1, addingDriver.getIsCorrect());
+        verify(factoryInput, times(3)).inputStringName();
+    }
+
+    @Test
+    @DisplayName("1 Times Incorrect Name Input")
+    void takeNameWithIncorrectInput1Times(){
+        //Given
+        when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah").thenReturn("Kardelen");
+        //When
+        addingDriver.takeName();
+        //Then
+        assertEquals(1, addingDriver.getIsCorrect());
+        verify(factoryInput, times(2)).inputStringName();
     }
 
     @Test
@@ -63,10 +100,35 @@ class AddingDriverTest {
         addingDriver.takeSurname();
         //Then
         assertEquals(0, addingDriver.getIsCorrect());
+        verify(factoryInput, times(3)).inputStringSurname();
     }
 
     @Test
-    @DisplayName("Correct CardId Input")
+    @DisplayName("2 Times Incorrect Surname Input")
+    void takeSurnameWithIncorrectInput2Times(){
+        //Given
+        when(factoryInput.inputStringSurname()).thenReturn("Muhammed Bekir Cinnah").thenReturn("").thenReturn("Selami");
+        //When
+        addingDriver.takeSurname();
+        //Then
+        assertEquals(1, addingDriver.getIsCorrect());
+        verify(factoryInput, times(3)).inputStringSurname();
+    }
+
+    @Test
+    @DisplayName("1 Times Incorrect Surname Input")
+    void takeSurnameWithIncorrectInput1Times(){
+        //Given
+        when(factoryInput.inputStringSurname()).thenReturn("Muhammed Bekir Cinnah").thenReturn("Kardelen");
+        //When
+        addingDriver.takeSurname();
+        //Then
+        assertEquals(1, addingDriver.getIsCorrect());
+        verify(factoryInput, times(2)).inputStringSurname();
+    }
+
+    @Test
+    @DisplayName("Correct DriverId Input")
     void takeIdWithCorrectInput(){
         //Given
         when(factoryInput.inputIntegerId()).thenReturn(1);
@@ -77,70 +139,95 @@ class AddingDriverTest {
     }
 
     @Test
-    @DisplayName("Incorrect CardId Input 7")
-    void takeIdWithIncorrectInputWith7(){
-        //Given
-        when(factoryInput.inputIntegerId()).thenReturn(7);
-        //When
-        addingDriver.takeId();
-        //Then
-        assertEquals(0, addingDriver.getIsCorrect());
-    }
-
-    @Test
-    @DisplayName("Incorrect CardId Input 18")
-    void takeIdWithIncorrectInputWith18(){
-        //Given
-        when(factoryInput.inputIntegerId()).thenReturn(18);
-        //When
-        addingDriver.takeId();
-        //Then
-        assertEquals(0, addingDriver.getIsCorrect());
-    }
-
-    @Test
-    @DisplayName("Incorrect CardId Input -23")
+    @DisplayName("Incorrect DriverId Input Negative and Zero")
     void takeIdWithIncorrectInputWithNegativeInteger(){
         //Given
-        when(factoryInput.inputIntegerId()).thenReturn(-23);
+        when(factoryInput.inputIntegerId()).thenReturn(-23).thenReturn(-223).thenReturn(0);
         //When
         addingDriver.takeId();
         //Then
         assertEquals(0, addingDriver.getIsCorrect());
+        verify(factoryInput, times(3)).inputIntegerId();
     }
 
     @Test
-    @DisplayName("Incorrect CardId Input Plus 10.000")
+    @DisplayName("Incorrect DriverId Input Plus 9.999")
     void takeIdWithIncorrectInputWithPlus10000(){
         //Given
-        when(factoryInput.inputIntegerId()).thenReturn(10000);
+        when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(13232).thenReturn(99999);
         //When
         addingDriver.takeId();
         //Then
         assertEquals(0, addingDriver.getIsCorrect());
+        verify(factoryInput, times(3)).inputIntegerId();
     }
 
+    @Test
+    @DisplayName("2 Times Incorrect DriverId Input")
+    void takeIdWithIncorrectInput2Times(){
+        //Given
+        when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(153400).thenReturn(9999);
+        //When
+        addingDriver.takeId();
+        //Then
+        assertEquals(1, addingDriver.getIsCorrect());
+        verify(factoryInput, times(3)).inputIntegerId();
+    }
 
     @Test
-    @DisplayName("Verify setCardInfo Method Calls")
-    void setCardInfoMethodCallsVerify(){
+    @DisplayName("1 Times Incorrect DriverId Input")
+    void takeIdWithIncorrectInput1Times(){
         //Given
-        when(factoryInput.inputStringName()).thenReturn("Barış");
-        when(factoryInput.inputStringSurname()).thenReturn("Osman");
-        when(factoryInput.inputIntegerId()).thenReturn(1);
-        doNothing().when(driver).setName("Barış");
-        doNothing().when(driver).setSurname("Osman");
-        doNothing().when(driver).setId(1);
+        when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(4);
+        //When
+        addingDriver.takeId();
+        //Then
+        assertEquals(1, addingDriver.getIsCorrect());
+        verify(factoryInput, times(2)).inputIntegerId();
+    }
+
+    @Test
+    @DisplayName("Verify setDriverInfo Method Calls")
+    void setDriverInfoMethodCallsVerify(){
+        //Given
+        Driver driver = new Driver(0);
+        when(factoryInput.inputStringName()).thenReturn("Ayşe");
+        when(factoryInput.inputStringSurname()).thenReturn("Selim");
+        when(factoryInput.inputIntegerId()).thenReturn(999);
+
         //When
         addingDriver.setDriverInfo(driver);
+
         //Then
-        verify(driver).setName("Barış");
-        verify(driver).setSurname("Osman");
-        verify(driver).setId(1);
+
+        assertAll("SetUp Driver's Info",
+                ()-> assertEquals(999, driver.getId()),
+                ()-> assertEquals("Ayşe", driver.getName()),
+                ()->assertEquals("Selim", driver.getSurname()),
+                ()->assertEquals(addingDriver.getDriver(), driver)
+        );
+
         verify(factoryInput).inputStringName();
         verify(factoryInput).inputStringSurname();
         verify(factoryInput).inputIntegerId();
+    }
 
+    @Test
+    @DisplayName("Verify SetDriverInfo Parameter with Null Throw Exception")
+    void verifySetDriverInfoParameterWithNullThrowException(){
+        //Given
+        String expectedMessage = "Driver is null";
+        String actualMessage = null;
+
+        //When
+        try {
+            addingDriver.setDriverInfo(null);
+        }catch (Exception e){
+            actualMessage = e.getMessage();
+        }
+
+        //Then
+        assertEquals(expectedMessage, actualMessage);
     }
 
 

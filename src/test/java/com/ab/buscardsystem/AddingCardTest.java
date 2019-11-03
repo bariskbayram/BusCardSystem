@@ -59,7 +59,7 @@ class AddingCardTest {
 
     @Test
     @DisplayName("Correct Type Input With normal")
-    void takeTipWithCorrectInputNormal2() {
+    void takeTypeWithCorrectInputNormal2() {
         //Given
         when(factoryInput.inputStringType()).thenReturn("normal");
 
@@ -72,9 +72,9 @@ class AddingCardTest {
 
     @Test
     @DisplayName("3 Times Incorrect Type Input")
-    void takeTipWithIncorrectInput3Times() {
+    void takeTypeWithIncorrectInput3Times() {
         //Given
-        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("Pilot").thenReturn("Child");
+        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("").thenReturn("Child");
 
        //When
         addingCard.takeType();
@@ -87,9 +87,9 @@ class AddingCardTest {
 
     @Test
     @DisplayName("2 Times Incorrect Type Input")
-    void takeTipWithIncorrectInput2Times(){
+    void takeTypeWithIncorrectInput2Times(){
         //Given
-        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("").thenReturn("Normal");
+        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn(" ").thenReturn("Normal");
 
         //When
         addingCard.takeType();
@@ -101,7 +101,7 @@ class AddingCardTest {
 
     @Test
     @DisplayName("1 Times Incorrect Type Input")
-    void takeTipWithIncorrectInput1Times(){
+    void takeTypeWithIncorrectInput1Times(){
         //Given
         when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("Normal");
 
@@ -123,6 +123,7 @@ class AddingCardTest {
         //Then
         assertEquals(1, addingCard.getIsCorrect());
     }
+
     @Test
     @DisplayName("Correct Name Input With NoName")
     void takeNameWithCorrectInputNoName(){
@@ -185,6 +186,7 @@ class AddingCardTest {
         //Then
         assertEquals(1, addingCard.getIsCorrect());
     }
+
     @Test
     @DisplayName("Correct Surname Input With NoName")
     void takeSurnameWithCorrectInputNoName(){
@@ -240,7 +242,7 @@ class AddingCardTest {
     @DisplayName("Correct CardId Input")
     void takeIdWithCorrectInput(){
         //Given
-        when(factoryInput.inputIntegerId()).thenReturn(11).thenReturn(100).thenReturn(19);
+        when(factoryInput.inputIntegerId()).thenReturn(11);
         //When
         addingCard.takeId();
         //Then
@@ -272,10 +274,10 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("Incorrect CardId Input -23")
+    @DisplayName("Incorrect CardId Input Negative and Zero")
     void takeIdWithIncorrectInputWithNegativeInteger(){
         //Given
-        when(factoryInput.inputIntegerId()).thenReturn(-23).thenReturn(-40).thenReturn(-132);
+        when(factoryInput.inputIntegerId()).thenReturn(-23).thenReturn(0).thenReturn(-132);
         //When
         addingCard.takeId();
         //Then
@@ -299,7 +301,7 @@ class AddingCardTest {
     @DisplayName("2 Times Incorrect CardId Input")
     void takeIdWithIncorrectInput2Times(){
         //Given
-        when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(15000).thenReturn(4);
+        when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(15000).thenReturn(9999);
         //When
         addingCard.takeId();
         //Then
@@ -318,7 +320,6 @@ class AddingCardTest {
         assertEquals(1, addingCard.getIsCorrect());
         verify(factoryInput, times(2)).inputIntegerId();
     }
-
 
     @Test
     @DisplayName("Verify setCardInfo Method Calls")
@@ -353,9 +354,18 @@ class AddingCardTest {
     @DisplayName("Verify SetCardInfo Parameter with Null Throw Exception")
     void verifySetCardInfoParameterWithNullThrowException(){
         //Given
-        Card card = null;
-        //When - Then
-        assertThrows(NullPointerException.class, ()->addingCard.setCardInfo(card), "Card is null");
+        String expectedMessage = "Card is null";
+        String actualMessage = null;
+
+        //When
+        try {
+            addingCard.setCardInfo(null);
+        }catch (Exception e){
+            actualMessage = e.getMessage();
+        }
+
+        //Then
+        assertEquals(expectedMessage, actualMessage);
     }
 
 }
