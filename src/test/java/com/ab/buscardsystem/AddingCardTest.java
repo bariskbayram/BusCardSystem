@@ -19,8 +19,8 @@ class AddingCardTest {
     FactoryInput factoryInput;
 
     @Test
-    @DisplayName("Correct Tip Input With Student")
-    void takeTipWithCorrectInputStudent1() {
+    @DisplayName("Correct Type Input With Student")
+    void takeTypeWithCorrectInputStudent1() {
         //Given
         when(factoryInput.inputStringType()).thenReturn("Student");
 
@@ -32,8 +32,8 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("Correct Tip Input With student")
-    void takeTipWithCorrectInputStudent2() {
+    @DisplayName("Correct Type Input With student")
+    void takeTypeWithCorrectInputStudent2() {
         //Given
         when(factoryInput.inputStringType()).thenReturn("student");
 
@@ -45,8 +45,8 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("Correct Tip Input With Normal")
-    void takeTipWithCorrectInputNormal1() {
+    @DisplayName("Correct Type Input With Normal")
+    void takeTypeWithCorrectInputNormal1() {
         //Given
         when(factoryInput.inputStringType()).thenReturn("Normal");
 
@@ -58,7 +58,7 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("Correct Tip Input With normal")
+    @DisplayName("Correct Type Input With normal")
     void takeTipWithCorrectInputNormal2() {
         //Given
         when(factoryInput.inputStringType()).thenReturn("normal");
@@ -71,7 +71,7 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("3 Times Incorrect Tip Input")
+    @DisplayName("3 Times Incorrect Type Input")
     void takeTipWithIncorrectInput3Times() {
         //Given
         when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("Pilot").thenReturn("Child");
@@ -86,10 +86,10 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("2 Times Incorrect Tip Input")
+    @DisplayName("2 Times Incorrect Type Input")
     void takeTipWithIncorrectInput2Times(){
         //Given
-        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("Pilot").thenReturn("Normal");
+        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("").thenReturn("Normal");
 
         //When
         addingCard.takeType();
@@ -100,7 +100,7 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("1 Times Incorrect Tip Input")
+    @DisplayName("1 Times Incorrect Type Input")
     void takeTipWithIncorrectInput1Times(){
         //Given
         when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("Normal");
@@ -118,6 +118,16 @@ class AddingCardTest {
     void takeNameWithCorrectInput(){
         //Given
         when(factoryInput.inputStringName()).thenReturn("Barış");
+        //When
+        addingCard.takeName();
+        //Then
+        assertEquals(1, addingCard.getIsCorrect());
+    }
+    @Test
+    @DisplayName("Correct Name Input With NoName")
+    void takeNameWithCorrectInputNoName(){
+        //Given
+        when(factoryInput.inputStringName()).thenReturn("");
         //When
         addingCard.takeName();
         //Then
@@ -170,6 +180,16 @@ class AddingCardTest {
     void takeSurnameWithCorrectInput(){
         //Given
         when(factoryInput.inputStringSurname()).thenReturn("Osman");
+        //When
+        addingCard.takeSurname();
+        //Then
+        assertEquals(1, addingCard.getIsCorrect());
+    }
+    @Test
+    @DisplayName("Correct Surname Input With NoName")
+    void takeSurnameWithCorrectInputNoName(){
+        //Given
+        when(factoryInput.inputStringSurname()).thenReturn("");
         //When
         addingCard.takeSurname();
         //Then

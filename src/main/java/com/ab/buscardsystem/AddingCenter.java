@@ -12,14 +12,21 @@ public class AddingCenter extends ParentObject {
     private CenterConsole centerConsole;
     private int centerId;
     private FactoryInput factoryInput = new FactoryInput();
+    private int isCorrect;
 
     public CenterConsole setCenterInfo(CenterConsole centerConsole){
-        System.out.print("Please enter name: ");
-        name = factoryInput.inputStringName();
-        System.out.print("Please enter address: ");
-        address = factoryInput.inputStringAddress();
-        System.out.print("Please enter center ID: ");
-        centerId = factoryInput.inputIntegerId();
+        if(centerConsole == null)
+            throw new NullPointerException("CenterConsole is null");
+        isCorrect = 1;
+        takeName();
+        if(isCorrect == 0)
+            return null;
+        takeAddress();
+        if(isCorrect == 0)
+            return null;
+        takeCenterId();
+        if(isCorrect == 0)
+            return null;
         centerConsole.setId(centerId);
         centerConsole.setName(name);
         centerConsole.setAddress(address);
@@ -28,6 +35,54 @@ public class AddingCenter extends ParentObject {
         return centerConsole;
     }
 
+    public void takeName(){
+        isCorrect = 0;
+        for(int i=0; i<3; i++) {
+            System.out.print("Please enter name: ");
+            name = factoryInput.inputStringName();
+            if (name.length() < 15 && !name.equals("") && !name.startsWith(" ")) {
+                isCorrect = 1;
+                break;
+            } else {
+                System.out.println("Incorrect Name, please try again!");
+            }
+        }
+    }
+
+    public void takeAddress(){
+        isCorrect = 0;
+        for(int i=0; i<3; i++) {
+            System.out.print("Please enter address: ");
+            address = factoryInput.inputStringAddress();
+            if (address.length() < 100 && address.length()>0) {
+                isCorrect = 1;
+                break;
+            } else {
+                System.out.println("Incorrect address, please try again!");
+            }
+        }
+    }
+
+    public void takeCenterId(){
+        isCorrect = 0;
+        for(int i=0; i<3; i++) {
+            System.out.print("Please enter center Id: ");
+            centerId = factoryInput.inputIntegerId();
+            if (centerId > 0 && 10000>centerId) {
+                isCorrect = 1;
+                break;
+            } else {
+                System.out.println("Center Id is wrong, please try again!");
+            }
+        }
+    }
+    public int getIsCorrect() {
+        return isCorrect;
+    }
+
+    public void setIsCorrect(int isCorrect) {
+        this.isCorrect = isCorrect;
+    }
     public LocalDate getLocalDate() {
         return localDate;
     }
