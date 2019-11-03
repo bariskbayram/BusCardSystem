@@ -21,10 +21,10 @@ class AddingCardTest {
     Card card;
 
     @Test
-    @DisplayName("Correct Tip Input With Öğrenci")
+    @DisplayName("Correct Tip Input With Student")
     void takeTipWithCorrectInputOgrenci1() {
         //Given
-        when(factoryInput.inputStringTip()).thenReturn("Öğrenci");
+        when(factoryInput.inputStringTip()).thenReturn("Student");
 
         //When
         addingCard.takeTip();
@@ -34,10 +34,10 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("Correct Tip Input With öğrenci")
+    @DisplayName("Correct Tip Input With student")
     void takeTipWithCorrectInputOgrenci2() {
         //Given
-        when(factoryInput.inputStringTip()).thenReturn("öğrenci");
+        when(factoryInput.inputStringTip()).thenReturn("student");
 
         //When
         addingCard.takeTip();
@@ -190,27 +190,29 @@ class AddingCardTest {
     @DisplayName("Verify setCardInfo Method Calls")
     void setCardInfoMethodCallsVerify(){
         //Given
-        when(factoryInput.inputStringName()).thenReturn("Barış");
-        when(factoryInput.inputStringTip()).thenReturn("Öğrenci");
-        when(factoryInput.inputIntegerId()).thenReturn(1);
-        when(factoryInput.inputStringSurname()).thenReturn("Osman");
-        doNothing().when(card).setId(1);
+        when(factoryInput.inputStringName()).thenReturn("j");
+        when(factoryInput.inputStringTip()).thenReturn("Student");
+        when(factoryInput.inputIntegerId()).thenReturn(11);
+        when(factoryInput.inputStringSurname()).thenReturn("y");
+        doNothing().when(card).setId(11);
         doNothing().when(card).setBalance(0);
-        doNothing().when(card).setName("Barış");
-        doNothing().when(card).setSurname("Osman");
-        doNothing().when(card).setTip("Öğrenci");
+        doNothing().when(card).setName("j");
+        doNothing().when(card).setSurname("y");
+        doNothing().when(card).setTip("Student");
         //When
         addingCard.setCardInfo(card);
         //Then
-        verify(card).setId(1);
-        verify(card).setBalance(0);
-        verify(card).setName("Barış");
-        verify(card).setSurname("Osman");
-        verify(card).setTip("Öğrenci");
         verify(factoryInput).inputStringName();
         verify(factoryInput).inputStringTip();
         verify(factoryInput).inputIntegerId();
         verify(factoryInput).inputStringSurname();
+
+        verify(card).setId(11);
+        verify(card).setBalance(0);
+        verify(card).setName("j");
+        verify(card).setSurname("y");
+        verify(card).setTip("Student");
+
     }
 
 }

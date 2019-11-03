@@ -2,7 +2,7 @@ package com.ab.buscardsystem;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Scanner;
+
 
 public class AddingCard extends ParentObject {
 
@@ -72,7 +72,7 @@ public class AddingCard extends ParentObject {
         for(int i=0; i<3; i++) {
             System.out.print("Tip giriniz: ");
             tip = factoryInput.inputStringTip();
-            if (tip.toUpperCase().equals("ÖĞRENCİ") || tip.toUpperCase().equals("TAM")) {
+            if (tip.toUpperCase().equals("STUDENT") || tip.toUpperCase().equals("TAM")) {
                 isCorrect = 1;
                 break;
             } else {
@@ -86,7 +86,7 @@ public class AddingCard extends ParentObject {
         for(int i=0; i<3; i++) {
             System.out.print("Id giriniz: ");
             cardId = factoryInput.inputIntegerId();
-            if (cardId > 0 && cardId < 10.000 && cardId != 7 && cardId != 18) {
+            if ((cardId > 0 && cardId < 10000)&& (cardId != 7 && cardId != 18)) {
                 isCorrect = 1;
                 break;
             } else {
