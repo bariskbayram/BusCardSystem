@@ -1,9 +1,8 @@
 package com.ab.buscardsystem;
 
-import java.sql.SQLException;
-import java.util.Scanner;
-
 public class Starter {
+
+    private static FactoryInput factoryInput = new FactoryInput();
 
     public static void main(String[] args){
         startScreen();
@@ -16,8 +15,7 @@ public class Starter {
             System.out.println("3 -> Otobüs Konsolu");
             System.out.println("0 -> Çıkış");
             System.out.print("Yapmak istediğiniz işlemin numarasını giriniz: ");
-            Scanner scanner = new Scanner(System.in);
-            int decision = scanner.nextInt();
+            int decision = factoryInput.inputIntegerId();
             switch (decision){
                 case 1:
                     System.out.println("KentKart konsolu çalıştı.");
@@ -71,8 +69,7 @@ public class Starter {
             System.out.println("6 -> Mevcut Sürücü çıkarma");
             System.out.println("0 -> Çıkış");
             System.out.print("Yapmak istediğiniz işlemin numarasını giriniz: ");
-            Scanner scanner = new Scanner(System.in);
-            int decision = scanner.nextInt();
+            int decision = factoryInput.inputIntegerId();
             switch (decision) {
                 case 1:
                     start.startAddingCard();

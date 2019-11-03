@@ -15,62 +15,62 @@ public class CityCardConsole {
     private DBFacade dbFacade;
     private double amount;
     private AddingDriver addingDriver;
+    private FactoryInput factoryInput = new FactoryInput();
 
     public CityCardConsole(DBFacade dbFacade){
         this.dbFacade = dbFacade;
     }
 
-    public void enterCenterId (int centerId){
-        addingMoneyToCenter = new AddingMoneyToCenter();
+    public void enterCenterId (int centerId, AddingMoneyToCenter addingMoneyToCenter){
         centerConsole =(CenterConsole) dbFacade.get(centerId, CenterConsole.class);
         addingMoneyToCenter.setCenterConsole(centerConsole);
         System.out.println("Yuklenecek tutarı giriniz: ");
-        Scanner scanner = new Scanner(System.in);
-        amount = scanner.nextDouble();
+        amount = factoryInput.inputDoubleAmount();
+        this.addingMoneyToCenter = addingMoneyToCenter;
         enterAmount(amount);
     }
 
     public void enterAmount (double amount){
         addingMoneyToCenter.setAmount(amount);
         System.out.println("Verilen parayı giriniz: ");
-        Scanner scanner = new Scanner(System.in);
-        double payment = scanner.nextDouble();
+        double payment = factoryInput.inputDoublePayment();
         addingMoneyToCenter.setPayment(payment);
-        addingMoneyToCenter.createCenterReceipt(amount,payment);
+        addingMoneyToCenter.createCenterReceipt(new CenterReceipt(amount,payment));
         addingMoneyToCenter.getCenterReceipt().setCenterConsoleId(centerConsole.getId());
         centerConsole.setBalance(centerConsole.getBalance()+amount);
         dbFacade.update(centerConsole);
         dbFacade.put(addingMoneyToCenter.getCenterReceipt());
     }
 
-    public void enterCardInfo(){
-        addingCard = new AddingCard();
-        dbFacade.put(addingCard.setCardInfo());
+    public void enterCardInfo(AddingCard addingCard){
+        Card card = addingCard.setCardInfo(new Card(0));
+        if(card == null)
+            return;
+        dbFacade.put(card);
+        this.addingCard = addingCard;
         dbFacade.put(addingCard);
     }
 
-    public void enterCenterInfo(){
-        addingCenter = new AddingCenter();
-        dbFacade.put(addingCenter.setCenterInfo());
+    public void enterCenterInfo(AddingCenter addingCenter){
+        dbFacade.put(addingCenter.setCenterInfo(new CenterConsole()));
+        this.addingCenter = addingCenter;
         dbFacade.put(addingCenter);
     }
 
-    public void enterDriverInfo(){
-        addingDriver = new AddingDriver();
-        dbFacade.put(addingDriver.setDriverInfo());
+    public void enterDriverInfo(AddingDriver addingDriver){
+        dbFacade.put(addingDriver.setDriverInfo(new Driver(0)));
+        this.addingDriver = addingDriver;
         dbFacade.put(addingDriver);
     }
 
     public void deleteDriver(){
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Silinecek sürücünün Id'sini giriniz: ");
-        dbFacade.delete(scanner.nextInt(), Driver.class);
+        dbFacade.delete(factoryInput.inputIntegerId(), Driver.class);
     }
 
     public void deleteCenter(){
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Silinecek centerId'sini giriniz: ");
-        dbFacade.delete(scanner.nextInt(), CenterConsole.class);
+        dbFacade.delete(factoryInput.inputIntegerId(), CenterConsole.class);
     }
 
     public LocalDate getLocalDate() {

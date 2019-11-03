@@ -8,6 +8,7 @@ public class WholeSystem {
     private BusConsole busConsole = new BusConsole(dbFacade);
     private CenterConsole centerConsole = new CenterConsole(dbFacade);
     private CityCardConsole cityCardConsole = new CityCardConsole(dbFacade);
+    private FactoryInput factoryInput = new FactoryInput();
 
     public WholeSystem() {
     }
@@ -15,47 +16,50 @@ public class WholeSystem {
     public void startTappingCard() {
 
         while (true) {
-            Scanner scanner = new Scanner(System.in);
             System.out.print("Soför LogOut olmak istiyor mu?Devam etmek için 0'a, " +
                     "LogOut olmak için 1'e basınız: ");
-            int logOut = scanner.nextInt();
+            int logOut = factoryInput.inputIntegerId();
             if(logOut == 1)
                 return;
             boolean tamBasılmışMı = false;
             System.out.print("Tam kart özelliği aktif edilsin mi?\nAktif etmek için 1 yazınız, " +
                     "aktif etmeden devam etmemek için 0 yazınız: ");
-            if(scanner.nextInt() == 1)
+            if(factoryInput.inputIntegerId2() == 1)
                 tamBasılmışMı = true;
             System.out.print("Lütfen CardId giriniz: ");
-            int cardId = scanner.nextInt();
-            busConsole.enterCardId(cardId, tamBasılmışMı);
+            int cardId = factoryInput.inputIntegerId3();
+            if(tamBasılmışMı == true)
+                busConsole.enterCardId(cardId, tamBasılmışMı, new TappingCard(0, 3.25));
+            else{
+                busConsole.enterCardId(cardId, tamBasılmışMı, new TappingCard(0));
+            }
         }
     }
 
     public void startAddingMoneyToCard(){
-        Scanner scanner = new Scanner(System.in);
+        System.out.print("CenterId giriniz: ");
+        int centerId = factoryInput.inputIntegerId();
         System.out.print("CardId giriniz: ");
-        int id = scanner.nextInt();
-        centerConsole.enterCardId(id);
+        int CardId = factoryInput.inputIntegerId2();
+        centerConsole.enterCardId(CardId, centerId, new AddingMoneyToCard());
     }
 
     public void startAddingMoneyToCenter(){
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Center Id giriniz : ");
-        int id = scanner.nextInt();
-        cityCardConsole.enterCenterId(id);
+        int id = factoryInput.inputIntegerId();
+        cityCardConsole.enterCenterId(id, new AddingMoneyToCenter());
     }
 
     public void startAddingCard(){
-        cityCardConsole.enterCardInfo();
+        cityCardConsole.enterCardInfo(new AddingCard());
     }
-    public void startAddingCenter(){ cityCardConsole.enterCenterInfo();}
-    public void startAddingDriver(){cityCardConsole.enterDriverInfo();}
+    public void startAddingCenter(){ cityCardConsole.enterCenterInfo(new AddingCenter());}
+    public void startAddingDriver(){cityCardConsole.enterDriverInfo(new AddingDriver());}
     public void startRemovingDriver(){
         cityCardConsole.deleteDriver();
     }
     public void startRemovingCenter(){ cityCardConsole.deleteCenter();}
-    public void startDriverLogIn(){ busConsole.enterDriverId();}
+    public void startDriverLogIn(){ busConsole.enterDriverId(new DriverLogIn());}
 
     public void setDbFacade(DBFacade dbFacade) {
         this.dbFacade = dbFacade;

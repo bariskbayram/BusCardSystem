@@ -8,8 +8,10 @@ public class AddingMoneyToCard {
     private CardReceipt cardReceipt;
     private double payment;
 
-    public void createCardReceipt(double amount, double payment) {
-        cardReceipt = new CardReceipt(amount, payment);
+    public void createCardReceipt(CardReceipt cardReceipt) {
+        amount = cardReceipt.getAmount();
+        payment = cardReceipt.getPayment();
+        this.cardReceipt = cardReceipt;
         System.out.println("Verilen tutar: " + payment + " Yüklenecek tutar: " + amount + " Para üstü: " + (payment-amount));
     }
 

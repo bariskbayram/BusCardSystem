@@ -15,25 +15,27 @@ public class BusConsole extends ParentObject {
     private Driver driver;
     private LocalDate localDate = LocalDate.now();
     private LocalTime localTime = LocalTime.now();
+    private boolean tamBasılmışMı;
+    private FactoryInput factoryInput = new FactoryInput();
 
     public BusConsole(DBFacade dbFacade){
         this.dbFacade = dbFacade;
     }
     public BusConsole(){}
 
-    public void enterCardId(int cardId, boolean tamBasılmışMı){
-
+    public void enterCardId(int cardId, boolean tamBasılmısMıParameter, TappingCard tappingCard){
+        this.tamBasılmışMı = tamBasılmısMıParameter;
         System.out.println(tamBasılmışMı);
         if(tamBasılmışMı == true) {
-            tappingCard = new TappingCard(getId(), 3.25);
+            tappingCard.setAmount(3.25);
         }else {
             if(invalidList.containsKey(cardId) == true &&
                     (localTime.getMinute() - invalidList.get(cardId).getMinute()) < 90 ){
                 System.out.println("Gösterilmiş Kart!");
                 return;
             }
-            tappingCard = new TappingCard(getId());
         }
+        tappingCard.setBusConsoleId(getId());
         card = (Card) dbFacade.get(cardId, Card.class);
         if(card == null)
             return;
@@ -42,22 +44,22 @@ public class BusConsole extends ParentObject {
             return;
         tappingCard.setCardId(card.getId());
         setId(tappingCard.getBusConsoleId());
+        this.tappingCard = tappingCard;
         dbFacade.update(card);
         dbFacade.put(tappingCard);
         invalidList.put(cardId, localTime);
     }
 
-    public void enterDriverId(){
-        driverLogIn = new DriverLogIn();
-        Scanner scanner = new Scanner(System.in);
+    public void enterDriverId(DriverLogIn driverLogIn){
         System.out.println("LogIn olacağınız Otobüsün Id'sini giriniz: ");
-        int busConsoleId = scanner.nextInt();
+        int busConsoleId = factoryInput.inputIntegerId();
         driverLogIn.setBusConsoleId(busConsoleId);
         setId(busConsoleId);
         System.out.println("LogIn olmak için ID giriniz: ");
-        int driverId = scanner.nextInt();
+        int driverId = factoryInput.inputIntegerId2();
         driver = (Driver) dbFacade.get(driverId, Driver.class);
         driverLogIn.setLogin(driver);
+        this.driverLogIn = driverLogIn;
         dbFacade.put(driverLogIn);
     }
 
@@ -108,6 +110,12 @@ public class BusConsole extends ParentObject {
     }
     public void setDriver(Driver driver) {
         this.driver = driver;
+    }
+    public boolean isTamBasılmışMı() {
+        return tamBasılmışMı;
+    }
+    public void setTamBasılmışMı(boolean tamBasılmışMı) {
+        this.tamBasılmışMı = tamBasılmışMı;
     }
 
 }

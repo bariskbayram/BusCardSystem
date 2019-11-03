@@ -12,19 +12,20 @@ public class AddingCenter extends ParentObject {
     private String address;
     private CenterConsole centerConsole;
     private int centerId;
+    private FactoryInput factoryInput = new FactoryInput();
 
-    public CenterConsole setCenterInfo(){
-        Scanner scanner = new Scanner(System.in);
+    public CenterConsole setCenterInfo(CenterConsole centerConsole){
         System.out.print("İsim giriniz: ");
-        name = scanner.nextLine();
+        name = factoryInput.inputStringName();
         System.out.print("Adres giriniz: ");
-        address = scanner.nextLine();
+        address = factoryInput.inputStringAddress();
         System.out.print("Id giriniz: ");
-        centerId = scanner.nextInt();
-        centerConsole = new CenterConsole();
+        centerId = factoryInput.inputIntegerId();
+        centerConsole.setId(centerId);
         centerConsole.setName(name);
         centerConsole.setAddress(address);
         centerConsole.setId(centerId);
+        this.centerConsole = centerConsole;
         return centerConsole;
     }
 

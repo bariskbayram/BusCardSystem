@@ -16,36 +16,35 @@ public class CenterConsole extends ParentObject{
     private String address;
     private LocalDate localDate = LocalDate.now();
     private LocalTime localTime = LocalTime.now();
+    private FactoryInput factoryInput = new FactoryInput();
 
     public CenterConsole(DBFacade dbFacade){
         this.dbFacade = dbFacade;
     }
     public CenterConsole(){}
 
-    public void enterCardId(int cardId){
-        addingMoneyToCard = new AddingMoneyToCard();
-        getAndEquals();
+    public void enterCardId(int cardId, int centerId, AddingMoneyToCard addingMoneyToCard){
+        getAndEquals(centerId);
         card = (Card) dbFacade.get(cardId, Card.class);
         if(card == null)
             return;
         addingMoneyToCard.setCard(card);
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Yüklemek istediğiniz tutarı giriniz: ");
-        amount = scanner.nextDouble();
+        amount = factoryInput.inputDoubleAmount();
+        this.addingMoneyToCard = addingMoneyToCard;
         enterAmount(amount);
     }
 
     public void enterAmount(double amount){
         addingMoneyToCard.setAmount(amount);
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Verilecek tutarı giriniz: ");
-        double payment = scanner.nextDouble();
+        double payment = factoryInput.inputDoublePayment();
         if(balance < amount) {
             System.out.println("Dolum Merkezinin bakiyesi yetersiz.");
             return;
         }
         addingMoneyToCard.setPayment(payment);
-        addingMoneyToCard.createCardReceipt(amount, payment);
+        addingMoneyToCard.createCardReceipt(new CardReceipt(amount, payment));
         addingMoneyToCard.getCardReceipt().setCardId(card.getId());
         addingMoneyToCard.getCardReceipt().setCenterConsoleId(getId());
         card.setBalance(card.getBalance() + amount);
@@ -57,8 +56,8 @@ public class CenterConsole extends ParentObject{
         dbFacade.put(addingMoneyToCard.getCardReceipt());
     }
 
-    public void getAndEquals(){
-        CenterConsole centerConsoleWithoutDB = (CenterConsole) dbFacade.get(17005, CenterConsole.class);
+    public void getAndEquals(int id){
+        CenterConsole centerConsoleWithoutDB = (CenterConsole) dbFacade.get(id, CenterConsole.class);
         CenterConsole centerConsoleWithDB = CenterConsole.this;
 
         centerConsoleWithDB.setId(centerConsoleWithoutDB.getId());

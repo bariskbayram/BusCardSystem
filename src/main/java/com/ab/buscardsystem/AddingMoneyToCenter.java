@@ -9,8 +9,10 @@ public class AddingMoneyToCenter {
     private CenterConsole centerConsole;
     private CenterReceipt centerReceipt;
 
-    public void createCenterReceipt(double amount, double payment) {
-        centerReceipt = new CenterReceipt(amount,payment);
+    public void createCenterReceipt(CenterReceipt centerReceipt) {
+        amount = centerReceipt.getAmount();
+        payment = centerReceipt.getPayment();
+        this.centerReceipt = centerReceipt;
         System.out.println("\nVerilen Tutar : " + payment +"\nYuklenecek tutar : " + amount + "\nPara Üstü : " + (payment - amount));
     }
 
