@@ -19,8 +19,8 @@ class AddingCardTest {
     FactoryInput factoryInput;
 
     @Test
-    @DisplayName("Correct Tip Input With Student")
-    void takeTipWithCorrectInputStudent1() {
+    @DisplayName("Correct Type Input With Student")
+    void takeTypeWithCorrectInputStudent1() {
         //Given
         when(factoryInput.inputStringType()).thenReturn("Student");
 
@@ -32,8 +32,8 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("Correct Tip Input With student")
-    void takeTipWithCorrectInputStudent2() {
+    @DisplayName("Correct Type Input With student")
+    void takeTypeWithCorrectInputStudent2() {
         //Given
         when(factoryInput.inputStringType()).thenReturn("student");
 
@@ -45,8 +45,8 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("Correct Tip Input With Normal")
-    void takeTipWithCorrectInputNormal1() {
+    @DisplayName("Correct Type Input With Normal")
+    void takeTypeWithCorrectInputNormal1() {
         //Given
         when(factoryInput.inputStringType()).thenReturn("Normal");
 
@@ -58,8 +58,8 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("Correct Tip Input With normal")
-    void takeTipWithCorrectInputNormal2() {
+    @DisplayName("Correct Type Input With normal")
+    void takeTypeWithCorrectInputNormal2() {
         //Given
         when(factoryInput.inputStringType()).thenReturn("normal");
 
@@ -71,10 +71,10 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("3 Times Incorrect Tip Input")
-    void takeTipWithIncorrectInput3Times() {
+    @DisplayName("3 Times Incorrect Type Input")
+    void takeTypeWithIncorrectInput3Times() {
         //Given
-        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("Pilot").thenReturn("Child");
+        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("").thenReturn("Child");
 
        //When
         addingCard.takeType();
@@ -86,10 +86,10 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("2 Times Incorrect Tip Input")
-    void takeTipWithIncorrectInput2Times(){
+    @DisplayName("2 Times Incorrect Type Input")
+    void takeTypeWithIncorrectInput2Times(){
         //Given
-        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("Pilot").thenReturn("Normal");
+        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn(" ").thenReturn("Normal");
 
         //When
         addingCard.takeType();
@@ -100,8 +100,8 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("1 Times Incorrect Tip Input")
-    void takeTipWithIncorrectInput1Times(){
+    @DisplayName("1 Times Incorrect Type Input")
+    void takeTypeWithIncorrectInput1Times(){
         //Given
         when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("Normal");
 
@@ -118,6 +118,17 @@ class AddingCardTest {
     void takeNameWithCorrectInput(){
         //Given
         when(factoryInput.inputStringName()).thenReturn("Barış");
+        //When
+        addingCard.takeName();
+        //Then
+        assertEquals(1, addingCard.getIsCorrect());
+    }
+
+    @Test
+    @DisplayName("Correct Name Input With NoName")
+    void takeNameWithCorrectInputNoName(){
+        //Given
+        when(factoryInput.inputStringName()).thenReturn("");
         //When
         addingCard.takeName();
         //Then
@@ -177,6 +188,17 @@ class AddingCardTest {
     }
 
     @Test
+    @DisplayName("Correct Surname Input With NoName")
+    void takeSurnameWithCorrectInputNoName(){
+        //Given
+        when(factoryInput.inputStringSurname()).thenReturn("");
+        //When
+        addingCard.takeSurname();
+        //Then
+        assertEquals(1, addingCard.getIsCorrect());
+    }
+
+    @Test
     @DisplayName("3 Times Incorrect Surname Input With More Than 14 Letters")
     void takeSurnameWithIncorrectInput3Times(){
         //Given
@@ -220,7 +242,7 @@ class AddingCardTest {
     @DisplayName("Correct CardId Input")
     void takeIdWithCorrectInput(){
         //Given
-        when(factoryInput.inputIntegerId()).thenReturn(11).thenReturn(100).thenReturn(19);
+        when(factoryInput.inputIntegerId()).thenReturn(11);
         //When
         addingCard.takeId();
         //Then
@@ -252,10 +274,10 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("Incorrect CardId Input -23")
+    @DisplayName("Incorrect CardId Input Negative and Zero")
     void takeIdWithIncorrectInputWithNegativeInteger(){
         //Given
-        when(factoryInput.inputIntegerId()).thenReturn(-23).thenReturn(-40).thenReturn(-132);
+        when(factoryInput.inputIntegerId()).thenReturn(-23).thenReturn(0).thenReturn(-132);
         //When
         addingCard.takeId();
         //Then
@@ -279,7 +301,7 @@ class AddingCardTest {
     @DisplayName("2 Times Incorrect CardId Input")
     void takeIdWithIncorrectInput2Times(){
         //Given
-        when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(15000).thenReturn(4);
+        when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(15000).thenReturn(9999);
         //When
         addingCard.takeId();
         //Then
@@ -298,7 +320,6 @@ class AddingCardTest {
         assertEquals(1, addingCard.getIsCorrect());
         verify(factoryInput, times(2)).inputIntegerId();
     }
-
 
     @Test
     @DisplayName("Verify setCardInfo Method Calls")
@@ -333,9 +354,18 @@ class AddingCardTest {
     @DisplayName("Verify SetCardInfo Parameter with Null Throw Exception")
     void verifySetCardInfoParameterWithNullThrowException(){
         //Given
-        Card card = null;
-        //When - Then
-        assertThrows(NullPointerException.class, ()->addingCard.setCardInfo(card), "Card is null");
+        String expectedMessage = "Card is null";
+        String actualMessage = null;
+
+        //When
+        try {
+            addingCard.setCardInfo(null);
+        }catch (Exception e){
+            actualMessage = e.getMessage();
+        }
+
+        //Then
+        assertEquals(expectedMessage, actualMessage);
     }
 
 }
