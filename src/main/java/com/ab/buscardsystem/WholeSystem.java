@@ -1,7 +1,5 @@
 package com.ab.buscardsystem;
 
-import java.util.Scanner;
-
 public class WholeSystem {
 
     private DBFacade dbFacade = new DBFacade();
@@ -16,36 +14,35 @@ public class WholeSystem {
     public void startTappingCard() {
 
         while (true) {
-            System.out.print("Soför LogOut olmak istiyor mu?Devam etmek için 0'a, " +
-                    "LogOut olmak için 1'e basınız: ");
+            System.out.print("For Driver LogOut please enter 1, for continue without LogOut please enter 0: ");
             int logOut = factoryInput.inputIntegerId();
             if(logOut == 1)
                 return;
-            boolean tamBasılmışMı = false;
-            System.out.print("Tam kart özelliği aktif edilsin mi?\nAktif etmek için 1 yazınız, " +
-                    "aktif etmeden devam etmemek için 0 yazınız: ");
+            boolean isTappingNormal = false;
+            System.out.print("For activate the Normal Card Type please enter 1, " +
+                    "for continue without activating please enter 0: ");
             if(factoryInput.inputIntegerId2() == 1)
-                tamBasılmışMı = true;
-            System.out.print("Lütfen CardId giriniz: ");
+                isTappingNormal = true;
+            System.out.print("Please enter Card ID: ");
             int cardId = factoryInput.inputIntegerId3();
-            if(tamBasılmışMı == true)
-                busConsole.enterCardId(cardId, tamBasılmışMı, new TappingCard(0, 3.25));
+            if(isTappingNormal == true)
+                busConsole.enterCardId(cardId, isTappingNormal, new TappingCard(0, 3.25));
             else{
-                busConsole.enterCardId(cardId, tamBasılmışMı, new TappingCard(0));
+                busConsole.enterCardId(cardId, isTappingNormal, new TappingCard(0));
             }
         }
     }
 
     public void startAddingMoneyToCard(){
-        System.out.print("CenterId giriniz: ");
+        System.out.print("Please enter Center ID: ");
         int centerId = factoryInput.inputIntegerId();
-        System.out.print("CardId giriniz: ");
+        System.out.print("Please enter Card ID: ");
         int CardId = factoryInput.inputIntegerId2();
         centerConsole.enterCardId(CardId, centerId, new AddingMoneyToCard());
     }
 
     public void startAddingMoneyToCenter(){
-        System.out.println("Center Id giriniz : ");
+        System.out.println("Please enter Center ID: ");
         int id = factoryInput.inputIntegerId();
         cityCardConsole.enterCenterId(id, new AddingMoneyToCenter());
     }

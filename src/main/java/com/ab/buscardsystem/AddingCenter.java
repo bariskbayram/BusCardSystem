@@ -5,7 +5,6 @@ import java.time.LocalTime;
 import java.util.Scanner;
 
 public class AddingCenter extends ParentObject {
-    private SqliteDB sqliteDB;
     private LocalDate localDate = LocalDate.now();
     private LocalTime localTime = LocalTime.now();
     private String name;
@@ -15,11 +14,11 @@ public class AddingCenter extends ParentObject {
     private FactoryInput factoryInput = new FactoryInput();
 
     public CenterConsole setCenterInfo(CenterConsole centerConsole){
-        System.out.print("İsim giriniz: ");
-        name = factoryInput.inputStringName();
-        System.out.print("Adres giriniz: ");
-        address = factoryInput.inputStringAddress();
-        System.out.print("Id giriniz: ");
+        System.out.print("Please enter name: ");
+        name = factoryInput.inputStringName().toUpperCase();
+        System.out.print("Please enter address: ");
+        address = factoryInput.inputStringAddress().toUpperCase();
+        System.out.print("Please enter center ID: ");
         centerId = factoryInput.inputIntegerId();
         centerConsole.setId(centerId);
         centerConsole.setName(name);

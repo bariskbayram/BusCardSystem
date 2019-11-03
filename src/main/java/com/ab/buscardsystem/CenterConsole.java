@@ -29,7 +29,7 @@ public class CenterConsole extends ParentObject{
         if(card == null)
             return;
         addingMoneyToCard.setCard(card);
-        System.out.print("Yüklemek istediğiniz tutarı giriniz: ");
+        System.out.print("Please enter amount: ");
         amount = factoryInput.inputDoubleAmount();
         this.addingMoneyToCard = addingMoneyToCard;
         enterAmount(amount);
@@ -37,10 +37,10 @@ public class CenterConsole extends ParentObject{
 
     public void enterAmount(double amount){
         addingMoneyToCard.setAmount(amount);
-        System.out.print("Verilecek tutarı giriniz: ");
+        System.out.print("Please enter payment: ");
         double payment = factoryInput.inputDoublePayment();
         if(balance < amount) {
-            System.out.println("Dolum Merkezinin bakiyesi yetersiz.");
+            System.out.println("Center's balance is not enough.");
             return;
         }
         addingMoneyToCard.setPayment(payment);
@@ -49,8 +49,8 @@ public class CenterConsole extends ParentObject{
         addingMoneyToCard.getCardReceipt().setCenterConsoleId(getId());
         card.setBalance(card.getBalance() + amount);
         setBalance(getBalance() - amount);
-        System.out.println("Önceki Bakiye: " + new DecimalFormat("##.##").format(card.getBalance() - amount));
-        System.out.println("Güncel Bakiye: " + new DecimalFormat("##.##").format(card.getBalance()));
+        System.out.println("Previous Balance: " + new DecimalFormat("##.##").format(card.getBalance() - amount));
+        System.out.println("Current Balance: " + new DecimalFormat("##.##").format(card.getBalance()));
         dbFacade.update(card);
         dbFacade.update(CenterConsole.this);
         dbFacade.put(addingMoneyToCard.getCardReceipt());

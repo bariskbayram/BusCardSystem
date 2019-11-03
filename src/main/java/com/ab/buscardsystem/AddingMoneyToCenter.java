@@ -13,7 +13,7 @@ public class AddingMoneyToCenter {
         amount = centerReceipt.getAmount();
         payment = centerReceipt.getPayment();
         this.centerReceipt = centerReceipt;
-        System.out.println("\nVerilen Tutar : " + payment +"\nYuklenecek tutar : " + amount + "\nPara Üstü : " + (payment - amount));
+        System.out.println("\nPayment : " + payment +"\nAmount : " + amount + "\nChange : " + (payment - amount));
     }
 
     public int getId() {

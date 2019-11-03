@@ -26,7 +26,7 @@ public class TappingCard extends ParentObject {
 
     public void set(Card card){
         currentBalance = card.getBalance();
-        if(card.getTip().equals("Öğrenci")){
+        if(card.getType().equals("STUDENT")){
             cardDefaultPrice = 2.10;
         }else{
             cardDefaultPrice = 3.25;
@@ -35,12 +35,12 @@ public class TappingCard extends ParentObject {
             this.amount = cardDefaultPrice;
         }
         if(amount > card.getBalance()){
-            System.out.println("Yetersiz Bakiye." + card.getName());
+            System.out.println("Card's balance is not enough.");
             return;
         }else{
             card.setBalance(card.getBalance() - amount);
-            System.out.println("Önceki Bakiye: " + new DecimalFormat("##.##").format(currentBalance));
-            System.out.println("Güncel Bakiye: " + new DecimalFormat("##.##").format(card.getBalance()));
+            System.out.println("Previous Balance: " + new DecimalFormat("##.##").format(currentBalance));
+            System.out.println("Current Balance: " + new DecimalFormat("##.##").format(card.getBalance()));
         }
     }
 

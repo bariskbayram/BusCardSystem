@@ -5,18 +5,18 @@ public class Card extends ParentObject {
     private String name;
     private String surname;
     private double balance;
-    private String tip;
+    private String type;
     private Boolean situation = true;
 
     public Card(int id){
         this.setId(id);
     }
 
-    public void setTip(String tip) {
-        this.tip = tip;
+    public void setType(String type) {
+        this.type = type;
     }
-    public String getTip() {
-        return tip;
+    public String getType() {
+        return type;
     }
     public String getName() {
         return name;

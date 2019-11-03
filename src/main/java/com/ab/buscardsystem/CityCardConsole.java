@@ -24,7 +24,7 @@ public class CityCardConsole {
     public void enterCenterId (int centerId, AddingMoneyToCenter addingMoneyToCenter){
         centerConsole =(CenterConsole) dbFacade.get(centerId, CenterConsole.class);
         addingMoneyToCenter.setCenterConsole(centerConsole);
-        System.out.println("Yuklenecek tutarı giriniz: ");
+        System.out.println("Please enter amount: ");
         amount = factoryInput.inputDoubleAmount();
         this.addingMoneyToCenter = addingMoneyToCenter;
         enterAmount(amount);
@@ -32,7 +32,7 @@ public class CityCardConsole {
 
     public void enterAmount (double amount){
         addingMoneyToCenter.setAmount(amount);
-        System.out.println("Verilen parayı giriniz: ");
+        System.out.println("Please enter payment: ");
         double payment = factoryInput.inputDoublePayment();
         addingMoneyToCenter.setPayment(payment);
         addingMoneyToCenter.createCenterReceipt(new CenterReceipt(amount,payment));
@@ -64,12 +64,12 @@ public class CityCardConsole {
     }
 
     public void deleteDriver(){
-        System.out.println("Silinecek sürücünün Id'sini giriniz: ");
+        System.out.println("Please enter Driver ID for delete process: ");
         dbFacade.delete(factoryInput.inputIntegerId(), Driver.class);
     }
 
     public void deleteCenter(){
-        System.out.println("Silinecek centerId'sini giriniz: ");
+        System.out.println("Please enter Center ID for delete process: ");
         dbFacade.delete(factoryInput.inputIntegerId(), CenterConsole.class);
     }
 

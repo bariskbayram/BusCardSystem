@@ -12,7 +12,7 @@ public class AddingMoneyToCard {
         amount = cardReceipt.getAmount();
         payment = cardReceipt.getPayment();
         this.cardReceipt = cardReceipt;
-        System.out.println("Verilen tutar: " + payment + " Yüklenecek tutar: " + amount + " Para üstü: " + (payment-amount));
+        System.out.println("Payment: " + payment + " Amount: " + amount + " Change: " + (payment-amount));
     }
 
     public int getCardId() {
