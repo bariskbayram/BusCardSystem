@@ -33,7 +33,6 @@ public class TappingCardDB implements IDataBase {
         catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("TapingCard döndürüldü.");
         return tappingCard;
     }
 

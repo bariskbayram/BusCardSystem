@@ -34,7 +34,7 @@ public class FactoryInput {
         return scanner.nextLine();
     }
 
-    public String inputStringTip(){
+    public String inputStringType(){
         return scanner.nextLine();
     }
 

@@ -33,7 +33,7 @@ class AddingDriverTest {
     }
 
     @Test
-    @DisplayName("Incorrect Name Input With 14 Harften Uzun")
+    @DisplayName("Incorrect Name Input With More Than 14 Letters")
     void takeNameWithIncorrectInput(){
         //Given
         when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah");
@@ -55,7 +55,7 @@ class AddingDriverTest {
     }
 
     @Test
-    @DisplayName("Incorrect Surname Input With 14 Harften Uzun")
+    @DisplayName("Incorrect Surname Input With More Than 14 Letters")
     void takeSurnameWithIncorrectInput(){
         //Given
         when(factoryInput.inputStringSurname()).thenReturn("Muhammed Bekir Cinnah");
@@ -125,16 +125,16 @@ class AddingDriverTest {
     @DisplayName("Verify setCardInfo Method Calls")
     void setCardInfoMethodCallsVerify(){
         //Given
-        when(factoryInput.inputStringName()).thenReturn("Barış");
+        when(factoryInput.inputStringName()).thenReturn("Baris");
         when(factoryInput.inputStringSurname()).thenReturn("Osman");
         when(factoryInput.inputIntegerId()).thenReturn(1);
-        doNothing().when(driver).setName("Barış");
+        doNothing().when(driver).setName("Baris");
         doNothing().when(driver).setSurname("Osman");
         doNothing().when(driver).setId(1);
         //When
         addingDriver.setDriverInfo(driver);
         //Then
-        verify(driver).setName("Barış");
+        verify(driver).setName("Baris");
         verify(driver).setSurname("Osman");
         verify(driver).setId(1);
         verify(factoryInput).inputStringName();

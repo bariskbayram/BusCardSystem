@@ -28,7 +28,7 @@ public class CardDB implements IDataBase {
                 card.setName(resultSet.getString("Name"));
                 card.setSurname(resultSet.getString("Surname"));
                 card.setBalance(resultSet.getDouble("Balance"));
-                card.setTip(resultSet.getString("Tip"));
+                card.setType(resultSet.getString("Type"));
                 this.card = card;
             }
             sqliteDB.closeDB();
@@ -68,14 +68,14 @@ public class CardDB implements IDataBase {
     public void putItem(ParentObject object) {
         try {
             sqliteDB.connectDB();
-            String query = "INSERT INTO Card (Id, Name, Surname, Balance, Tip) VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO Card (Id, Name, Surname, Balance, Type) VALUES (?,?,?,?,?)";
             PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
             Card card = (Card) object;
             preparedStatement.setString(1, String.valueOf(card.getId()));
             preparedStatement.setString(2, String.valueOf(card.getName()));
             preparedStatement.setString(3, String.valueOf(card.getSurname()));
             preparedStatement.setString(4, String.valueOf(card.getBalance()));
-            preparedStatement.setString(5, String.valueOf(card.getTip()));
+            preparedStatement.setString(5, String.valueOf(card.getType()));
             preparedStatement.executeUpdate();
             sqliteDB.closeDB();
         }catch (Exception e){

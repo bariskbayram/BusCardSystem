@@ -26,7 +26,7 @@ public class AddingCardDB implements IDataBase{
     public void putItem(ParentObject object) {
         try {
             sqliteDB.connectDB();
-            String query = "INSERT INTO AddingCard (CardId, Date, Time, Name, Surname, Tip) VALUES (?,?,?,?,?,?)";
+            String query = "INSERT INTO AddingCard (CardId, Date, Time, Name, Surname, Type) VALUES (?,?,?,?,?,?)";
             PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
             addingCard = (AddingCard) object;
             preparedStatement.setString(1, String.valueOf(addingCard.getCardId()));
@@ -34,7 +34,7 @@ public class AddingCardDB implements IDataBase{
             preparedStatement.setString(3, String.valueOf(addingCard.getLocalTime()));
             preparedStatement.setString(4, String.valueOf(addingCard.getName()));
             preparedStatement.setString(5, String.valueOf(addingCard.getSurname()));
-            preparedStatement.setString(6, String.valueOf(addingCard.getTip()));
+            preparedStatement.setString(6, String.valueOf(addingCard.getType()));
             preparedStatement.executeUpdate();
             sqliteDB.closeDB();
         }catch (Exception e){

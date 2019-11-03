@@ -3,14 +3,13 @@ package com.ab.buscardsystem;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
 public class AddingCard extends ParentObject {
 
     private LocalDate localDate = LocalDate.now();
     private LocalTime localTime = LocalTime.now();
     private String name;
     private String surname;
-    private String tip;
+    private String type;
     private int cardId;
     private Card card;
     private int isCorrect;
@@ -24,7 +23,7 @@ public class AddingCard extends ParentObject {
         takeSurname();
         if(isCorrect == 0)
             return null;
-        takeTip();
+        takeType();
         if(isCorrect == 0)
             return null;
         takeId();
@@ -34,7 +33,7 @@ public class AddingCard extends ParentObject {
         card.setBalance(0);
         card.setName(name);
         card.setSurname(surname);
-        card.setTip(tip);
+        card.setType(type);
         this.card = card;
         return card;
     }
@@ -42,13 +41,13 @@ public class AddingCard extends ParentObject {
     public void takeName(){
         isCorrect = 0;
         for(int i=0; i<3; i++) {
-            System.out.print("İsim giriniz: ");
-            name = factoryInput.inputStringName();
+            System.out.print("Please enter name: ");
+            name = factoryInput.inputStringName().toUpperCase();
             if (name.length() < 15) {
                 isCorrect = 1;
                 break;
             } else {
-                System.out.println("Çok uzun isim girdiniz, tekrar deneyin!");
+                System.out.println("Name is too long, please try again!");
             }
         }
     }
@@ -56,27 +55,27 @@ public class AddingCard extends ParentObject {
     public void takeSurname(){
         isCorrect = 0;
         for(int i=0; i<3; i++) {
-            System.out.print("Soyad giriniz: ");
-            surname = factoryInput.inputStringSurname();
+            System.out.print("Please enter surname: ");
+            surname = factoryInput.inputStringSurname().toUpperCase();
             if (surname.length() < 15) {
                 isCorrect = 1;
                 break;
             } else {
-                System.out.println("Çok uzun soyad girdiniz, tekrar deneyin!");
+                System.out.println("Surname is too long, please try again!");
             }
         }
     }
 
-    public void takeTip(){
+    public void takeType(){
         isCorrect = 0;
         for(int i=0; i<3; i++) {
-            System.out.print("Tip giriniz: ");
-            tip = factoryInput.inputStringTip();
-            if (tip.toUpperCase().equals("STUDENT") || tip.toUpperCase().equals("TAM")) {
+            System.out.print("Please enter user tpye: ");
+            type = factoryInput.inputStringType().toUpperCase();
+            if (type.toUpperCase().equals("STUDENT") || type.toUpperCase().equals("NORMAL")) {
                 isCorrect = 1;
                 break;
             } else {
-                System.out.println("Yanlış tip girdiniz, tekrar deneyin!");
+                System.out.println("Type is wrong, please try again!");
             }
         }
     }
@@ -84,13 +83,13 @@ public class AddingCard extends ParentObject {
     public void takeId(){
         isCorrect = 0;
         for(int i=0; i<3; i++) {
-            System.out.print("Id giriniz: ");
+            System.out.print("Please enter Card ID: ");
             cardId = factoryInput.inputIntegerId();
-            if ((cardId > 0 && cardId < 10000)&& (cardId != 7 && cardId != 18)) {
+            if (cardId > 0 && cardId < 10000 && cardId != 7 && cardId != 18) {
                 isCorrect = 1;
                 break;
             } else {
-                System.out.println("Yanlış Kart Id girdiniz, tekrar deneyin!");
+                System.out.println("Card ID is wrong, please try again!");
             }
         }
     }
@@ -113,11 +112,11 @@ public class AddingCard extends ParentObject {
     public void setSurname(String surname) {
         this.surname = surname;
     }
-    public String getTip() {
-        return tip;
+    public String getType() {
+        return type;
     }
-    public void setTip(String tip) {
-        this.tip = tip;
+    public void setType(String type) {
+        this.type = type;
     }
     public int getCardId() {
         return cardId;

@@ -22,12 +22,12 @@ class AddingCardTest {
 
     @Test
     @DisplayName("Correct Tip Input With Student")
-    void takeTipWithCorrectInputOgrenci1() {
+    void takeTipWithCorrectInputStudent1() {
         //Given
-        when(factoryInput.inputStringTip()).thenReturn("Student");
+        when(factoryInput.inputStringType()).thenReturn("Student");
 
         //When
-        addingCard.takeTip();
+        addingCard.takeType();
 
         //Then
         assertEquals(1, addingCard.getIsCorrect());
@@ -35,38 +35,38 @@ class AddingCardTest {
 
     @Test
     @DisplayName("Correct Tip Input With student")
-    void takeTipWithCorrectInputOgrenci2() {
+    void takeTipWithCorrectInputStudent2() {
         //Given
-        when(factoryInput.inputStringTip()).thenReturn("student");
+        when(factoryInput.inputStringType()).thenReturn("student");
 
         //When
-        addingCard.takeTip();
+        addingCard.takeType();
 
         //Then
         assertEquals(1, addingCard.getIsCorrect());
     }
 
     @Test
-    @DisplayName("Correct Tip Input With Tam")
-    void takeTipWithCorrectInputTam1() {
+    @DisplayName("Correct Tip Input With Normal")
+    void takeTipWithCorrectInputNormal1() {
         //Given
-        when(factoryInput.inputStringTip()).thenReturn("Tam");
+        when(factoryInput.inputStringType()).thenReturn("Normal");
 
         //When
-        addingCard.takeTip();
+        addingCard.takeType();
 
         //Then
         assertEquals(1, addingCard.getIsCorrect());
     }
 
     @Test
-    @DisplayName("Correct Tip Input With tam")
-    void takeTipWithCorrectInputTam2() {
+    @DisplayName("Correct Tip Input With normal")
+    void takeTipWithCorrectInputNormal2() {
         //Given
-        when(factoryInput.inputStringTip()).thenReturn("tam");
+        when(factoryInput.inputStringType()).thenReturn("normal");
 
         //When
-        addingCard.takeTip();
+        addingCard.takeType();
 
         //Then
         assertEquals(1, addingCard.getIsCorrect());
@@ -76,10 +76,10 @@ class AddingCardTest {
     @DisplayName("Incorrect Tip Input")
     void takeTipWithIncorrectInput() {
         //Given
-        when(factoryInput.inputStringTip()).thenReturn("Doktor");
+        when(factoryInput.inputStringType()).thenReturn("Doctor");
 
        //When
-        addingCard.takeTip();
+        addingCard.takeType();
 
         //Then
        assertEquals(0, addingCard.getIsCorrect());
@@ -98,7 +98,7 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("Incorrect Name Input With 14 Harften Uzun")
+    @DisplayName("Incorrect Name Input With More Than 14 Letters")
     void takeNameWithIncorrectInput(){
         //Given
         when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah");
@@ -120,7 +120,7 @@ class AddingCardTest {
     }
 
     @Test
-    @DisplayName("Incorrect Surname Input With 14 Harften Uzun")
+    @DisplayName("Incorrect Surname Input With More Than 14 Letters")
     void takeSurnameWithIncorrectInput(){
         //Given
         when(factoryInput.inputStringSurname()).thenReturn("Muhammed Bekir Cinnah");
@@ -134,7 +134,7 @@ class AddingCardTest {
     @DisplayName("Correct CardId Input")
     void takeIdWithCorrectInput(){
         //Given
-        when(factoryInput.inputIntegerId()).thenReturn(1);
+        when(factoryInput.inputIntegerId()).thenReturn(11).thenReturn(100).thenReturn(19);
         //When
         addingCard.takeId();
         //Then
@@ -190,29 +190,27 @@ class AddingCardTest {
     @DisplayName("Verify setCardInfo Method Calls")
     void setCardInfoMethodCallsVerify(){
         //Given
-        when(factoryInput.inputStringName()).thenReturn("j");
-        when(factoryInput.inputStringTip()).thenReturn("Student");
+        when(factoryInput.inputStringName()).thenReturn("Barış");
+        when(factoryInput.inputStringType()).thenReturn("Student");
         when(factoryInput.inputIntegerId()).thenReturn(11);
-        when(factoryInput.inputStringSurname()).thenReturn("y");
+        when(factoryInput.inputStringSurname()).thenReturn("Osman");
         doNothing().when(card).setId(11);
         doNothing().when(card).setBalance(0);
-        doNothing().when(card).setName("j");
-        doNothing().when(card).setSurname("y");
-        doNothing().when(card).setTip("Student");
+        doNothing().when(card).setName("Barış");
+        doNothing().when(card).setSurname("Osman");
+        doNothing().when(card).setType("Student");
         //When
         addingCard.setCardInfo(card);
         //Then
-        verify(factoryInput).inputStringName();
-        verify(factoryInput).inputStringTip();
-        verify(factoryInput).inputIntegerId();
-        verify(factoryInput).inputStringSurname();
-
         verify(card).setId(11);
         verify(card).setBalance(0);
-        verify(card).setName("j");
-        verify(card).setSurname("y");
-        verify(card).setTip("Student");
-
+        verify(card).setName("Barış");
+        verify(card).setSurname("Osman");
+        verify(card).setType("Student");
+        verify(factoryInput).inputStringName();
+        verify(factoryInput).inputStringType();
+        verify(factoryInput).inputIntegerId();
+        verify(factoryInput).inputStringSurname();
     }
 
 }
