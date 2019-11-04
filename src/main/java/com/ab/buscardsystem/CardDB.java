@@ -18,7 +18,7 @@ public class CardDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             String query = "SELECT * FROM Card WHERE Id = ?";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             preparedStatement.setString(1, String.valueOf(id));
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -54,7 +54,7 @@ public class CardDB implements IDataBase {
             sqliteDB.connectDB();
             card = (Card) object;
             String query = "UPDATE Card SET Balance = ? WHERE Id = ?";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             preparedStatement.setString(1, String.valueOf(card.getBalance()));
             preparedStatement.setString(2, String.valueOf(card.getId()));
             preparedStatement.executeUpdate();
@@ -68,15 +68,22 @@ public class CardDB implements IDataBase {
     public void putItem(ParentObject object) {
         try {
             sqliteDB.connectDB();
-            String query = "INSERT INTO Card (Id, Name, Surname, Balance, Type) VALUES (?,?,?,?,?)";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
             Card card = (Card) object;
-            preparedStatement.setString(1, String.valueOf(card.getId()));
-            preparedStatement.setString(2, String.valueOf(card.getName()));
-            preparedStatement.setString(3, String.valueOf(card.getSurname()));
-            preparedStatement.setString(4, String.valueOf(card.getBalance()));
-            preparedStatement.setString(5, String.valueOf(card.getType()));
-            preparedStatement.executeUpdate();
+            String queryGet = "SELECT * FROM Card WHERE Id = ?";
+            PreparedStatement preparedStatementGet = sqliteDB.getConnection().prepareStatement(queryGet);
+            preparedStatementGet.setString(1, String.valueOf(card.getId()));
+            ResultSet resultSet = preparedStatementGet.executeQuery();
+            if(resultSet.getInt("Id") ==  card.getId()){
+                throw new IllegalArgumentException("Card is already exist.");
+            }
+            String queryInsert = "INSERT INTO Card (Id, Name, Surname, Balance, Type) VALUES (?,?,?,?,?)";
+            PreparedStatement preparedStatementInsert = sqliteDB.getConnection().prepareStatement(queryInsert);
+            preparedStatementInsert.setString(1, String.valueOf(card.getId()));
+            preparedStatementInsert.setString(2, String.valueOf(card.getName()));
+            preparedStatementInsert.setString(3, String.valueOf(card.getSurname()));
+            preparedStatementInsert.setString(4, String.valueOf(card.getBalance()));
+            preparedStatementInsert.setString(5, String.valueOf(card.getType()));
+            preparedStatementInsert.executeUpdate();
             sqliteDB.closeDB();
         }catch (Exception e){
             e.printStackTrace();

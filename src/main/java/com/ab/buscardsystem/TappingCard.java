@@ -17,6 +17,7 @@ public class TappingCard extends ParentObject {
 
     public TappingCard(int busConsoleId){
         this.busConsoleId = busConsoleId;
+        this.amount = 0;
     }
     public TappingCard(int busConsoleId, double amount){
         this.busConsoleId = busConsoleId;
@@ -82,6 +83,15 @@ public class TappingCard extends ParentObject {
     }
     public double getCurrentBalance() {
         return currentBalance;
+    }
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
+    }
+    public void setLocalTime(LocalTime localTime) {
+        this.localTime = localTime;
+    }
+    public void setCurrentBalance(double currentBalance) {
+        this.currentBalance = currentBalance;
     }
 
 }

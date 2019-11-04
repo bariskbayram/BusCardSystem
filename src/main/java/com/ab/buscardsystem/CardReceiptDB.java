@@ -55,7 +55,7 @@ public class CardReceiptDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             String query = "INSERT INTO CardReceipt (CardId, CenterConsoleId, Date, Time, Payment, Change, Amount) VALUES (?,?,?,?,?,?,?)";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             CardReceipt cardReceipt = (CardReceipt) object;
             preparedStatement.setString(1, String.valueOf(cardReceipt.getCardId()));
             preparedStatement.setString(2, String.valueOf(cardReceipt.getCenterConsoleId()));

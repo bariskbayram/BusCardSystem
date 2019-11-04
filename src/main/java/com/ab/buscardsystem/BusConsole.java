@@ -16,6 +16,8 @@ public class BusConsole extends ParentObject {
     private LocalTime localTime = LocalTime.now();
     private boolean isTappingNormal;
     private FactoryInput factoryInput = new FactoryInput();
+    private boolean cardTappingSitutation;
+    private boolean balanceSitutation;
 
     public BusConsole(DBFacade dbFacade){
         this.dbFacade = dbFacade;
@@ -24,13 +26,11 @@ public class BusConsole extends ParentObject {
 
     public void enterCardId(int cardId, boolean isTappingNormalParameter, TappingCard tappingCard){
         this.isTappingNormal = isTappingNormalParameter;
-        System.out.println(isTappingNormal);
         if(isTappingNormal == true) {
             tappingCard.setAmount(3.25);
         }else {
-            if(invalidList.containsKey(cardId) == true &&
-                    (localTime.getMinute() - invalidList.get(cardId).getMinute()) < 90 ){
-                System.out.println("Card is already tapped!");
+            cardTappingSitutation = isCardAlreadyTapped(cardId);
+            if(!cardTappingSitutation){
                 return;
             }
         }
@@ -39,7 +39,8 @@ public class BusConsole extends ParentObject {
         if(card == null)
             return;
         tappingCard.set(card);
-        if(tappingCard.getAmount() > tappingCard.getCurrentBalance())
+        balanceSitutation = isCardBalanceEnough(tappingCard);
+        if(!balanceSitutation)
             return;
         tappingCard.setCardId(card.getId());
         setId(tappingCard.getBusConsoleId());
@@ -62,12 +63,48 @@ public class BusConsole extends ParentObject {
         dbFacade.put(driverLogIn);
     }
 
+    public boolean isCardAlreadyTapped(int cardId) {
+
+        if (invalidList.containsKey(cardId) == true) {
+            int time = (localTime.getMinute() - invalidList.get(cardId).getMinute());
+            System.out.println(time);
+            if (time < 45) {
+                System.out.println("Card is already tapped!");
+                return false;
+            }else {
+                return true;
+            }
+        }else {
+            return true;
+        }
+    }
+
+    public boolean isCardBalanceEnough(TappingCard tappingCard){
+        if(tappingCard.getAmount() > tappingCard.getCurrentBalance()) {
+            return false;
+        }else{
+            return true;
+        }
+    }
+
    /* public void getAndEquals(){
         BusConsole busConsoleWithDB = BusConsole.this;
         BusConsole busConsoleWithoutDB = dbFacade.get();
 
     }*/
 
+    public boolean isCardTappingSitutation() {
+        return cardTappingSitutation;
+    }
+    public void setCardTappingSitutation(boolean cardTappingSitutation) {
+        this.cardTappingSitutation = cardTappingSitutation;
+    }
+    public boolean isBalanceSitutation() {
+        return balanceSitutation;
+    }
+    public void setBalanceSitutation(boolean balanceSitutation) {
+        this.balanceSitutation = balanceSitutation;
+    }
     public LocalDate getLocalDate() {
         return localDate;
     }

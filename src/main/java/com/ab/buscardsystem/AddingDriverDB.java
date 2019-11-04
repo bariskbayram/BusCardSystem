@@ -27,7 +27,7 @@ public class AddingDriverDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             String query = "INSERT INTO AddingDriver (Date, Time, Name, Surname, DriverId) VALUES (?,?,?,?,?)";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             addingDriver = (AddingDriver) object;
             preparedStatement.setString(1, String.valueOf(addingDriver.getLocalDate()));
             preparedStatement.setString(2, String.valueOf(addingDriver.getLocalTime()));

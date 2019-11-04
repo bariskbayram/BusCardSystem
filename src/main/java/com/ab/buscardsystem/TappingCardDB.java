@@ -18,7 +18,7 @@ public class TappingCardDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             String query = "SELECT * FROM Card WHERE Id = ?";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             preparedStatement.setString(1, String.valueOf(id));
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -47,7 +47,7 @@ public class TappingCardDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             String query = "INSERT INTO TappingCard (Amount, Date, Time, BusConsoleId, CardId) VALUES (?,?,?,?,?)";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             TappingCard tappingCard = (TappingCard) object;
             preparedStatement.setString(1, String.valueOf(tappingCard.getAmount()));
             preparedStatement.setString(2, String.valueOf(tappingCard.getLocalDate()));

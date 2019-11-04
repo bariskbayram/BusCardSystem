@@ -6,6 +6,7 @@ public class AddingCardDB implements IDataBase{
 
     private SqliteDB sqliteDB;
     private AddingCard addingCard;
+    private String query;
 
     public AddingCardDB(SqliteDB sqliteDB){
         this.sqliteDB = sqliteDB;
@@ -26,8 +27,8 @@ public class AddingCardDB implements IDataBase{
     public void putItem(ParentObject object) {
         try {
             sqliteDB.connectDB();
-            String query = "INSERT INTO AddingCard (CardId, Date, Time, Name, Surname, Type) VALUES (?,?,?,?,?,?)";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            query = "INSERT INTO AddingCard (CardId, Date, Time, Name, Surname, Type) VALUES (?,?,?,?,?,?)";
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             addingCard = (AddingCard) object;
             preparedStatement.setString(1, String.valueOf(addingCard.getCardId()));
             preparedStatement.setString(2, String.valueOf(addingCard.getLocalDate()));
@@ -54,4 +55,11 @@ public class AddingCardDB implements IDataBase{
     public void setAddingCard(AddingCard addingCard) {
         this.addingCard = addingCard;
     }
+    public String getQuery() {
+        return query;
+    }
+    public void setQuery(String query) {
+        this.query = query;
+    }
+
 }

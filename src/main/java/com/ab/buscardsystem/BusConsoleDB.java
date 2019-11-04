@@ -17,7 +17,7 @@ public class BusConsoleDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             String query = "SELECT * FROM BusConsole WHERE Id = ?";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             preparedStatement.setString(1,String.valueOf(id));
             ResultSet resultSet = preparedStatement.executeQuery();
 

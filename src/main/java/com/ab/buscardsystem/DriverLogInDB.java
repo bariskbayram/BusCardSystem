@@ -27,7 +27,7 @@ public class DriverLogInDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             String query = "INSERT INTO DriverLogIn (DriverId, Date, Time, BusConsoleId) VALUES (?,?,?,?)";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             driverLogIn = (DriverLogIn) object;
             preparedStatement.setString(1, String.valueOf(driverLogIn.getDriverId()));
             preparedStatement.setString(2, String.valueOf(driverLogIn.getLocalDate()));

@@ -25,7 +25,7 @@ public class CenterReceiptDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             String query = "INSERT INTO CenterReceipt (CenterConsoleId, Date, Time, Payment, Change, Amount) VALUES (?,?,?,?,?,?)";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             CenterReceipt centerReceipt = (CenterReceipt) object;
             preparedStatement.setString(1, String.valueOf(centerReceipt.getCenterConsoleId()));
             preparedStatement.setString(2, String.valueOf(centerReceipt.getLocalDate()));

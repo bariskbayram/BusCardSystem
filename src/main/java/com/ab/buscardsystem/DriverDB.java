@@ -18,7 +18,7 @@ public class DriverDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             String query = "SELECT * FROM Driver WHERE Id = ?";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             preparedStatement.setString(1, String.valueOf(id));
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -42,7 +42,7 @@ public class DriverDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             String queryDelete = "DELETE FROM Driver WHERE Id = ?";
-            PreparedStatement preparedStatementDelete = sqliteDB.connection.prepareStatement(queryDelete);
+            PreparedStatement preparedStatementDelete = sqliteDB.getConnection().prepareStatement(queryDelete);
             preparedStatementDelete.setString(1,String.valueOf(id));
             preparedStatementDelete.executeUpdate();
             sqliteDB.closeDB();
@@ -58,9 +58,16 @@ public class DriverDB implements IDataBase {
     public void putItem(ParentObject object) {
         try {
             sqliteDB.connectDB();
-            String query = "INSERT INTO Driver (Id, Name, Surname) VALUES (?,?,?)";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
             Driver driver = (Driver) object;
+            String queryGet = "SELECT * FROM Driver WHERE Id = ?";
+            PreparedStatement preparedStatementGet = sqliteDB.getConnection().prepareStatement(queryGet);
+            preparedStatementGet.setString(1, String.valueOf(driver.getId()));
+            ResultSet resultSet = preparedStatementGet.executeQuery();
+            if(resultSet.getInt("Id") ==  driver.getId()){
+                throw new IllegalArgumentException("Driver is already exist.");
+            }
+            String query = "INSERT INTO Driver (Id, Name, Surname) VALUES (?,?,?)";
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             preparedStatement.setString(1, String.valueOf(driver.getId()));
             preparedStatement.setString(2, String.valueOf(driver.getName()));
             preparedStatement.setString(3, String.valueOf(driver.getSurname()));

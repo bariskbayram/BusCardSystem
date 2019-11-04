@@ -28,7 +28,7 @@ public class AddingCenterDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             String query = "INSERT INTO AddingCenter (Date, Time, Name, Address, CenterId) VALUES (?,?,?,?,?)";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             addingCenter = (AddingCenter) object;
             preparedStatement.setString(1, String.valueOf(addingCenter.getLocalDate()));
             preparedStatement.setString(2, String.valueOf(addingCenter.getLocalTime()));

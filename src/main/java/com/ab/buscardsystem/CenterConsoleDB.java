@@ -17,7 +17,7 @@ public class CenterConsoleDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             String query = "SELECT * FROM CenterConsole WHERE Id = ?";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             preparedStatement.setString(1,String.valueOf(id));
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -39,7 +39,7 @@ public class CenterConsoleDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             String queryDelete = "DELETE FROM CenterConsole WHERE Id = ?";
-            PreparedStatement preparedStatementDelete = sqliteDB.connection.prepareStatement(queryDelete);
+            PreparedStatement preparedStatementDelete = sqliteDB.getConnection().prepareStatement(queryDelete);
             preparedStatementDelete.setString(1,String.valueOf(id));
             preparedStatementDelete.executeUpdate();
             sqliteDB.closeDB();
@@ -54,7 +54,7 @@ public class CenterConsoleDB implements IDataBase {
             sqliteDB.connectDB();
             centerConsole = (CenterConsole) object;
             String query = "UPDATE CenterConsole SET Balance = ? WHERE Id = ?";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             preparedStatement.setString(1, String.valueOf(centerConsole.getBalance()));
             preparedStatement.setString(2, String.valueOf(centerConsole.getId()));
             preparedStatement.executeUpdate();
@@ -69,8 +69,15 @@ public class CenterConsoleDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             CenterConsole centerConsole = (CenterConsole) object;
+            String queryGet = "SELECT * FROM Center WHERE Id = ?";
+            PreparedStatement preparedStatementGet = sqliteDB.getConnection().prepareStatement(queryGet);
+            preparedStatementGet.setString(1, String.valueOf(centerConsole.getId()));
+            ResultSet resultSet = preparedStatementGet.executeQuery();
+            if(resultSet.getInt("Id") ==  centerConsole.getId()){
+                throw new IllegalArgumentException("Center is already exist.");
+            }
             String query = "INSERT INTO CenterConsole (Id, Name, Address, Balance) VALUES (?,?,?,?)";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
+            PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             preparedStatement.setString(1, String.valueOf(centerConsole.getId()));
             preparedStatement.setString(2, String.valueOf(centerConsole.getName()));
             preparedStatement.setString(3, String.valueOf(centerConsole.getAddress()));

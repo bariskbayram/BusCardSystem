@@ -138,5 +138,17 @@ public class AddingCard extends ParentObject {
     public void setIsCorrect(int isCorrect) {
         this.isCorrect = isCorrect;
     }
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
+    }
+    public void setLocalTime(LocalTime localTime) {
+        this.localTime = localTime;
+    }
+    public FactoryInput getFactoryInput() {
+        return factoryInput;
+    }
+    public void setFactoryInput(FactoryInput factoryInput) {
+        this.factoryInput = factoryInput;
+    }
 
 }
