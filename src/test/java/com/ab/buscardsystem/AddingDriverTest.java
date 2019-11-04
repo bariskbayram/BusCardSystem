@@ -28,6 +28,7 @@ class AddingDriverTest {
         addingDriver.takeName();
         //Then
         assertEquals(1, addingDriver.getIsCorrect());
+        verify(factoryInput).inputStringName();
     }
 
     @Test
@@ -92,6 +93,18 @@ class AddingDriverTest {
     }
 
     @Test
+    @DisplayName("Incorrect Surname Input With NoName or Start With Space")
+    void takeSurnameWithCorrectInputNoNameOrStartWithSpace(){
+        //Given
+        when(factoryInput.inputStringSurname()).thenReturn("").thenReturn(" ").thenReturn("  ");
+        //When
+        addingDriver.takeSurname();
+        //Then
+        assertEquals(0, addingDriver.getIsCorrect());
+        verify(factoryInput, times(3)).inputStringSurname();
+    }
+
+    @Test
     @DisplayName("Incorrect Surname Input With More Than 14 Letters")
     void takeSurnameWithIncorrectInput(){
         //Given
@@ -136,6 +149,7 @@ class AddingDriverTest {
         addingDriver.takeId();
         //Then
         assertEquals(1, addingDriver.getIsCorrect());
+        verify(factoryInput).inputIntegerId();
     }
 
     @Test
@@ -204,12 +218,68 @@ class AddingDriverTest {
                 ()-> assertEquals(999, driver.getId()),
                 ()-> assertEquals("Ayşe", driver.getName()),
                 ()->assertEquals("Selim", driver.getSurname()),
-                ()->assertEquals(addingDriver.getDriver(), driver)
+                ()->assertEquals(addingDriver.getDriver(), driver),
+                ()->assertEquals(1, addingDriver.getIsCorrect())
         );
 
         verify(factoryInput).inputStringName();
         verify(factoryInput).inputStringSurname();
         verify(factoryInput).inputIntegerId();
+    }
+
+    @Test
+    @DisplayName("Verify setDriverInfo Method Calls With Wrong Name Input 3 Times")
+    void setDriverInfoMethodCallsVerifyWrongNameInput3Times(){
+        //Given
+        Driver driver = new Driver(0);
+        when(factoryInput.inputStringName()).thenReturn("Barış Kaan Bayram")
+                .thenReturn("Slavan Abul Ahmet Cimo")
+                .thenReturn("Kemalletin Seyit Onbaşı");
+
+        //When
+        addingDriver.setDriverInfo(driver);
+
+        //Then
+        assertEquals(0, addingDriver.getIsCorrect());
+        verify(factoryInput, times(3)).inputStringName();
+    }
+
+    @Test
+    @DisplayName("Verify setDriverInfo Method Calls With Wrong Surname Input 3 Times")
+    void setDriverInfoMethodCallsVerifyWrongSurnameInput3Times(){
+        //Given
+        Driver driver = new Driver(0);
+        when(factoryInput.inputStringName()).thenReturn("Kemal");
+        when(factoryInput.inputStringSurname()).thenReturn("Barış Kaan Bayram")
+                .thenReturn("Slavan Abul Ahmet Cimo")
+                .thenReturn("Kemalletin Seyit Onbaşı");
+
+        //When
+        addingDriver.setDriverInfo(driver);
+
+        //Then
+        assertEquals(0, addingDriver.getIsCorrect());
+        verify(factoryInput).inputStringName();
+        verify(factoryInput, times(3)).inputStringSurname();
+    }
+
+    @Test
+    @DisplayName("Verify setDriverInfo Method Calls With Wrong ID Input 3 Times")
+    void setDriverInfoMethodCallsVerifyWrongIdInput3Times(){
+        //Given
+        Driver driver = new Driver(0);
+        when(factoryInput.inputStringName()).thenReturn("Barış");
+        when(factoryInput.inputStringSurname()).thenReturn("Salih");
+        when(factoryInput.inputIntegerId()).thenReturn(-23).thenReturn(232422).thenReturn(0);
+
+        //When
+        addingDriver.setDriverInfo(driver);
+
+        //Then
+        assertEquals(0, addingDriver.getIsCorrect());
+        verify(factoryInput).inputStringName();
+        verify(factoryInput).inputStringSurname();
+        verify(factoryInput, times(3)).inputIntegerId();
     }
 
     @Test

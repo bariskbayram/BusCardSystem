@@ -6,6 +6,7 @@ public class AddingDriverDB implements IDataBase {
 
     private SqliteDB sqliteDB;
     private AddingDriver addingDriver;
+    private String query;
 
     public AddingDriverDB(SqliteDB sqliteDB){
         this.sqliteDB = sqliteDB;
@@ -26,7 +27,7 @@ public class AddingDriverDB implements IDataBase {
     public void putItem(ParentObject object) {
         try {
             sqliteDB.connectDB();
-            String query = "INSERT INTO AddingDriver (Date, Time, Name, Surname, DriverId) VALUES (?,?,?,?,?)";
+            query = "INSERT INTO AddingDriver (Date, Time, Name, Surname, DriverId) VALUES (?,?,?,?,?)";
             PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             addingDriver = (AddingDriver) object;
             preparedStatement.setString(1, String.valueOf(addingDriver.getLocalDate()));
@@ -53,5 +54,10 @@ public class AddingDriverDB implements IDataBase {
     public void setAddingDriver(AddingDriver addingDriver) {
         this.addingDriver = addingDriver;
     }
-
+    public String getQuery() {
+        return query;
+    }
+    public void setQuery(String query) {
+        this.query = query;
+    }
 }

@@ -19,14 +19,20 @@ public class AddingDriver extends ParentObject {
             throw new NullPointerException("Driver is null");
         isCorrect = 1;
         takeName();
-        if(isCorrect == 0)
+        if(isCorrect == 0){
+            System.out.println("You have entered the wrong 3 times.");
             return null;
+        }
         takeSurname();
-        if(isCorrect == 0)
+        if(isCorrect == 0){
+            System.out.println("You have entered the wrong 3 times.");
             return null;
+        }
         takeId();
-        if(isCorrect == 0)
+        if(isCorrect == 0){
+            System.out.println("You have entered the wrong 3 times.");
             return null;
+        }
         driver.setId(driverId);
         driver.setName(name);
         driver.setSurname(surname);
@@ -111,6 +117,18 @@ public class AddingDriver extends ParentObject {
     }
     public void setIsCorrect(int isCorrect) {
         this.isCorrect = isCorrect;
+    }
+    public void setLocalTime(LocalTime localTime) {
+        this.localTime = localTime;
+    }
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
+    }
+    public FactoryInput getFactoryInput() {
+        return factoryInput;
+    }
+    public void setFactoryInput(FactoryInput factoryInput) {
+        this.factoryInput = factoryInput;
     }
 
 }

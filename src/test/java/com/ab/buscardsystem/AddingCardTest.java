@@ -29,19 +29,21 @@ class AddingCardTest {
 
         //Then
         assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput).inputStringType();
     }
 
     @Test
-    @DisplayName("Correct Type Input With student")
+    @DisplayName("Correct Type Input With stuDent")
     void takeTypeWithCorrectInputStudent2() {
         //Given
-        when(factoryInput.inputStringType()).thenReturn("student");
+        when(factoryInput.inputStringType()).thenReturn("stuDent");
 
         //When
         addingCard.takeType();
 
         //Then
         assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput).inputStringType();
     }
 
     @Test
@@ -55,19 +57,23 @@ class AddingCardTest {
 
         //Then
         assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput).inputStringType();
+
     }
 
     @Test
     @DisplayName("Correct Type Input With normal")
     void takeTypeWithCorrectInputNormal2() {
         //Given
-        when(factoryInput.inputStringType()).thenReturn("normal");
+        when(factoryInput.inputStringType()).thenReturn("norMal");
 
         //When
         addingCard.takeType();
 
         //Then
         assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput).inputStringType();
+
     }
 
     @Test
@@ -122,6 +128,7 @@ class AddingCardTest {
         addingCard.takeName();
         //Then
         assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput).inputStringName();
     }
 
     @Test
@@ -133,6 +140,7 @@ class AddingCardTest {
         addingCard.takeName();
         //Then
         assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput).inputStringName();
     }
 
     @Test
@@ -185,6 +193,8 @@ class AddingCardTest {
         addingCard.takeSurname();
         //Then
         assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput).inputStringSurname();
+
     }
 
     @Test
@@ -196,6 +206,7 @@ class AddingCardTest {
         addingCard.takeSurname();
         //Then
         assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput).inputStringSurname();
     }
 
     @Test
@@ -247,6 +258,7 @@ class AddingCardTest {
         addingCard.takeId();
         //Then
         assertEquals(1, addingCard.getIsCorrect());
+        verify(factoryInput).inputIntegerId();
     }
 
     @Test
@@ -341,13 +353,90 @@ class AddingCardTest {
                 ()->assertEquals("Osman", card.getSurname()),
                 ()->assertEquals("STUDENT", card.getType()),
                 ()->assertEquals(0, card.getBalance()),
-                ()->assertEquals(addingCard.getCard(), card)
+                ()->assertEquals(addingCard.getCard(), card),
+                ()->assertEquals(1, addingCard.getIsCorrect())
         );
 
         verify(factoryInput).inputStringName();
         verify(factoryInput).inputStringType();
         verify(factoryInput).inputIntegerId();
         verify(factoryInput).inputStringSurname();
+    }
+
+    @Test
+    @DisplayName("Verify setCardInfo Method Calls With Wrong Name Input 3 Times")
+    void setCardInfoMethodCallsVerifyWrongNameInput3Times(){
+        //Given
+        Card card = new Card(0);
+        when(factoryInput.inputStringName()).thenReturn("Barış Kaan Bayram")
+                                            .thenReturn("Slavan Abul Ahmet Cimo")
+                                            .thenReturn("Kemalletin Seyit Onbaşı");
+
+        //When
+        addingCard.setCardInfo(card);
+
+        //Then
+        assertEquals(0, addingCard.getIsCorrect());
+        verify(factoryInput, times(3)).inputStringName();
+    }
+
+    @Test
+    @DisplayName("Verify setCardInfo Method Calls With Wrong Surname Input 3 Times")
+    void setCardInfoMethodCallsVerifyWrongSurnameInput3Times(){
+        //Given
+        Card card = new Card(0);
+        when(factoryInput.inputStringName()).thenReturn("Kemal");
+        when(factoryInput.inputStringSurname()).thenReturn("Barış Kaan Bayram")
+                .thenReturn("Slavan Abul Ahmet Cimo")
+                .thenReturn("Kemalletin Seyit Onbaşı");
+
+        //When
+        addingCard.setCardInfo(card);
+
+        //Then
+        assertEquals(0, addingCard.getIsCorrect());
+        verify(factoryInput).inputStringName();
+        verify(factoryInput, times(3)).inputStringSurname();
+    }
+
+    @Test
+    @DisplayName("Verify setCardInfo Method Calls With Wrong Type Input 3 Times")
+    void setCardInfoMethodCallsVerifyWrongTypeInput3Times(){
+        //Given
+        Card card = new Card(0);
+        when(factoryInput.inputStringName()).thenReturn("Barış");
+        when(factoryInput.inputStringSurname()).thenReturn("Salih");
+        when(factoryInput.inputStringType()).thenReturn("Doctor").thenReturn("Pilot").thenReturn(" ");
+
+        //When
+        addingCard.setCardInfo(card);
+
+        //Then
+        assertEquals(0, addingCard.getIsCorrect());
+        verify(factoryInput).inputStringName();
+        verify(factoryInput).inputStringSurname();
+        verify(factoryInput, times(3)).inputStringType();
+    }
+
+    @Test
+    @DisplayName("Verify setCardInfo Method Calls With Wrong ID Input 3 Times")
+    void setCardInfoMethodCallsVerifyWrongIdInput3Times(){
+        //Given
+        Card card = new Card(0);
+        when(factoryInput.inputStringName()).thenReturn("Barış");
+        when(factoryInput.inputStringSurname()).thenReturn("Salih");
+        when(factoryInput.inputStringType()).thenReturn("Normal");
+        when(factoryInput.inputIntegerId()).thenReturn(-23).thenReturn(232422).thenReturn(18);
+
+        //When
+        addingCard.setCardInfo(card);
+
+        //Then
+        assertEquals(0, addingCard.getIsCorrect());
+        verify(factoryInput).inputStringName();
+        verify(factoryInput).inputStringSurname();
+        verify(factoryInput).inputStringType();
+        verify(factoryInput, times(3)).inputIntegerId();
     }
 
     @Test

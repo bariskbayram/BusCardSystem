@@ -19,14 +19,20 @@ public class AddingCenter extends ParentObject {
             throw new NullPointerException("CenterConsole is null");
         isCorrect = 1;
         takeName();
-        if(isCorrect == 0)
+        if(isCorrect == 0){
+            System.out.println("You have entered the wrong 3 times.");
             return null;
+        }
         takeAddress();
-        if(isCorrect == 0)
+        if(isCorrect == 0){
+            System.out.println("You have entered the wrong 3 times.");
             return null;
+        }
         takeCenterId();
-        if(isCorrect == 0)
+        if(isCorrect == 0){
+            System.out.println("You have entered the wrong 3 times.");
             return null;
+        }
         centerConsole.setId(centerId);
         centerConsole.setName(name);
         centerConsole.setAddress(address);
@@ -54,7 +60,7 @@ public class AddingCenter extends ParentObject {
         for(int i=0; i<3; i++) {
             System.out.print("Please enter address: ");
             address = factoryInput.inputStringAddress();
-            if (address.length() < 100 && address.length()>0) {
+            if (address.length() < 100 && !address.equals("") && !address.startsWith(" ")) {
                 isCorrect = 1;
                 break;
             } else {
@@ -107,5 +113,22 @@ public class AddingCenter extends ParentObject {
     public void setCenterConsole(CenterConsole centerConsole) {
         this.centerConsole = centerConsole;
     }
-
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
+    }
+    public void setLocalTime(LocalTime localTime) {
+        this.localTime = localTime;
+    }
+    public int getCenterId() {
+        return centerId;
+    }
+    public void setCenterId(int centerId) {
+        this.centerId = centerId;
+    }
+    public FactoryInput getFactoryInput() {
+        return factoryInput;
+    }
+    public void setFactoryInput(FactoryInput factoryInput) {
+        this.factoryInput = factoryInput;
+    }
 }

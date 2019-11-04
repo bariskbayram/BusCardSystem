@@ -28,7 +28,7 @@ class AddingCardDBTest {
     @InjectMocks
     AddingCardDB addingCardDB = new AddingCardDB(sqliteDB);
     @Mock
-    Connection c;
+    Connection connection;
     @Mock
     PreparedStatement preparedStatement;
 
@@ -46,10 +46,11 @@ class AddingCardDBTest {
         addingCard.setType("Normal");
         String query = "INSERT INTO AddingCard (CardId, Date, Time, Name, Surname, Type) VALUES (?,?,?,?,?,?)";
 
-        doNothing().when(sqliteDB).connectDB();
-        when(sqliteDB.getConnection()).thenReturn(c);
-        when(c.prepareStatement(query)).thenReturn(preparedStatement);
         when(tableMapper.getMapper(AddingCard.class)).thenReturn(addingCardDB);
+
+        doNothing().when(sqliteDB).connectDB();
+        when(sqliteDB.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(query)).thenReturn(preparedStatement);
         doNothing().when(preparedStatement).setString(anyInt(), anyString());
         when(preparedStatement.executeUpdate()).thenReturn(1);
         doNothing().when(sqliteDB).closeDB();
@@ -59,7 +60,11 @@ class AddingCardDBTest {
 
         //Then
         assertEquals(query, addingCardDB.getQuery());
+        verify(tableMapper).getMapper(AddingCard.class);
         verify(sqliteDB).connectDB();
+        verify(sqliteDB).getConnection();
+        verify(connection).prepareStatement(query);
+        verify(preparedStatement).executeUpdate();
         verify(sqliteDB).closeDB();
         verify(preparedStatement, times(1)).setString(1,String.valueOf(addingCard.getCardId()));
         verify(preparedStatement, times(1)).setString(2,String.valueOf(addingCard.getLocalDate()));

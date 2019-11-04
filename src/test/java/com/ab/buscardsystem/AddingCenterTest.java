@@ -28,7 +28,9 @@ class AddingCenterTest {
 
         //Then
         assertEquals(1, addingCenter.getIsCorrect());
+        verify(factoryInput).inputStringName();
     }
+
     @Test
     @DisplayName("InCorrect Name Input With NoName")
     void takeNameWithInCorrectInputNoName() {
@@ -42,11 +44,41 @@ class AddingCenterTest {
         assertEquals(0, addingCenter.getIsCorrect());
         verify(factoryInput, times(3)).inputStringName();
     }
+
+    @Test
+    @DisplayName("InCorrect Name Input With Start With Space")
+    void takeNameWithInCorrectInputStartWithSpace() {
+        //Given
+        when(factoryInput.inputStringName()).thenReturn(" ");
+
+        //When
+        addingCenter.takeName();
+
+        //Then
+        assertEquals(0, addingCenter.getIsCorrect());
+        verify(factoryInput, times(3)).inputStringName();
+    }
+
+    @Test
+    @DisplayName("3 Times Incorrect Name Input With More Than 14 Letters")
+    void takeNameWithIncorrectInput3Times(){
+        //Given
+        when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah")
+                                            .thenReturn("Barış Kaan Bayram")
+                                            .thenReturn("Ata Osman Özgüz");
+
+        //When
+        addingCenter.takeName();
+        //Then
+        assertEquals(0, addingCenter.getIsCorrect());
+        verify(factoryInput, times(3)).inputStringName();
+    }
+
     @Test
     @DisplayName("2 Times Incorrect Name Input")
     void takeNameWithInCorrectInputTwoTimes() {
         //Given
-        when(factoryInput.inputStringName()).thenReturn("").thenReturn("").thenReturn("Ali");
+        when(factoryInput.inputStringName()).thenReturn("").thenReturn(" ").thenReturn("Ali");
 
         //When
         addingCenter.takeName();
@@ -55,6 +87,7 @@ class AddingCenterTest {
         assertEquals(1, addingCenter.getIsCorrect());
         verify(factoryInput, times(3)).inputStringName();
     }
+
     @Test
     @DisplayName("1 Times Incorrect Name Input")
     void takeNameWithInCorrectInputOneTimes() {
@@ -68,6 +101,7 @@ class AddingCenterTest {
         assertEquals(1, addingCenter.getIsCorrect());
         verify(factoryInput, times(2)).inputStringName();
     }
+
     @Test
     @DisplayName("Correct Address Input With CorrectAddress")
     void takeAddressWithCorrectInput() {
@@ -79,12 +113,14 @@ class AddingCenterTest {
 
         //Then
         assertEquals(1, addingCenter.getIsCorrect());
+        verify(factoryInput).inputStringAddress();
     }
+
     @Test
-    @DisplayName("InCorrect Address Input With NoName")
+    @DisplayName("InCorrect Address Input With NoName And Start With Space")
     void takeAddressWithInCorrectInputNoName() {
         //Given
-        when(factoryInput.inputStringAddress()).thenReturn("");
+        when(factoryInput.inputStringAddress()).thenReturn("").thenReturn(" ").thenReturn("");
 
         //When
         addingCenter.takeAddress();
@@ -93,6 +129,7 @@ class AddingCenterTest {
         assertEquals(0, addingCenter.getIsCorrect());
         verify(factoryInput, times(3)).inputStringAddress();
     }
+
     @Test
     @DisplayName("1 Times Incorrect Name Input")
     void takeAddressWithInCorrectInputOneTimes() {
@@ -106,6 +143,7 @@ class AddingCenterTest {
         assertEquals(1, addingCenter.getIsCorrect());
         verify(factoryInput, times(2)).inputStringAddress();
     }
+
     @Test
     @DisplayName("2 Times Incorrect Name Input")
     void takeAddressWithInCorrectInputTwoTimes() {
@@ -133,16 +171,19 @@ class AddingCenterTest {
         assertEquals(0, addingCenter.getIsCorrect());
         verify(factoryInput, times(3)).inputStringAddress();
     }
+
     @Test
     @DisplayName("Correct CenterId Input")
     void takeCenterIdWithCorrectInput(){
         //Given
-        when(factoryInput.inputIntegerId()).thenReturn(3).thenReturn(100).thenReturn(9999);
+        when(factoryInput.inputIntegerId()).thenReturn(3);
         //When
         addingCenter.takeCenterId();
         //Then
         assertEquals(1, addingCenter.getIsCorrect());
+        verify(factoryInput).inputIntegerId();
     }
+
     @Test
     @DisplayName("InCorrect CenterId Input with Negative And Zero ")
     void takeCenterIdWithInCorrectInputZeroAndNegative(){
@@ -154,6 +195,7 @@ class AddingCenterTest {
         assertEquals(0, addingCenter.getIsCorrect());
         verify(factoryInput, times(3)).inputIntegerId();
     }
+
     @Test
     @DisplayName("InCorrect CenterId Input with Too Big ")
     void takeCenterIdWithInCorrectInputTooBig(){
@@ -165,6 +207,7 @@ class AddingCenterTest {
         assertEquals(0, addingCenter.getIsCorrect());
         verify(factoryInput, times(3)).inputIntegerId();
     }
+
     @Test
     @DisplayName("2 Times Incorrect Name Input ")
     void takeCenterIdWithInCorrectInputTwoTimes(){
@@ -176,6 +219,7 @@ class AddingCenterTest {
         assertEquals(1, addingCenter.getIsCorrect());
         verify(factoryInput, times(3)).inputIntegerId();
     }
+
     @Test
     @DisplayName("1 Times Incorrect Name Input ")
     void takeCenterIdWithInCorrectInputOneTimes(){
@@ -203,6 +247,8 @@ class AddingCenterTest {
         }
         assertEquals(expectedMassage,actualMassage);
     }
+
+
     @Test
     @DisplayName("Verify setCenterInfo Method Calls")
     void setCenterInfoMethodCallsVerify(){
@@ -221,12 +267,68 @@ class AddingCenterTest {
                 ()-> assertEquals(77, centerConsole.getId()),
                 ()-> assertEquals("muhsin", centerConsole.getName()),
                 ()->assertEquals("canakkale", centerConsole.getAddress()),
-                ()->assertEquals(addingCenter.getCenterConsole(), centerConsole)
+                ()->assertEquals(addingCenter.getCenterConsole(), centerConsole),
+                ()->assertEquals(1, addingCenter.getIsCorrect())
         );
 
         verify(factoryInput).inputStringName();
         verify(factoryInput).inputStringAddress();
         verify(factoryInput).inputIntegerId();
     }
+
+    @Test
+    @DisplayName("Verify setCenterInfo Method Calls With 3 Wrong Name Input")
+    void setCenterInfoMethodCallsVerify3WrongNameInput(){
+        //Given
+        CenterConsole centerConsole = new CenterConsole();
+        when(factoryInput.inputStringName()).thenReturn("").thenReturn(" ").thenReturn("IncorrectNameIncorrectName");
+
+        //When
+        addingCenter.setCenterInfo(centerConsole);
+
+        //Then
+        verify(factoryInput, times(3)).inputStringName();
+    }
+
+    @Test
+    @DisplayName("Verify setCenterInfo Method Calls With 3 Wrong Address Input")
+    void setCenterInfoMethodCallsVerify3WrongAddressInput(){
+        //Given
+        CenterConsole centerConsole = new CenterConsole();
+        when(factoryInput.inputStringName()).thenReturn("muhsin");
+        when(factoryInput.inputStringAddress())
+                .thenReturn("KahramanMaras/GaziMustafaKemalPasa HakimiyetKayıtsızŞartsızMilletindir Mahallesi DumlupınarSavasları Apartmanı Kat 7 Daire 18")
+                .thenReturn("")
+                .thenReturn(" ");
+
+
+        //When
+        addingCenter.setCenterInfo(centerConsole);
+
+        //Then
+
+        verify(factoryInput).inputStringName();
+        verify(factoryInput, times(3)).inputStringAddress();
+    }
+
+    @Test
+    @DisplayName("Verify setCenterInfo Method Calls With 3 Wrong ID Input")
+    void setCenterInfoMethodCallsVerify3WrongIdInput(){
+        //Given
+        CenterConsole centerConsole = new CenterConsole();
+        when(factoryInput.inputStringName()).thenReturn("muhsin");
+        when(factoryInput.inputStringAddress()).thenReturn("canakkale");
+        when(factoryInput.inputIntegerId()).thenReturn(77777).thenReturn(-23).thenReturn(0);
+
+        //When
+        addingCenter.setCenterInfo(centerConsole);
+
+        //Then
+        verify(factoryInput).inputStringName();
+        verify(factoryInput).inputStringAddress();
+        verify(factoryInput, times(3)).inputIntegerId();
+    }
+
+
 
 }

@@ -6,6 +6,7 @@ public class AddingCenterDB implements IDataBase {
 
     private SqliteDB sqliteDB;
     private AddingCenter addingCenter;
+    private String query;
 
     public AddingCenterDB(SqliteDB sqliteDB){
         this.sqliteDB = sqliteDB;
@@ -27,14 +28,14 @@ public class AddingCenterDB implements IDataBase {
     public void putItem(ParentObject object) {
         try {
             sqliteDB.connectDB();
-            String query = "INSERT INTO AddingCenter (Date, Time, Name, Address, CenterId) VALUES (?,?,?,?,?)";
+            query = "INSERT INTO AddingCenter (Date, Time, Name, Address, CenterId) VALUES (?,?,?,?,?)";
             PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             addingCenter = (AddingCenter) object;
             preparedStatement.setString(1, String.valueOf(addingCenter.getLocalDate()));
             preparedStatement.setString(2, String.valueOf(addingCenter.getLocalTime()));
             preparedStatement.setString(3, String.valueOf(addingCenter.getName()));
             preparedStatement.setString(4, String.valueOf(addingCenter.getAddress()));
-            preparedStatement.setString(5, String.valueOf(addingCenter.getCenterConsole().getId()));
+            preparedStatement.setString(5, String.valueOf(addingCenter.getCenterId()));
             preparedStatement.executeUpdate();
             sqliteDB.closeDB();
         }catch (Exception e){
@@ -53,5 +54,11 @@ public class AddingCenterDB implements IDataBase {
     }
     public void setAddingCenter(AddingCenter addingCenter) {
         this.addingCenter = addingCenter;
+    }
+    public String getQuery() {
+        return query;
+    }
+    public void setQuery(String query) {
+        this.query = query;
     }
 }

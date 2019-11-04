@@ -20,17 +20,25 @@ public class AddingCard extends ParentObject {
             throw new NullPointerException("Card is null");
         isCorrect = 1;
         takeName();
-        if(isCorrect == 0)
+        if(isCorrect == 0){
+            System.out.println("You have entered the wrong 3 times.");
             return null;
+        }
         takeSurname();
-        if(isCorrect == 0)
+        if(isCorrect == 0){
+            System.out.println("You have entered the wrong 3 times.");
             return null;
+        }
         takeType();
-        if(isCorrect == 0)
+        if(isCorrect == 0){
+            System.out.println("You have entered the wrong 3 times.");
             return null;
+        }
         takeId();
-        if(isCorrect == 0)
+        if(isCorrect == 0){
+            System.out.println("You have entered the wrong 3 times.");
             return null;
+        }
         card.setId(cardId);
         card.setBalance(0);
         card.setName(name);

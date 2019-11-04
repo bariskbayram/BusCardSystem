@@ -135,7 +135,7 @@ class BusConsoleTest {
 
     }
 
-    @Test
+    /*@Test
     @Disabled
     @DisplayName("Card Tapped But Not In 45 Minute")
     void isCardAlreadyTappedNotTappedIn(){
@@ -152,7 +152,7 @@ class BusConsoleTest {
         //Then
         assertTrue(situtation);
 
-    }
+    }*/
 
     @Test
     @DisplayName("Is Card Already Tapped with 44 Minute")
