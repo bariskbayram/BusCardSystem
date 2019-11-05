@@ -2,6 +2,7 @@ package com.ab.buscardsystem;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoField;
 import java.util.HashMap;
 
 public class BusConsole extends ParentObject {
@@ -17,7 +18,10 @@ public class BusConsole extends ParentObject {
     private boolean isTappingNormal;
     private FactoryInput factoryInput = new FactoryInput();
     private boolean cardTappingSitutation;
-    private boolean balanceSitutation;
+    private int time;
+    private int busConsoleId;
+    private int isCorrect;
+    private int driverId;
 
     public BusConsole(DBFacade dbFacade){
         this.dbFacade = dbFacade;
@@ -25,9 +29,11 @@ public class BusConsole extends ParentObject {
     public BusConsole(){}
 
     public void enterCardId(int cardId, boolean isTappingNormalParameter, TappingCard tappingCard){
+        if(tappingCard == null)
+            throw new NullPointerException("TappingCard is null");
         this.isTappingNormal = isTappingNormalParameter;
         if(isTappingNormal == true) {
-            tappingCard.setAmount(3.25);
+
         }else {
             cardTappingSitutation = isCardAlreadyTapped(cardId);
             if(!cardTappingSitutation){
@@ -37,11 +43,8 @@ public class BusConsole extends ParentObject {
         tappingCard.setBusConsoleId(getId());
         card = (Card) dbFacade.get(cardId, Card.class);
         if(card == null)
-            return;
+            throw new NullPointerException("Card is null");
         tappingCard.set(card);
-        balanceSitutation = isCardBalanceEnough(tappingCard);
-        if(!balanceSitutation)
-            return;
         tappingCard.setCardId(card.getId());
         setId(tappingCard.getBusConsoleId());
         this.tappingCard = tappingCard;
@@ -51,23 +54,62 @@ public class BusConsole extends ParentObject {
     }
 
     public void enterDriverId(DriverLogIn driverLogIn){
-        System.out.println("Please enter BusConsole ID : ");
-        int busConsoleId = factoryInput.inputIntegerId();
+        if(driverLogIn == null)
+            throw new NullPointerException("DriverLogIn is null");
+        isCorrect=1;
+        takeBusConsoleId();
+        if(isCorrect == 0){
+            System.out.println("You have entered the wrong 3 times.");
+            return;
+        }
+        takeDriverId();
+        if(isCorrect == 0){
+            System.out.println("You have entered the wrong 3 times.");
+            return;
+        }
         driverLogIn.setBusConsoleId(busConsoleId);
         setId(busConsoleId);
-        System.out.println("Please enter Driver ID: ");
-        int driverId = factoryInput.inputIntegerId2();
         driver = (Driver) dbFacade.get(driverId, Driver.class);
+        if(driver == null){
+            throw new NullPointerException("Driver is null");
+        }
         driverLogIn.setLogin(driver);
         this.driverLogIn = driverLogIn;
         dbFacade.put(driverLogIn);
     }
 
+    public void takeBusConsoleId(){
+        isCorrect = 0;
+        for(int i=0; i<3; i++) {
+            System.out.print("Please enter BusConsole ID: ");
+            busConsoleId = factoryInput.inputIntegerId();
+            if (busConsoleId > 0 && busConsoleId < 10000) {
+                isCorrect = 1;
+                break;
+            } else {
+                System.out.println("BusConsole ID is wrong, please try again!");
+            }
+        }
+    }
+
+    public void takeDriverId(){
+        isCorrect = 0;
+        for(int i=0; i<3; i++) {
+            System.out.print("Please enter Driver ID: ");
+            driverId = factoryInput.inputIntegerId();
+            if (driverId > 0 && driverId < 10000) {
+                isCorrect = 1;
+                break;
+            } else {
+                System.out.println("Driver ID is wrong, please try again!");
+            }
+        }
+    }
+
     public boolean isCardAlreadyTapped(int cardId) {
 
         if (invalidList.containsKey(cardId) == true) {
-            int time = (localTime.getMinute() - invalidList.get(cardId).getMinute());
-            System.out.println(time);
+            time = (LocalTime.now().get(ChronoField.MINUTE_OF_DAY) - invalidList.get(cardId).get(ChronoField.MINUTE_OF_DAY));
             if (time < 45) {
                 System.out.println("Card is already tapped!");
                 return false;
@@ -79,31 +121,11 @@ public class BusConsole extends ParentObject {
         }
     }
 
-    public boolean isCardBalanceEnough(TappingCard tappingCard){
-        if(tappingCard.getAmount() > tappingCard.getCurrentBalance()) {
-            return false;
-        }else{
-            return true;
-        }
-    }
-
-   /* public void getAndEquals(){
-        BusConsole busConsoleWithDB = BusConsole.this;
-        BusConsole busConsoleWithoutDB = dbFacade.get();
-
-    }*/
-
     public boolean isCardTappingSitutation() {
         return cardTappingSitutation;
     }
     public void setCardTappingSitutation(boolean cardTappingSitutation) {
         this.cardTappingSitutation = cardTappingSitutation;
-    }
-    public boolean isBalanceSitutation() {
-        return balanceSitutation;
-    }
-    public void setBalanceSitutation(boolean balanceSitutation) {
-        this.balanceSitutation = balanceSitutation;
     }
     public LocalDate getLocalDate() {
         return localDate;
@@ -153,5 +175,28 @@ public class BusConsole extends ParentObject {
     public void setTappingNormal(boolean tappingNormal) {
         this.isTappingNormal = tappingNormal;
     }
-
+    public int getTime() {
+        return time;
+    }
+    public void setTime(int time) {
+        this.time = time;
+    }
+    public int getBusConsoleId() {
+        return busConsoleId;
+    }
+    public void setBusConsoleId(int busConsoleId) {
+        this.busConsoleId = busConsoleId;
+    }
+    public int getIsCorrect() {
+        return isCorrect;
+    }
+    public void setIsCorrect(int isCorrect) {
+        this.isCorrect = isCorrect;
+    }
+    public int getDriverId() {
+        return driverId;
+    }
+    public void setDriverId(int driverId) {
+        this.driverId = driverId;
+    }
 }

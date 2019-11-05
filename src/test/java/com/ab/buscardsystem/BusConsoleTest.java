@@ -22,6 +22,8 @@ class BusConsoleTest {
     DBFacade dbFacade;
     @Mock
     TappingCard tappingCard;
+    @Mock
+    FactoryInput factoryInput;
 
     @Test
     @DisplayName("Verify enterCardId method's Call With Inactive Default Type")
@@ -30,30 +32,23 @@ class BusConsoleTest {
         //Given
         Card card = new Card(10);
         HashMap<Integer, LocalTime> invalidList = new HashMap<>();
-        invalidList.put(5,busConsole.getLocalTime());
         busConsole.setInvalidList(invalidList);
-        doNothing().when(tappingCard).setBusConsoleId(anyInt());
         when(dbFacade.get(card.getId(), Card.class)).thenReturn(card);
-        tappingCard.setCurrentBalance(10);
-        when(tappingCard.getBusConsoleId()).thenReturn(5);
         doNothing().when(tappingCard).set(card);
-        doNothing().when(tappingCard).setCardId(10);
         doNothing().when(dbFacade).update(card);
         doNothing().when(dbFacade).put(tappingCard);
-        when(tappingCard.getAmount()).thenReturn(3.25);
-        when(tappingCard.getCurrentBalance()).thenReturn(10.0);
 
         //When
         busConsole.enterCardId(card.getId(), true, tappingCard);
 
         //Then
+        assertEquals(busConsole.getTappingCard(), tappingCard);
         assertTrue(busConsole.isTappingNormal());
-        assertTrue(busConsole.isBalanceSitutation());
         assertTrue(invalidList.containsKey(10));
-        verify(tappingCard).setAmount(3.25);
+        verify(tappingCard).set(card);
+        verify(tappingCard).setCardId(card.getId());
         verify(tappingCard).setBusConsoleId(anyInt());
         verify(dbFacade).get(card.getId(),Card.class);
-        verify(tappingCard).set(card);
         verify(tappingCard).getBusConsoleId();
         verify(dbFacade).update(card);
         verify(dbFacade).put(tappingCard);
@@ -67,30 +62,25 @@ class BusConsoleTest {
         //Given
         Card card = new Card(37);
         HashMap<Integer, LocalTime> invalidList = new HashMap<>();
-        invalidList.put(5,busConsole.getLocalTime());
         busConsole.setInvalidList(invalidList);
-        doNothing().when(tappingCard).setBusConsoleId(anyInt());
         when(dbFacade.get(card.getId(), Card.class)).thenReturn(card);
-        tappingCard.setCurrentBalance(10.0);
         when(tappingCard.getBusConsoleId()).thenReturn(5);
         doNothing().when(tappingCard).set(card);
-        doNothing().when(tappingCard).setCardId(37);
         doNothing().when(dbFacade).update(card);
         doNothing().when(dbFacade).put(tappingCard);
-        when(tappingCard.getAmount()).thenReturn(3.25);
-        when(tappingCard.getCurrentBalance()).thenReturn(10.0);
 
         //When
         busConsole.enterCardId(card.getId(), false, tappingCard);
 
         //Then
+        assertEquals(busConsole.getTappingCard(), tappingCard);
         assertTrue(busConsole.isCardTappingSitutation());
         assertFalse(busConsole.isTappingNormal());
-        assertTrue(busConsole.isBalanceSitutation());
         assertTrue(invalidList.containsKey(37));
+        verify(tappingCard).set(card);
+        verify(tappingCard).setCardId(card.getId());
         verify(tappingCard).setBusConsoleId(anyInt());
         verify(dbFacade).get(card.getId(),Card.class);
-        verify(tappingCard).set(card);
         verify(tappingCard).getBusConsoleId();
         verify(dbFacade).update(card);
         verify(dbFacade).put(tappingCard);
@@ -101,20 +91,52 @@ class BusConsoleTest {
     @DisplayName("Verify enterCardId method's Call With Default Type Already Tapped")
     void enterCardIdDefaultTypeWithAlreadyTapped(){
 
-        //Given
-        Card card = new Card(42);
+        Card card = new Card(41);
         HashMap<Integer, LocalTime> invalidList = new HashMap<>();
-        invalidList.put(5,busConsole.getLocalTime());
-        invalidList.put(42, busConsole.getLocalTime());
+        invalidList.put(41, LocalTime.now().minusMinutes(34));
         busConsole.setInvalidList(invalidList);
 
         //When
         busConsole.enterCardId(card.getId(), false, tappingCard);
 
         //Then
-        assertFalse(busConsole.isTappingNormal());
+        assertEquals(busConsole.getTappingCard(), tappingCard);
         assertFalse(busConsole.isCardTappingSitutation());
+        assertFalse(busConsole.isTappingNormal());
+        assertTrue(invalidList.containsKey(41));
+        assertTrue(busConsole.getTime() < 45);
+    }
 
+    @Test
+    @DisplayName("Verify enterCardId method's Call With Default Type Tapped But Not in 45 Minutes")
+    void enterCardIdDefaultTypeWithTappedButNotIn45Minutes(){
+
+        Card card = new Card(41);
+        HashMap<Integer, LocalTime> invalidList = new HashMap<>();
+        invalidList.put(41, LocalTime.now().minusMinutes(46));
+        busConsole.setInvalidList(invalidList);
+        when(dbFacade.get(card.getId(), Card.class)).thenReturn(card);
+        when(tappingCard.getBusConsoleId()).thenReturn(5);
+        doNothing().when(tappingCard).set(card);
+        doNothing().when(dbFacade).update(card);
+        doNothing().when(dbFacade).put(tappingCard);
+
+        //When
+        busConsole.enterCardId(card.getId(), false, tappingCard);
+
+        //Then
+        assertEquals(busConsole.getTappingCard(), tappingCard);
+        assertTrue(busConsole.isCardTappingSitutation());
+        assertFalse(busConsole.isTappingNormal());
+        assertTrue(invalidList.containsKey(41));
+        assertTrue(busConsole.getTime() >= 45);
+        verify(tappingCard).set(card);
+        verify(tappingCard).setCardId(card.getId());
+        verify(tappingCard).setBusConsoleId(anyInt());
+        verify(dbFacade).get(card.getId(),Card.class);
+        verify(tappingCard).getBusConsoleId();
+        verify(dbFacade).update(card);
+        verify(dbFacade).put(tappingCard);
     }
 
     @Test
@@ -132,11 +154,9 @@ class BusConsoleTest {
 
         //Then
         assertTrue(situtation);
-
     }
 
-    /*@Test
-    @Disabled
+    @Test
     @DisplayName("Card Tapped But Not In 45 Minute")
     void isCardAlreadyTappedNotTappedIn(){
 
@@ -151,17 +171,18 @@ class BusConsoleTest {
 
         //Then
         assertTrue(situtation);
+        assertTrue(busConsole.getTime() >= 45);
 
-    }*/
+    }
 
     @Test
-    @DisplayName("Is Card Already Tapped with 44 Minute")
-    void isCardAlreadyTapped(){
+    @DisplayName("Card Tapped In 45 Minute")
+    void isCardAlreadyTappedIn45Minute(){
 
         //Given
         HashMap<Integer, LocalTime> invalidList = new HashMap<>();
         LocalTime localTime = LocalTime.now();
-        invalidList.put(11, localTime.minusMinutes(44));
+        invalidList.put(11, localTime.minusMinutes(35));
         busConsole.setInvalidList(invalidList);
 
         //When
@@ -169,36 +190,138 @@ class BusConsoleTest {
 
         //Then
         assertFalse(situtation);
+        assertTrue(busConsole.getTime() < 45);
 
     }
 
     @Test
-    @DisplayName("Balance Is Not Enough with 3.24")
-    void isCardBalanceEnoughFalse(){
-
+    @DisplayName("Verify enterCardId Parameter with Null Throw Exception")
+    void verifyEntertCardIdParameterWithNullThrowException(){
         //Given
-        TappingCard tappingCard = new TappingCard(1);
-        tappingCard.setAmount(3.25);
-        tappingCard.setCurrentBalance(3.24);
+        String expectedMessage = "TappingCard is null";
+        String actualMessage = null;
 
         //When
+        try {
+            busConsole.enterCardId(32, false, null);
+        }catch (Exception e){
+            actualMessage = e.getMessage();
+        }
 
         //Then
-        assertFalse(busConsole.isCardBalanceEnough(tappingCard));
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    @DisplayName("Verify enterCardId Card with Null Throw Exception")
+    void verifyEnterCardIdCardWithNullThrowException(){
+        //Given
+        String expectedMessage = "Card is null";
+        String actualMessage = null;
+        when(dbFacade.get(22, Card.class)).thenReturn(null);
+
+        //When
+        try {
+            busConsole.enterCardId(22,true,new TappingCard(1));
+        }catch (Exception e){
+            actualMessage = e.getMessage();
+        }
+
+        //Then
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    @DisplayName("Verify enterDriverId With Success Senario")
+    void enterDriverIdVerifySuccessSenario(){
+        //Given
+        Driver driver = new Driver(14);
+        DriverLogIn driverLogIn = new DriverLogIn();
+        when(factoryInput.inputIntegerId()).thenReturn(32).thenReturn(14);
+        when(dbFacade.get(driver.getId(), Driver.class)).thenReturn(driver);
+        doNothing().when(dbFacade).put(driverLogIn);
+
+        //When
+        busConsole.enterDriverId(driverLogIn);
+
+        //Then
+        assertEquals(1, busConsole.getIsCorrect());
+        assertEquals(32,driverLogIn.getBusConsoleId());
+        assertEquals(32, busConsole.getId());
+        assertEquals(14, driverLogIn.getDriverId());
+        assertEquals(busConsole.getDriverLogIn(), driverLogIn);
+        verify(factoryInput, times(2)).inputIntegerId();
+        verify(dbFacade).get(driver.getId(), Driver.class);
+        verify(dbFacade).put(driverLogIn);
+    }
+
+    @Test
+    @DisplayName("Verify enterDriverId With Wrong BusConsoleId 3 Times")
+    void verifyEnterDriverIdWithWrongBusConsoleId3Times(){
+        //Given
+        when(factoryInput.inputIntegerId()).thenReturn(-3).thenReturn(-52).thenReturn(0);
+
+        //When
+        busConsole.enterDriverId(new DriverLogIn());
+
+        //Then
+        assertEquals(0, busConsole.getIsCorrect());
+        verify(factoryInput, times(3)).inputIntegerId();
+    }
+
+    @Test
+    @DisplayName("Verify enterDriverId With Wrong DriverId 3 Times")
+    void verifyEnterDriverIdWithWrongDriverId3Times(){
+        //Given
+        when(factoryInput.inputIntegerId()).thenReturn(3).thenReturn(-1).thenReturn(23242423).thenReturn(0);
+
+        //When
+        busConsole.enterDriverId(new DriverLogIn());
+        //Then
+        assertEquals(0, busConsole.getIsCorrect());
+        verify(factoryInput, times(4)).inputIntegerId();
 
     }
 
     @Test
-    @DisplayName("Balance is enough with 3.26")
-    void isCardBalanceEnoughTrue(){
-
+    @DisplayName("Verify enterDriverId Parameter with Null Throw Exception")
+    void verifyEnterDriverIdParameterWithNullThrowException(){
         //Given
-        TappingCard tappingCard = new TappingCard(1);
-        tappingCard.setAmount(3.25);
-        tappingCard.setCurrentBalance(3.26);
+        String expectedMessage = "DriverLogIn is null";
+        String actualMessage = null;
 
-        //When-Then
-        assertTrue(busConsole.isCardBalanceEnough(tappingCard));
+        //When
+        try {
+            busConsole.enterDriverId(null);
+        }catch (Exception e){
+            actualMessage = e.getMessage();
+        }
 
+        //Then
+        assertEquals(expectedMessage, actualMessage);
     }
+
+    @Test
+    @DisplayName("Verify enterCardId Card with Null Throw Exception")
+    void verifyEnterCardInfoParameterWithNullThrowException2(){
+        //Given
+        String expectedMessage = "Driver is null";
+        String actualMessage = null;
+        when(dbFacade.get(424, Driver.class)).thenReturn(null);
+        when(factoryInput.inputIntegerId()).thenReturn(32).thenReturn(424);
+
+        //When
+        try {
+            busConsole.enterDriverId(new DriverLogIn());
+        }catch (Exception e){
+            actualMessage = e.getMessage();
+        }
+
+        //Then
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+
+
+
 }
