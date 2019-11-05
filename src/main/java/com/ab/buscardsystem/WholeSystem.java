@@ -4,7 +4,7 @@ public class WholeSystem {
 
     private DBFacade dbFacade = new DBFacade();
     private BusConsole busConsole = new BusConsole(dbFacade);
-    private CenterConsole centerConsole;
+    private CenterConsole centerConsoleClass = new CenterConsole(dbFacade);
     private CityCardConsole cityCardConsole = new CityCardConsole(dbFacade);
     private FactoryInput factoryInput = new FactoryInput();
 
@@ -40,8 +40,7 @@ public class WholeSystem {
             System.out.println("CenterConsole ID is wrong.");
             return;
         }
-        centerConsole = (CenterConsole) dbFacade.get(centerId, CenterConsole.class);
-        if(centerConsole == null){
+        if(dbFacade.get(centerId, CenterConsole.class) == null){
             System.out.println("There is no CenterConsole for this ID.");
             return;
         }else{
@@ -49,7 +48,7 @@ public class WholeSystem {
         }
         System.out.print("Please enter Card ID: ");
         int CardId = factoryInput.inputIntegerId2();
-        centerConsole.enterCardId(CardId, centerId, new AddingMoneyToCard());
+        centerConsoleClass.enterCardId(CardId, centerId, new AddingMoneyToCard());
     }
 
     public void startAddingMoneyToCenter(){
@@ -89,10 +88,10 @@ public class WholeSystem {
         return busConsole;
     }
     public CenterConsole getCenterConsole() {
-        return centerConsole;
+        return centerConsoleClass;
     }
     public void setCenterConsole(CenterConsole centerConsole) {
-        this.centerConsole = centerConsole;
+        this.centerConsoleClass = centerConsole;
     }
     public CityCardConsole getCityCardConsole() {
         return cityCardConsole;

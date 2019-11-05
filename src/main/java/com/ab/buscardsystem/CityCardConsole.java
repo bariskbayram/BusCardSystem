@@ -2,7 +2,6 @@ package com.ab.buscardsystem;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Scanner;
 
 public class CityCardConsole {
 
@@ -46,30 +45,54 @@ public class CityCardConsole {
         Card card = addingCard.setCardInfo(new Card(0));
         if(card == null)
             return;
+        if(dbFacade.get(card.getId(), Card.class) != null) {
+            System.out.println("This Card ID is already exist");
+            return;
+        }
         dbFacade.put(card);
         this.addingCard = addingCard;
         dbFacade.put(addingCard);
     }
 
     public void enterCenterInfo(AddingCenter addingCenter){
-        dbFacade.put(addingCenter.setCenterInfo(new CenterConsole()));
+        CenterConsole centerConsole = addingCenter.setCenterInfo(new CenterConsole());
+        if(dbFacade.get(centerConsole.getId(), CenterConsole.class) != null){
+            System.out.println("This CenterConsole ID is already exist.");
+            return;
+        }
+        dbFacade.put(centerConsole);
         this.addingCenter = addingCenter;
         dbFacade.put(addingCenter);
     }
 
     public void enterDriverInfo(AddingDriver addingDriver){
-        dbFacade.put(addingDriver.setDriverInfo(new Driver(0)));
+        Driver driver = addingDriver.setDriverInfo(new Driver(0));
+        if(dbFacade.get(driver.getId(), Driver.class) != null){
+            System.out.println("This Driver ID is already exist.");
+            return;
+        }
+        dbFacade.put(driver);
         this.addingDriver = addingDriver;
         dbFacade.put(addingDriver);
     }
 
     public void deleteDriver(){
         System.out.println("Please enter Driver ID for delete process: ");
-        dbFacade.delete(factoryInput.inputIntegerId(), Driver.class);
+        int driverId = factoryInput.inputIntegerId();
+        if(dbFacade.get(driverId, Driver.class) == null){
+            System.out.println("Couldn't find a Driver for this ID");
+            return;
+        }
+        dbFacade.delete(driverId, Driver.class);
     }
 
-    public void deleteCenter(){
+    public void deleteCenter() {
         System.out.println("Please enter Center ID for delete process: ");
+        int centerId = factoryInput.inputIntegerId();
+        if (dbFacade.get(centerId, CenterConsole.class) == null){
+            System.out.println("Couldn't find a Center for this ID");
+            return;
+        }
         dbFacade.delete(factoryInput.inputIntegerId(), CenterConsole.class);
     }
 

@@ -24,6 +24,8 @@ public class CardDB implements IDataBase {
 
             while (resultSet.next()) {
                 int cardId = resultSet.getInt("Id");
+                if(cardId < 0 || cardId > 10000 || cardId != id)
+                    return null;
                 Card card = new Card(cardId);
                 card.setName(resultSet.getString("Name"));
                 card.setSurname(resultSet.getString("Surname"));
@@ -40,13 +42,7 @@ public class CardDB implements IDataBase {
     }
 
     @Override
-    public void deleteItem(int id) {
-        /* Card silme senaryosu
-        String queryDelete = "DELETE FROM Card WHERE Id = ?";
-        PreparedStatement preparedStatementDelete = sqliteDB.connection.prepareStatement(queryDelete);
-        preparedStatementDelete.setString(1,String.valueOf(card.getId()));
-        preparedStatementDelete.executeUpdate();*/
-    }
+    public void deleteItem(int id) {}
 
     @Override
     public void updateItem(ParentObject object) {
@@ -69,13 +65,6 @@ public class CardDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             Card card = (Card) object;
-            String queryGet = "SELECT * FROM Card WHERE Id = ?";
-            PreparedStatement preparedStatementGet = sqliteDB.getConnection().prepareStatement(queryGet);
-            preparedStatementGet.setString(1, String.valueOf(card.getId()));
-            ResultSet resultSet = preparedStatementGet.executeQuery();
-            if(resultSet.getInt("Id") ==  card.getId()){
-                throw new IllegalArgumentException("Card is already exist.");
-            }
             String queryInsert = "INSERT INTO Card (Id, Name, Surname, Balance, Type) VALUES (?,?,?,?,?)";
             PreparedStatement preparedStatementInsert = sqliteDB.getConnection().prepareStatement(queryInsert);
             preparedStatementInsert.setString(1, String.valueOf(card.getId()));

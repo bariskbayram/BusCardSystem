@@ -43,8 +43,10 @@ public class BusConsole extends ParentObject {
         }
         tappingCard.setBusConsoleId(getId());
         card = (Card) dbFacade.get(cardId, Card.class);
-        if(card == null)
-            throw new NullPointerException("Card is null");
+        if(card == null){
+            System.out.println("There is no Card for this ID.");
+            return;
+        }
         tappingCard.set(card);
         tappingCard.setCardId(card.getId());
         setId(tappingCard.getBusConsoleId());
@@ -76,7 +78,8 @@ public class BusConsole extends ParentObject {
         setId(busConsoleId);
         driver = (Driver) dbFacade.get(driverId, Driver.class);
         if(driver == null){
-            throw new NullPointerException("Driver is null");
+            System.out.println("There is no Driver for this ID");
+            return false;
         }
         driverLogIn.setLogin(driver);
         this.driverLogIn = driverLogIn;

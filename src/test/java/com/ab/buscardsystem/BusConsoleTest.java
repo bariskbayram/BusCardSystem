@@ -215,25 +215,6 @@ class BusConsoleTest {
     }
 
     @Test
-    @DisplayName("Verify enterCardId Card with Null Throw Exception")
-    void verifyEnterCardIdCardWithNullThrowException(){
-        //Given
-        String expectedMessage = "Card is null";
-        String actualMessage = null;
-        when(dbFacade.get(22, Card.class)).thenReturn(null);
-
-        //When
-        try {
-            busConsole.enterCardId(22,true,new TappingCard(1));
-        }catch (Exception e){
-            actualMessage = e.getMessage();
-        }
-
-        //Then
-        assertEquals(expectedMessage, actualMessage);
-    }
-
-    @Test
     @DisplayName("Verify enterDriverId With Success Senario")
     void enterDriverIdVerifySuccessSenario(){
         //Given
@@ -297,27 +278,6 @@ class BusConsoleTest {
         //When
         try {
             busConsole.enterDriverId(null);
-        }catch (Exception e){
-            actualMessage = e.getMessage();
-        }
-
-        //Then
-        assertEquals(expectedMessage, actualMessage);
-    }
-
-    @Test
-    @DisplayName("Verify enterCardId Card with Null Throw Exception")
-    void verifyEnterCardInfoParameterWithNullThrowException2(){
-        //Given
-        String expectedMessage = "Driver is null";
-        String actualMessage = null;
-        when(dbFacade.get(424, Driver.class)).thenReturn(null);
-        when(factoryInput.inputIntegerId()).thenReturn(32).thenReturn(424);
-        when(dbFacade.get(32, BusConsole.class)).thenReturn(busConsole);
-
-        //When
-        try {
-            busConsole.enterDriverId(new DriverLogIn());
         }catch (Exception e){
             actualMessage = e.getMessage();
         }

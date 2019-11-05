@@ -71,13 +71,6 @@ public class CenterConsoleDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             CenterConsole centerConsole = (CenterConsole) object;
-            String queryGet = "SELECT * FROM Center WHERE Id = ?";
-            PreparedStatement preparedStatementGet = sqliteDB.getConnection().prepareStatement(queryGet);
-            preparedStatementGet.setString(1, String.valueOf(centerConsole.getId()));
-            ResultSet resultSet = preparedStatementGet.executeQuery();
-            if(resultSet.getInt("Id") ==  centerConsole.getId()){
-                throw new IllegalArgumentException("Center is already exist.");
-            }
             String query = "INSERT INTO CenterConsole (Id, Name, Address, Balance) VALUES (?,?,?,?)";
             PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             preparedStatement.setString(1, String.valueOf(centerConsole.getId()));

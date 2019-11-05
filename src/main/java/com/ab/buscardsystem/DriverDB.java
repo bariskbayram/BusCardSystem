@@ -59,13 +59,6 @@ public class DriverDB implements IDataBase {
         try {
             sqliteDB.connectDB();
             Driver driver = (Driver) object;
-            String queryGet = "SELECT * FROM Driver WHERE Id = ?";
-            PreparedStatement preparedStatementGet = sqliteDB.getConnection().prepareStatement(queryGet);
-            preparedStatementGet.setString(1, String.valueOf(driver.getId()));
-            ResultSet resultSet = preparedStatementGet.executeQuery();
-            if(resultSet.getInt("Id") ==  driver.getId()){
-                throw new IllegalArgumentException("Driver is already exist.");
-            }
             String query = "INSERT INTO Driver (Id, Name, Surname) VALUES (?,?,?)";
             PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             preparedStatement.setString(1, String.valueOf(driver.getId()));
