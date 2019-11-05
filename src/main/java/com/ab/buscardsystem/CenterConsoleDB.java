@@ -24,6 +24,8 @@ public class CenterConsoleDB implements IDataBase {
             while (resultSet.next()){
                 CenterConsole centerConsole = new CenterConsole();
                 centerConsole.setId(resultSet.getInt("Id"));
+                if(centerConsole.getId() < 0 || centerConsole.getId() > 10000 || centerConsole.getId() != id)
+                    return null;
                 centerConsole.setBalance(resultSet.getDouble("Balance"));
                 this.centerConsole = centerConsole;
             }

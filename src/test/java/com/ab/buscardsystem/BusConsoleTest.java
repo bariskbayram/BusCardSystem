@@ -7,6 +7,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.sqlite.core.DB;
+
 import java.time.LocalTime;
 import java.util.HashMap;
 
@@ -240,12 +242,14 @@ class BusConsoleTest {
         when(factoryInput.inputIntegerId()).thenReturn(32).thenReturn(14);
         when(dbFacade.get(driver.getId(), Driver.class)).thenReturn(driver);
         doNothing().when(dbFacade).put(driverLogIn);
+        when(dbFacade.get(32, BusConsole.class)).thenReturn(busConsole);
 
         //When
         busConsole.enterDriverId(driverLogIn);
 
         //Then
         assertEquals(1, busConsole.getIsCorrect());
+        assertTrue(busConsole.isBusConsoleExist);
         assertEquals(32,driverLogIn.getBusConsoleId());
         assertEquals(32, busConsole.getId());
         assertEquals(14, driverLogIn.getDriverId());
@@ -273,13 +277,13 @@ class BusConsoleTest {
     @DisplayName("Verify enterDriverId With Wrong DriverId 3 Times")
     void verifyEnterDriverIdWithWrongDriverId3Times(){
         //Given
-        when(factoryInput.inputIntegerId()).thenReturn(3).thenReturn(-1).thenReturn(23242423).thenReturn(0);
+        when(factoryInput.inputIntegerId()).thenReturn(-1).thenReturn(23242423).thenReturn(0);
 
         //When
         busConsole.enterDriverId(new DriverLogIn());
         //Then
         assertEquals(0, busConsole.getIsCorrect());
-        verify(factoryInput, times(4)).inputIntegerId();
+        verify(factoryInput, times(3)).inputIntegerId();
 
     }
 
@@ -309,6 +313,7 @@ class BusConsoleTest {
         String actualMessage = null;
         when(dbFacade.get(424, Driver.class)).thenReturn(null);
         when(factoryInput.inputIntegerId()).thenReturn(32).thenReturn(424);
+        when(dbFacade.get(32, BusConsole.class)).thenReturn(busConsole);
 
         //When
         try {
@@ -319,6 +324,22 @@ class BusConsoleTest {
 
         //Then
         assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    @DisplayName("Verify getAndEquals Method with Null BusConsole")
+    void verifyGetAndEqualsMethodWithNullBusConsole(){
+
+        //Given
+        DriverLogIn driverLogIn = new DriverLogIn();
+        when(factoryInput.inputIntegerId()).thenReturn(32);
+        when(dbFacade.get(32, BusConsole.class)).thenReturn(null);
+
+        //When
+        busConsole.enterDriverId(driverLogIn);
+        // Then
+        assertFalse(busConsole.isBusConsoleExist);
+
     }
 
 

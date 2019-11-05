@@ -3,6 +3,7 @@ package com.ab.buscardsystem;
 public class Starter {
 
     private static FactoryInput factoryInput = new FactoryInput();
+    private static boolean isContinue;
 
     public static void main(String[] args){
         startScreen();
@@ -47,8 +48,13 @@ public class Starter {
 
     public static void startBusConsoleScreen() {
             WholeSystem start = new WholeSystem();
-            start.startDriverLogIn();
+            while(true){
+                isContinue = start.startDriverLogIn();
+                if(isContinue == false){
+                continue;
+            }
             start.startTappingCard();
+            }
     }
 
     public static void startCenterConsoleScreen() {
@@ -99,4 +105,11 @@ public class Starter {
         }
     }
 
+    public boolean isContinue() {
+        return isContinue;
+    }
+
+    public void setContinue(boolean aContinue) {
+        isContinue = aContinue;
+    }
 }

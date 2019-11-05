@@ -3,7 +3,6 @@ package com.ab.buscardsystem;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Scanner;
 
 public class CenterConsole extends ParentObject{
 
@@ -17,6 +16,7 @@ public class CenterConsole extends ParentObject{
     private LocalDate localDate = LocalDate.now();
     private LocalTime localTime = LocalTime.now();
     private FactoryInput factoryInput = new FactoryInput();
+    private boolean isCorrect;
 
     public CenterConsole(DBFacade dbFacade){
         this.dbFacade = dbFacade;
@@ -24,10 +24,14 @@ public class CenterConsole extends ParentObject{
     public CenterConsole(){}
 
     public void enterCardId(int cardId, int centerId, AddingMoneyToCard addingMoneyToCard){
-        getAndEquals(centerId);
-        card = (Card) dbFacade.get(cardId, Card.class);
-        if(card == null)
+        isCorrect = getAndEquals(centerId);
+        if(!isCorrect)
             return;
+        card = (Card) dbFacade.get(cardId, Card.class);
+        if(card == null){
+            System.out.println("There is no Card for this ID.");
+            return;
+        }
         addingMoneyToCard.setCard(card);
         System.out.print("Please enter amount: ");
         amount = factoryInput.inputDoubleAmount();
@@ -39,6 +43,10 @@ public class CenterConsole extends ParentObject{
         addingMoneyToCard.setAmount(amount);
         System.out.print("Please enter payment: ");
         double payment = factoryInput.inputDoublePayment();
+        if(payment < amount){
+            System.out.println("Payment is not enough.");
+            return;
+        }
         if(balance < amount) {
             System.out.println("Center's balance is not enough.");
             return;
@@ -56,12 +64,17 @@ public class CenterConsole extends ParentObject{
         dbFacade.put(addingMoneyToCard.getCardReceipt());
     }
 
-    public void getAndEquals(int id){
+    public boolean getAndEquals(int id){
         CenterConsole centerConsoleWithoutDB = (CenterConsole) dbFacade.get(id, CenterConsole.class);
+        if(centerConsoleWithoutDB == null){
+            System.out.println("There is no CenterConsole for this ID.");
+            return false;
+        }
         CenterConsole centerConsoleWithDB = CenterConsole.this;
 
         centerConsoleWithDB.setId(centerConsoleWithoutDB.getId());
         centerConsoleWithDB.setBalance(centerConsoleWithoutDB.getBalance());
+        return true;
     }
 
     public AddingMoneyToCard getAddingMoneyToCard() {
@@ -118,5 +131,11 @@ public class CenterConsole extends ParentObject{
     public void setAddress(String address) {
         this.address = address;
     }
+    public boolean isCorrect() {
+        return isCorrect;
+    }
 
+    public void setCorrect(boolean correct) {
+        isCorrect = correct;
+    }
 }

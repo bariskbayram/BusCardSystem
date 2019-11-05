@@ -6,6 +6,7 @@ public class CardReceiptDB implements IDataBase {
 
     private SqliteDB sqliteDB;
     private CardReceipt cardReceipt;
+    private String query;
 
     public CardReceiptDB(SqliteDB sqliteDB){
         this.sqliteDB = sqliteDB;
@@ -13,35 +14,7 @@ public class CardReceiptDB implements IDataBase {
 
     @Override
     public Object getItem(int id) {
-       /* try {
-            sqliteDB.connectDB();
-            String query = "SELECT * FROM Receipt WHERE Id = ?";
-            PreparedStatement preparedStatement = sqliteDB.connection.prepareStatement(query);
-            preparedStatement.setString(1, String.valueOf(id));
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                Receipt receipt = new Receipt();
-                receipt.setId(resultSet.getInt("Id"));
-                receipt.setCardId(resultSet.getInt("CardId"));
-                receipt.setDepositConsoleId(resultSet.getInt("DepositConsoleId"));
-                receipt.setLocalDate(resultSet.getString("Date");
-                String date = resultSet.getString("Date");
-                String time = resultSet.getString("Time");
-                int payment = resultSet.getInt("Payment");
-                int receiptId = resultSet.getInt("Id");
-                int receiptId = resultSet.getInt("Id");
-                TappingCard tappingCard = new TappingCard(tappingCardId, busConsoleId);
-                this.tappingCard = tappingCard;
-            }
-            sqliteDB.closeDB();
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        System.out.println("TapingCard döndürüldü.");
-        return tappingCard;*/
-       return cardReceipt;
+       return null;
     }
 
     @Override
@@ -54,7 +27,7 @@ public class CardReceiptDB implements IDataBase {
     public void putItem(ParentObject object) {
         try {
             sqliteDB.connectDB();
-            String query = "INSERT INTO CardReceipt (CardId, CenterConsoleId, Date, Time, Payment, Change, Amount) VALUES (?,?,?,?,?,?,?)";
+            query = "INSERT INTO CardReceipt (CardId, CenterConsoleId, Date, Time, Payment, Change, Amount) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             CardReceipt cardReceipt = (CardReceipt) object;
             preparedStatement.setString(1, String.valueOf(cardReceipt.getCardId()));
@@ -82,5 +55,11 @@ public class CardReceiptDB implements IDataBase {
     }
     public void setCardReceipt(CardReceipt cardReceipt) {
         this.cardReceipt = cardReceipt;
+    }
+    public String getQuery() {
+        return query;
+    }
+    public void setQuery(String query) {
+        this.query = query;
     }
 }

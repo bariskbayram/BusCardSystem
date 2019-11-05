@@ -20,15 +20,6 @@ public class SqliteDB {
         }
     }
 
-    public void executeQuery(String query){
-        try {
-            this.statement = connection.createStatement();
-            statement.executeQuery(query);
-        }catch (Exception e){
-            System.out.println(e);
-        }
-    }
-
     public void closeDB(){
         try {
             connection.close();
@@ -37,19 +28,15 @@ public class SqliteDB {
         }
     }
 
-
     public Connection getConnection() {
         return connection;
     }
-
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
-
     public Statement getStatement() {
         return statement;
     }
-
     public void setStatement(Statement statement) {
         this.statement = statement;
     }

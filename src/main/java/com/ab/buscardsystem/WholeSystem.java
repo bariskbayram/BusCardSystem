@@ -4,7 +4,7 @@ public class WholeSystem {
 
     private DBFacade dbFacade = new DBFacade();
     private BusConsole busConsole = new BusConsole(dbFacade);
-    private CenterConsole centerConsole = new CenterConsole(dbFacade);
+    private CenterConsole centerConsole;
     private CityCardConsole cityCardConsole = new CityCardConsole(dbFacade);
     private FactoryInput factoryInput = new FactoryInput();
 
@@ -36,6 +36,17 @@ public class WholeSystem {
     public void startAddingMoneyToCard(){
         System.out.print("Please enter Center ID: ");
         int centerId = factoryInput.inputIntegerId();
+        if(centerId < 0 || centerId>10000){
+            System.out.println("CenterConsole ID is wrong.");
+            return;
+        }
+        centerConsole = (CenterConsole) dbFacade.get(centerId, CenterConsole.class);
+        if(centerConsole == null){
+            System.out.println("There is no CenterConsole for this ID.");
+            return;
+        }else{
+            System.out.println("Success!");
+        }
         System.out.print("Please enter Card ID: ");
         int CardId = factoryInput.inputIntegerId2();
         centerConsole.enterCardId(CardId, centerId, new AddingMoneyToCard());
@@ -56,7 +67,14 @@ public class WholeSystem {
         cityCardConsole.deleteDriver();
     }
     public void startRemovingCenter(){ cityCardConsole.deleteCenter();}
-    public void startDriverLogIn(){ busConsole.enterDriverId(new DriverLogIn());}
+    public boolean startDriverLogIn(){
+
+        boolean isCorrect = busConsole.enterDriverId(new DriverLogIn());
+        if(!isCorrect)
+            return false;
+        else
+            return true;
+    }
 
     public void setDbFacade(DBFacade dbFacade) {
         this.dbFacade = dbFacade;

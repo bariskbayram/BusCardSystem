@@ -7,6 +7,7 @@ public class BusConsoleDB implements IDataBase {
 
     private SqliteDB sqliteDB;
     private BusConsole busConsole;
+    private String query;
 
     public BusConsoleDB(SqliteDB sqliteDB){
         this.sqliteDB = sqliteDB;
@@ -16,7 +17,7 @@ public class BusConsoleDB implements IDataBase {
     public Object getItem(int id) {
         try {
             sqliteDB.connectDB();
-            String query = "SELECT * FROM BusConsole WHERE Id = ?";
+            query = "SELECT * FROM BusConsole WHERE Id = ?";
             PreparedStatement preparedStatement = sqliteDB.getConnection().prepareStatement(query);
             preparedStatement.setString(1,String.valueOf(id));
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -24,6 +25,8 @@ public class BusConsoleDB implements IDataBase {
             while (resultSet.next()){
                 BusConsole busConsole = new BusConsole();
                 busConsole.setId(resultSet.getInt("Id"));
+                if(busConsole.getId() < 0 || busConsole.getId() > 10000 || busConsole.getId() != id)
+                    return null;
                 this.busConsole = busConsole;
             }
             sqliteDB.closeDB();
@@ -57,6 +60,12 @@ public class BusConsoleDB implements IDataBase {
     }
     public void setBusConsole(BusConsole busConsole) {
         this.busConsole = busConsole;
+    }
+    public String getQuery() {
+        return query;
+    }
+    public void setQuery(String query) {
+        this.query = query;
     }
 
 }

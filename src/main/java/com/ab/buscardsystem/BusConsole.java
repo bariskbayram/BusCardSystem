@@ -22,6 +22,7 @@ public class BusConsole extends ParentObject {
     private int busConsoleId;
     private int isCorrect;
     private int driverId;
+    boolean isBusConsoleExist;
 
     public BusConsole(DBFacade dbFacade){
         this.dbFacade = dbFacade;
@@ -53,19 +54,23 @@ public class BusConsole extends ParentObject {
         invalidList.put(cardId, localTime);
     }
 
-    public void enterDriverId(DriverLogIn driverLogIn){
+    public boolean enterDriverId(DriverLogIn driverLogIn){
         if(driverLogIn == null)
             throw new NullPointerException("DriverLogIn is null");
         isCorrect=1;
         takeBusConsoleId();
         if(isCorrect == 0){
             System.out.println("You have entered the wrong 3 times.");
-            return;
+            return false;
+        }
+        isBusConsoleExist = getAndEquals(busConsoleId);
+        if(!isBusConsoleExist){
+            return false;
         }
         takeDriverId();
         if(isCorrect == 0){
             System.out.println("You have entered the wrong 3 times.");
-            return;
+            return false;
         }
         driverLogIn.setBusConsoleId(busConsoleId);
         setId(busConsoleId);
@@ -76,6 +81,7 @@ public class BusConsole extends ParentObject {
         driverLogIn.setLogin(driver);
         this.driverLogIn = driverLogIn;
         dbFacade.put(driverLogIn);
+        return true;
     }
 
     public void takeBusConsoleId(){
@@ -119,6 +125,19 @@ public class BusConsole extends ParentObject {
         }else {
             return true;
         }
+    }
+
+    public boolean getAndEquals(int id){
+        BusConsole busConsoleConsoleWithoutDB = (BusConsole) dbFacade.get(id, BusConsole.class);
+        if(busConsoleConsoleWithoutDB == null){
+            System.out.println("There is no BusConsole for this ID");
+            return false;
+        }
+        BusConsole busConsoleWithDB = BusConsole.this;
+
+        busConsoleWithDB.setId(busConsoleConsoleWithoutDB.getId());
+
+        return true;
     }
 
     public boolean isCardTappingSitutation() {
@@ -199,4 +218,11 @@ public class BusConsole extends ParentObject {
     public void setDriverId(int driverId) {
         this.driverId = driverId;
     }
+    public boolean isBusConsoleExist() {
+        return isBusConsoleExist;
+    }
+    public void setBusConsoleExist(boolean busConsoleExist) {
+        isBusConsoleExist = busConsoleExist;
+    }
+
 }
