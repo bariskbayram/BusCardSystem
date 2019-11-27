@@ -1,5 +1,10 @@
 package com.ab.buscardsystem;
 
+import com.ab.buscardsystem.BusinessLayer.AddingDriver;
+import com.ab.buscardsystem.DataLayer.AddingDriverDB;
+import com.ab.buscardsystem.DataLayer.DBFacade;
+import com.ab.buscardsystem.DataLayer.SqliteDB;
+import com.ab.buscardsystem.DataLayer.TableMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +18,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -69,12 +74,12 @@ class AddingDriverDBTest {
         verify(connection).prepareStatement(query);
         verify(preparedStatement).executeUpdate();
         verify(sqliteDB).closeDB();
-        verify(preparedStatement, times(1)).setString(1,String.valueOf(addingDriver.getLocalDate()));
-        verify(preparedStatement, times(1)).setString(2,String.valueOf(addingDriver.getLocalTime()));
-        verify(preparedStatement, times(1)).setString(3,String.valueOf(addingDriver.getName()));
-        verify(preparedStatement, times(1)).setString(4,String.valueOf(addingDriver.getSurname()));
-        verify(preparedStatement, times(1)).setString(5,String.valueOf(addingDriver.getDriverId()));
-        verify(preparedStatement, times(5)).setString(anyInt(),anyString());
+        verify(preparedStatement, times(1)).setString(1, String.valueOf(addingDriver.getLocalDate()));
+        verify(preparedStatement, times(1)).setString(2, String.valueOf(addingDriver.getLocalTime()));
+        verify(preparedStatement, times(1)).setString(3, String.valueOf(addingDriver.getName()));
+        verify(preparedStatement, times(1)).setString(4, String.valueOf(addingDriver.getSurname()));
+        verify(preparedStatement, times(1)).setString(5, String.valueOf(addingDriver.getDriverId()));
+        verify(preparedStatement, times(5)).setString(anyInt(), anyString());
     }
 
 }

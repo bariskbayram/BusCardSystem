@@ -1,5 +1,7 @@
 package com.ab.buscardsystem;
 
+import com.ab.buscardsystem.BusinessLayer.AddingDriver;
+import com.ab.buscardsystem.BusinessLayer.Driver;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,9 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class AddingDriverTest {
@@ -21,7 +23,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("Correct Name Input With Barış")
-    void takeNameWithCorrectInput(){
+    void takeNameWithCorrectInput() {
         //Given
         when(factoryInput.inputStringName()).thenReturn("Barış");
         //When
@@ -33,7 +35,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("Incorrect Name Input With NoName or Start With Space")
-    void takeNameWithCorrectInputNoNameOrStartWithSpace(){
+    void takeNameWithCorrectInputNoNameOrStartWithSpace() {
         //Given
         when(factoryInput.inputStringName()).thenReturn("").thenReturn(" ").thenReturn("  ");
         //When
@@ -45,11 +47,11 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("Incorrect Name Input With More Than 14 Letters")
-    void takeNameWithIncorrectInputWithMoreThan14Letters(){
+    void takeNameWithIncorrectInputWithMoreThan14Letters() {
         //Given
         when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah")
-                                            .thenReturn("Lionel Rodriguez Messi")
-                                            .thenReturn("Cristiano Bekir Ronaldo");
+                .thenReturn("Lionel Rodriguez Messi")
+                .thenReturn("Cristiano Bekir Ronaldo");
         //When
         addingDriver.takeName();
         //Then
@@ -59,7 +61,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("2 Times Incorrect Name Input")
-    void takeNameWithIncorrectInput2Times(){
+    void takeNameWithIncorrectInput2Times() {
         //Given
         when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah").thenReturn("").thenReturn("Selami");
         //When
@@ -71,7 +73,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("1 Times Incorrect Name Input")
-    void takeNameWithIncorrectInput1Times(){
+    void takeNameWithIncorrectInput1Times() {
         //Given
         when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah").thenReturn("Kardelen");
         //When
@@ -83,7 +85,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("Correct Surname Input With Osman")
-    void takeSurnameWithCorrectInput(){
+    void takeSurnameWithCorrectInput() {
         //Given
         when(factoryInput.inputStringSurname()).thenReturn("Osman");
         //When
@@ -94,7 +96,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("Incorrect Surname Input With NoName or Start With Space")
-    void takeSurnameWithCorrectInputNoNameOrStartWithSpace(){
+    void takeSurnameWithCorrectInputNoNameOrStartWithSpace() {
         //Given
         when(factoryInput.inputStringSurname()).thenReturn("").thenReturn(" ").thenReturn("  ");
         //When
@@ -106,7 +108,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("Incorrect Surname Input With More Than 14 Letters")
-    void takeSurnameWithIncorrectInput(){
+    void takeSurnameWithIncorrectInput() {
         //Given
         when(factoryInput.inputStringSurname()).thenReturn("Muhammed Bekir Cinnah");
         //When
@@ -118,7 +120,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("2 Times Incorrect Surname Input")
-    void takeSurnameWithIncorrectInput2Times(){
+    void takeSurnameWithIncorrectInput2Times() {
         //Given
         when(factoryInput.inputStringSurname()).thenReturn("Muhammed Bekir Cinnah").thenReturn("").thenReturn("Selami");
         //When
@@ -130,7 +132,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("1 Times Incorrect Surname Input")
-    void takeSurnameWithIncorrectInput1Times(){
+    void takeSurnameWithIncorrectInput1Times() {
         //Given
         when(factoryInput.inputStringSurname()).thenReturn("Muhammed Bekir Cinnah").thenReturn("Kardelen");
         //When
@@ -142,7 +144,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("Correct DriverId Input")
-    void takeIdWithCorrectInput(){
+    void takeIdWithCorrectInput() {
         //Given
         when(factoryInput.inputIntegerId()).thenReturn(1);
         //When
@@ -154,7 +156,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("Incorrect DriverId Input Negative and Zero")
-    void takeIdWithIncorrectInputWithNegativeInteger(){
+    void takeIdWithIncorrectInputWithNegativeInteger() {
         //Given
         when(factoryInput.inputIntegerId()).thenReturn(-23).thenReturn(-223).thenReturn(0);
         //When
@@ -166,7 +168,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("Incorrect DriverId Input Plus 9.999")
-    void takeIdWithIncorrectInputWithPlus10000(){
+    void takeIdWithIncorrectInputWithPlus10000() {
         //Given
         when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(13232).thenReturn(99999);
         //When
@@ -178,7 +180,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("2 Times Incorrect DriverId Input")
-    void takeIdWithIncorrectInput2Times(){
+    void takeIdWithIncorrectInput2Times() {
         //Given
         when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(153400).thenReturn(9999);
         //When
@@ -190,7 +192,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("1 Times Incorrect DriverId Input")
-    void takeIdWithIncorrectInput1Times(){
+    void takeIdWithIncorrectInput1Times() {
         //Given
         when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(4);
         //When
@@ -202,7 +204,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("Verify setDriverInfo Method Calls")
-    void setDriverInfoMethodCallsVerify(){
+    void setDriverInfoMethodCallsVerify() {
         //Given
         Driver driver = new Driver(0);
         when(factoryInput.inputStringName()).thenReturn("Ayşe");
@@ -215,11 +217,11 @@ class AddingDriverTest {
         //Then
 
         assertAll("SetUp Driver's Info",
-                ()-> assertEquals(999, driver.getId()),
-                ()-> assertEquals("Ayşe", driver.getName()),
-                ()->assertEquals("Selim", driver.getSurname()),
-                ()->assertEquals(addingDriver.getDriver(), driver),
-                ()->assertEquals(1, addingDriver.getIsCorrect())
+                () -> assertEquals(999, driver.getId()),
+                () -> assertEquals("Ayşe", driver.getName()),
+                () -> assertEquals("Selim", driver.getSurname()),
+                () -> assertEquals(addingDriver.getDriver(), driver),
+                () -> assertEquals(1, addingDriver.getIsCorrect())
         );
 
         verify(factoryInput).inputStringName();
@@ -229,7 +231,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("Verify setDriverInfo Method Calls With Wrong Name Input 3 Times")
-    void setDriverInfoMethodCallsVerifyWrongNameInput3Times(){
+    void setDriverInfoMethodCallsVerifyWrongNameInput3Times() {
         //Given
         Driver driver = new Driver(0);
         when(factoryInput.inputStringName()).thenReturn("Barış Kaan Bayram")
@@ -246,7 +248,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("Verify setDriverInfo Method Calls With Wrong Surname Input 3 Times")
-    void setDriverInfoMethodCallsVerifyWrongSurnameInput3Times(){
+    void setDriverInfoMethodCallsVerifyWrongSurnameInput3Times() {
         //Given
         Driver driver = new Driver(0);
         when(factoryInput.inputStringName()).thenReturn("Kemal");
@@ -265,7 +267,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("Verify setDriverInfo Method Calls With Wrong ID Input 3 Times")
-    void setDriverInfoMethodCallsVerifyWrongIdInput3Times(){
+    void setDriverInfoMethodCallsVerifyWrongIdInput3Times() {
         //Given
         Driver driver = new Driver(0);
         when(factoryInput.inputStringName()).thenReturn("Barış");
@@ -284,7 +286,7 @@ class AddingDriverTest {
 
     @Test
     @DisplayName("Verify SetDriverInfo Parameter with Null Throw Exception")
-    void verifySetDriverInfoParameterWithNullThrowException(){
+    void verifySetDriverInfoParameterWithNullThrowException() {
         //Given
         String expectedMessage = "Driver is null";
         String actualMessage = null;
@@ -292,7 +294,7 @@ class AddingDriverTest {
         //When
         try {
             addingDriver.setDriverInfo(null);
-        }catch (Exception e){
+        } catch (Exception e) {
             actualMessage = e.getMessage();
         }
 

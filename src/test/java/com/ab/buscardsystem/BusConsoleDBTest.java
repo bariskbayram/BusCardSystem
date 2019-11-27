@@ -1,5 +1,10 @@
 package com.ab.buscardsystem;
 
+import com.ab.buscardsystem.BusinessLayer.BusConsole;
+import com.ab.buscardsystem.DataLayer.BusConsoleDB;
+import com.ab.buscardsystem.DataLayer.DBFacade;
+import com.ab.buscardsystem.DataLayer.SqliteDB;
+import com.ab.buscardsystem.DataLayer.TableMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,9 +12,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -62,7 +70,6 @@ class BusConsoleDBTest {
         verify(resultSet, times(2)).next();
         verify(resultSet).getInt("Id");
         verify(tableMapper).getMapper(BusConsole.class);
-
 
 
     }

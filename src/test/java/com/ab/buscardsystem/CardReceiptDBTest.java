@@ -1,5 +1,10 @@
 package com.ab.buscardsystem;
 
+import com.ab.buscardsystem.BusinessLayer.CardReceipt;
+import com.ab.buscardsystem.DataLayer.CardReceiptDB;
+import com.ab.buscardsystem.DataLayer.DBFacade;
+import com.ab.buscardsystem.DataLayer.SqliteDB;
+import com.ab.buscardsystem.DataLayer.TableMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +18,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -71,13 +76,13 @@ class CardReceiptDBTest {
         verify(connection).prepareStatement(query);
         verify(preparedStatement).executeUpdate();
         verify(sqliteDB).closeDB();
-        verify(preparedStatement, times(1)).setString(1,String.valueOf(cardReceipt.getCardId()));
-        verify(preparedStatement, times(1)).setString(2,String.valueOf(cardReceipt.getCenterConsoleId()));
-        verify(preparedStatement, times(1)).setString(3,String.valueOf(cardReceipt.getLocalDate()));
-        verify(preparedStatement, times(1)).setString(4,String.valueOf(cardReceipt.getLocalTime()));
-        verify(preparedStatement, times(1)).setString(5,String.valueOf(cardReceipt.getPayment()));
-        verify(preparedStatement, times(1)).setString(6,String.valueOf(cardReceipt.getChange()));
-        verify(preparedStatement, times(1)).setString(7,String.valueOf(cardReceipt.getAmount()));
-        verify(preparedStatement, times(7)).setString(anyInt(),anyString());
+        verify(preparedStatement, times(1)).setString(1, String.valueOf(cardReceipt.getCardId()));
+        verify(preparedStatement, times(1)).setString(2, String.valueOf(cardReceipt.getCenterConsoleId()));
+        verify(preparedStatement, times(1)).setString(3, String.valueOf(cardReceipt.getLocalDate()));
+        verify(preparedStatement, times(1)).setString(4, String.valueOf(cardReceipt.getLocalTime()));
+        verify(preparedStatement, times(1)).setString(5, String.valueOf(cardReceipt.getPayment()));
+        verify(preparedStatement, times(1)).setString(6, String.valueOf(cardReceipt.getChange()));
+        verify(preparedStatement, times(1)).setString(7, String.valueOf(cardReceipt.getAmount()));
+        verify(preparedStatement, times(7)).setString(anyInt(), anyString());
     }
 }
