@@ -30,6 +30,8 @@ public class CenterConsoleDB implements IDataBase {
                 if(centerConsole.getId() < 0 || centerConsole.getId() > 10000 || centerConsole.getId() != id)
                     return null;
                 centerConsole.setBalance(resultSet.getDouble("Balance"));
+                centerConsole.setName(resultSet.getString("Name"));
+                centerConsole.setAddress(resultSet.getString("Address"));
                 this.centerConsole = centerConsole;
             }
             sqliteDB.closeDB();

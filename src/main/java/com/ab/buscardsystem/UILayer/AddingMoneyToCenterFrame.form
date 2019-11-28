@@ -64,7 +64,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="d7675" class="javax.swing.JLabel" binding="centerIdLabel">
+          <component id="d7675" class="javax.swing.JLabel">
             <constraints>
               <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
               <gridbag top="0" left="0" bottom="0" right="60" weightx="0.25" weighty="0.25"/>
@@ -73,7 +73,7 @@
               <text value="Enter CenterID"/>
             </properties>
           </component>
-          <component id="d869" class="javax.swing.JLabel" binding="amountLabel">
+          <component id="d869" class="javax.swing.JLabel">
             <constraints>
               <grid row="1" column="4" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
               <gridbag top="0" left="0" bottom="0" right="60" weightx="0.25" weighty="0.25"/>
@@ -82,7 +82,7 @@
               <text value="Enter Amount"/>
             </properties>
           </component>
-          <component id="7f910" class="javax.swing.JLabel" binding="paymentLabel">
+          <component id="7f910" class="javax.swing.JLabel">
             <constraints>
               <grid row="2" column="3" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
               <gridbag top="0" left="0" bottom="0" right="60" weightx="0.25" weighty="0.25"/>
@@ -115,7 +115,7 @@
               <text value="Cancel"/>
             </properties>
           </component>
-          <grid id="6459f" binding="statusPanel" layout-manager="GridBagLayout">
+          <grid id="6459f" layout-manager="GridBagLayout">
             <constraints>
               <grid row="0" column="0" row-span="4" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.5" weighty="0.5"/>

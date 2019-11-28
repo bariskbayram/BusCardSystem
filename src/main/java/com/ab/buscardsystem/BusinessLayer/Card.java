@@ -38,10 +38,4 @@ public class Card extends ParentObject {
     public void setBalance(double balance) {
         this.balance = balance;
     }
-    public Boolean getSituation() {
-        return situation;
-    }
-    public void setSituation(Boolean situation) {
-        this.situation = situation;
-    }
 }

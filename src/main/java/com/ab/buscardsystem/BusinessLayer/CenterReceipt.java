@@ -35,20 +35,11 @@ public class CenterReceipt extends ParentObject {
     public double getChange() {
         return change;
     }
-    public void setChange(double change) {
-        this.change = change;
-    }
     public LocalTime getLocalTime() {
         return localTime;
     }
-    public void setLocalTime(LocalTime localTime) {
-        this.localTime = localTime;
-    }
     public LocalDate getLocalDate() {
         return localDate;
-    }
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
     }
     public int getCenterConsoleId() {
         return centerConsoleId;

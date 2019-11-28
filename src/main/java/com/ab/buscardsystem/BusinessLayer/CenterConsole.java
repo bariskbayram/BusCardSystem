@@ -64,12 +64,6 @@ public class CenterConsole extends ParentObject {
         return true;
     }
 
-    public AddingMoneyToCard getAddingMoneyToCard() {
-        return addingMoneyToCard;
-    }
-    public void setAddingMoneyToCard(AddingMoneyToCard addingMoneyToCard) {
-        this.addingMoneyToCard = addingMoneyToCard;
-    }
     public double getBalance() {
         return balance;
     }
@@ -79,20 +73,8 @@ public class CenterConsole extends ParentObject {
     public LocalDate getLocalDate() {
         return localDate;
     }
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
-    }
     public LocalTime getLocalTime() {
         return localTime;
-    }
-    public void setLocalTime(LocalTime localTime) {
-        this.localTime = localTime;
-    }
-    public DBFacade getDbFacade() {
-        return dbFacade;
-    }
-    public void setDbFacade(DBFacade dbFacade) {
-        this.dbFacade = dbFacade;
     }
     public Card getCard() {
         return card;
@@ -118,10 +100,5 @@ public class CenterConsole extends ParentObject {
     public void setAddress(String address) {
         this.address = address;
     }
-    public boolean isCorrect() {
-        return isCorrect;
-    }
-    public void setCorrect(boolean correct) {
-        isCorrect = correct;
-    }
+
 }

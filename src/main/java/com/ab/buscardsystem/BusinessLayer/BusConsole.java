@@ -1,7 +1,6 @@
 package com.ab.buscardsystem.BusinessLayer;
 
 import com.ab.buscardsystem.DataLayer.DBFacade;
-import com.ab.buscardsystem.FactoryInput;
 import com.ab.buscardsystem.ParentObject;
 
 import java.time.LocalDate;
@@ -20,7 +19,6 @@ public class BusConsole extends ParentObject {
     private LocalDate localDate = LocalDate.now();
     private LocalTime localTime = LocalTime.now();
     private boolean isTappingNormal;
-    private FactoryInput factoryInput = new FactoryInput();
     private boolean cardTappingSitutation;
     private int time;
     private int busConsoleId;

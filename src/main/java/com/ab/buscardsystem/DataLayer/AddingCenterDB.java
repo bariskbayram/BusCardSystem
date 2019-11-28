@@ -52,12 +52,6 @@ public class AddingCenterDB implements IDataBase {
     public void setSqliteDB(SqliteDB sqliteDB) {
         this.sqliteDB = sqliteDB;
     }
-    public AddingCenter getAddingCenter() {
-        return addingCenter;
-    }
-    public void setAddingCenter(AddingCenter addingCenter) {
-        this.addingCenter = addingCenter;
-    }
     public String getQuery() {
         return query;
     }

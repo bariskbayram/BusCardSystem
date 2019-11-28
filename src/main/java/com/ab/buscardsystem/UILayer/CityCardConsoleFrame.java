@@ -78,12 +78,4 @@ public class CityCardConsoleFrame extends JFrame {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("CityCardConsoleFrame");
-        frame.setContentPane(new CityCardConsoleFrame().panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocation(400,150);
-        frame.pack();
-        frame.setVisible(true);
-    }
 }

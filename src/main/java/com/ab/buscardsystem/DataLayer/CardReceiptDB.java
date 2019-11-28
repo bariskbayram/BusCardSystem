@@ -53,12 +53,6 @@ public class CardReceiptDB implements IDataBase {
     public void setSqliteDB(SqliteDB sqliteDB) {
         this.sqliteDB = sqliteDB;
     }
-    public CardReceipt getCardReceipt() {
-        return cardReceipt;
-    }
-    public void setCardReceipt(CardReceipt cardReceipt) {
-        this.cardReceipt = cardReceipt;
-    }
     public String getQuery() {
         return query;
     }

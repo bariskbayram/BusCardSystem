@@ -42,55 +42,7 @@ public class TableMapper {
     public void setSqliteDB(SqliteDB sqliteDB) {
         this.sqliteDB = sqliteDB;
     }
-    public void setMapper(HashMap<Class<?>, IDataBase> mapper) {
-        this.mapper = mapper;
-    }
-    public void setCardDB(CardDB cardDB) {
-        this.cardDB = cardDB;
-    }
-    public void setTappingCardDB(TappingCardDB tappingCardDB) {
-        this.tappingCardDB = tappingCardDB;
-    }
     public SqliteDB getSqliteDB() {
         return sqliteDB;
-    }
-    public HashMap<Class<?>, IDataBase> getMapper() {
-        return mapper;
-    }
-    public CardDB getCardDB() {
-        return cardDB;
-    }
-    public TappingCardDB getTappingCardDB() {
-        return tappingCardDB;
-    }
-    public CardReceiptDB getCardReceiptDB() {
-        return cardReceiptDB;
-    }
-    public void setCardReceiptDB(CardReceiptDB cardReceiptDB) {
-        this.cardReceiptDB = cardReceiptDB;
-    }
-    public CenterConsoleDB getCenterConsoleDB() {
-        return centerConsoleDB;
-    }
-    public void setCenterConsoleDB(CenterConsoleDB centerConsoleDB) {
-        this.centerConsoleDB = centerConsoleDB;
-    }
-    public BusConsoleDB getBusConsoleDB() {
-        return busConsoleDB;
-    }
-    public void setBusConsoleDB(BusConsoleDB busConsoleDB) {
-        this.busConsoleDB = busConsoleDB;
-    }
-    public CenterReceiptDB getCenterReceiptDB() {
-        return centerReceiptDB;
-    }
-    public void setCenterReceiptDB(CenterReceiptDB centerReceiptDB) {
-        this.centerReceiptDB = centerReceiptDB;
-    }
-    public AddingCardDB getAddingCardDB() {
-        return addingCardDB;
-    }
-    public void setAddingCardDB(AddingCardDB addingCardDB) {
-        this.addingCardDB = addingCardDB;
     }
 }

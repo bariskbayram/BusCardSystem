@@ -19,9 +19,6 @@ public class DriverLogIn extends ParentObject {
     public int getDriverId() {
         return driverId;
     }
-    public void setDriverId(int driverId) {
-        this.driverId = driverId;
-    }
     public LocalDate getLocalDate() {
         return localDate;
     }

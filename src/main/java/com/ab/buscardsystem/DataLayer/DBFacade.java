@@ -1,15 +1,11 @@
 package com.ab.buscardsystem.DataLayer;
 
-import com.ab.buscardsystem.BusinessLayer.BusConsole;
-import com.ab.buscardsystem.BusinessLayer.CenterConsole;
 import com.ab.buscardsystem.ParentObject;
 
 public class DBFacade {
 
     private TableMapper tableMapper = new TableMapper();
     private IDataBase iDataBase;
-    private BusConsole busConsole;
-    private CenterConsole centerConsole;
 
     public Object get(int id, Class<?> parameterClass){
         iDataBase = tableMapper.getMapper(parameterClass);
@@ -30,30 +26,4 @@ public class DBFacade {
         IDataBase DBMapper = tableMapper.getMapper(object.getClass());
         DBMapper.putItem(object);
     }
-
-    public void setTableMapper(TableMapper tableMapper) {
-        this.tableMapper = tableMapper;
-    }
-    public void setiDataBase(IDataBase iDataBase) {
-        this.iDataBase = iDataBase;
-    }
-    public TableMapper getTableMapper() {
-        return tableMapper;
-    }
-    public IDataBase getiDataBase() {
-        return iDataBase;
-    }
-    public BusConsole getBusConsole() {
-        return busConsole;
-    }
-    public void setBusConsole(BusConsole busConsole) {
-        this.busConsole = busConsole;
-    }
-    public CenterConsole getCenterConsole() {
-        return centerConsole;
-    }
-    public void setCenterConsole(CenterConsole centerConsole) {
-        this.centerConsole = centerConsole;
-    }
-
 }

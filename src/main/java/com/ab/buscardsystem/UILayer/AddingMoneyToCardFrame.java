@@ -12,10 +12,6 @@ public class AddingMoneyToCardFrame {
     private JTextField paymentTextField;
     private JButton OKButton;
     private JButton cancelButton;
-    private JLabel cardIdLabel;
-    private JLabel amountLabel;
-    private JLabel paymentLabel;
-    private JPanel statusPanel;
     private JLabel currentCardBalance;
     private JLabel statusText;
     private JLabel currentCenterBalance;
@@ -63,14 +59,6 @@ public class AddingMoneyToCardFrame {
         frame.setContentPane(this.panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocation(400,150);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("AddingMoneyToCardFrame");
-        frame.setContentPane(new AddingMoneyToCardFrame().panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

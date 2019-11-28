@@ -51,12 +51,6 @@ public class AddingDriverDB implements IDataBase {
     public void setSqliteDB(SqliteDB sqliteDB) {
         this.sqliteDB = sqliteDB;
     }
-    public AddingDriver getAddingDriver() {
-        return addingDriver;
-    }
-    public void setAddingDriver(AddingDriver addingDriver) {
-        this.addingDriver = addingDriver;
-    }
     public String getQuery() {
         return query;
     }

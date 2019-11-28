@@ -6,7 +6,6 @@ public class TappingCardFrame {
     private JPanel panel1;
     private JTextField enterCardIdTextField;
     private JButton OKButton;
-    private JLabel enterCardIdLabel;
     private JFrame frame;
 
     public static void main(String[] args) {
@@ -16,7 +15,6 @@ public class TappingCardFrame {
         frame.pack();
         frame.setVisible(true);
     }
-
 
     public void start() {
         frame = new JFrame("TappingCardFrame");

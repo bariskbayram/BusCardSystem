@@ -1,6 +1,5 @@
 package com.ab.buscardsystem.BusinessLayer;
 
-import com.ab.buscardsystem.FactoryInput;
 import com.ab.buscardsystem.ParentObject;
 
 import java.time.LocalDate;
@@ -15,8 +14,6 @@ public class AddingCard extends ParentObject {
     private CardType type;
     private int cardId;
     private Card card;
-    private int isCorrect;
-    private FactoryInput factoryInput = new FactoryInput();
 
     public Card setCardInfo(Card card){
         card.setId(cardId);
@@ -64,23 +61,4 @@ public class AddingCard extends ParentObject {
     public void setCard(Card card) {
         this.card = card;
     }
-    public int getIsCorrect() {
-        return isCorrect;
-    }
-    public void setIsCorrect(int isCorrect) {
-        this.isCorrect = isCorrect;
-    }
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
-    }
-    public void setLocalTime(LocalTime localTime) {
-        this.localTime = localTime;
-    }
-    public FactoryInput getFactoryInput() {
-        return factoryInput;
-    }
-    public void setFactoryInput(FactoryInput factoryInput) {
-        this.factoryInput = factoryInput;
-    }
-
 }

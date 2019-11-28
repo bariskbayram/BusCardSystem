@@ -52,12 +52,6 @@ public class AddingCardDB implements IDataBase {
     public void setSqliteDB(SqliteDB sqliteDB) {
         this.sqliteDB = sqliteDB;
     }
-    public AddingCard getAddingCard() {
-        return addingCard;
-    }
-    public void setAddingCard(AddingCard addingCard) {
-        this.addingCard = addingCard;
-    }
     public String getQuery() {
         return query;
     }

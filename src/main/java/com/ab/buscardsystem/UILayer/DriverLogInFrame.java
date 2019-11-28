@@ -3,7 +3,6 @@ package com.ab.buscardsystem.UILayer;
 import com.ab.buscardsystem.BusinessLayer.WholeSystem;
 
 import javax.swing.*;
-import java.awt.event.WindowEvent;
 
 public class DriverLogInFrame {
 
@@ -12,9 +11,6 @@ public class DriverLogInFrame {
     private JTextField driverIDTextField;
     private JButton logInButton;
     private JButton goBackButton;
-    private JLabel busConsoleIDLabel;
-    private JLabel driverIDLabel;
-    private JLabel statusLabel;
     private JFrame frame;
 
     public DriverLogInFrame() {
@@ -55,15 +51,6 @@ public class DriverLogInFrame {
     public void start() {
         frame = new JFrame("BusConsoleFrame");
         frame.setContentPane(this.panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocation(400,150);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("BusConsoleFrame");
-        frame.setContentPane(new DriverLogInFrame().panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocation(400,150);
         frame.pack();

@@ -48,20 +48,11 @@ public class CardReceipt extends ParentObject {
     public double getChange() {
         return change;
     }
-    public void setChange(double change) {
-        this.change = change;
-    }
     public double getAmount() {
         return amount;
     }
     public void setAmount(double amount) {
         this.amount = amount;
-    }
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
-    }
-    public void setLocalTime(LocalTime localTime) {
-        this.localTime = localTime;
     }
 
 }

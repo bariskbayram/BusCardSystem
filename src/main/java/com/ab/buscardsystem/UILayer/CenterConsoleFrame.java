@@ -8,7 +8,6 @@ public class CenterConsoleFrame {
     private JPanel panel1;
     private JButton logInButton;
     private JTextField enterCenterIdTextField;
-    private JLabel enterCenterIdLabel;
     private JButton goBackButton;
     private JFrame frame;
 
@@ -38,14 +37,6 @@ public class CenterConsoleFrame {
             StarterFrame starterFrame = new StarterFrame();
             starterFrame.setVisible(true);
         });
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("CenterConsoleFrame");
-        frame.setContentPane(new CenterConsoleFrame().panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
     }
 
     public void start() {

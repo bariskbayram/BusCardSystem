@@ -4,19 +4,14 @@ import com.ab.buscardsystem.BusinessLayer.Status;
 import com.ab.buscardsystem.BusinessLayer.WholeSystem;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 public class AddingMoneyToCenterFrame {
     private JPanel panel1;
     private JTextField centerIdTextField;
     private JTextField amountTextField;
     private JTextField paymentTextField;
-    private JLabel centerIdLabel;
-    private JLabel amountLabel;
-    private JLabel paymentLabel;
     private JButton OKButton;
     private JButton cancelButton;
-    private JPanel statusPanel;
     private JLabel statusText;
     private JLabel currentCenterBalance;
     private JFrame frame;
@@ -55,15 +50,6 @@ public class AddingMoneyToCenterFrame {
     public void start(){
         frame = new JFrame("AddingMoneyToCenterFrame");
         frame.setContentPane(this.panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocation(400,150);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("AddingMoneyToCenterFrame");
-        frame.setContentPane(new AddingMoneyToCenterFrame().panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocation(400,150);
         frame.pack();

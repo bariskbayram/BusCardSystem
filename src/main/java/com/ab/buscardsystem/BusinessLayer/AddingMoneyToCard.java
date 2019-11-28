@@ -35,9 +35,6 @@ public class AddingMoneyToCard {
     public CardReceipt getCardReceipt() {
         return cardReceipt;
     }
-    public void setCardReceipt(CardReceipt cardReceipt) {
-        this.cardReceipt = cardReceipt;
-    }
     public double getPayment() {
         return payment;
     }

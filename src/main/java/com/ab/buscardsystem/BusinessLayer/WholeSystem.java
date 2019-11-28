@@ -12,6 +12,7 @@ public class WholeSystem {
     private FactoryInput factoryInput = new FactoryInput();
     int centerId;
     int cardId;
+    private Driver driver;
 
     public WholeSystem() {
     }
@@ -63,12 +64,8 @@ public class WholeSystem {
         addingMoneyToCard.setAmount(amount);
         addingMoneyToCard.setPayment(payment);
         addingMoneyToCard.setCardId(cardId);
-        Status correctless = centerConsole.enterCardId(cardId, centerId, addingMoneyToCard);
-        if(correctless == Status.CARDNULL)
-            return Status.CARDNULL;
-        else if(correctless == Status.NOTENOUGHBALANCE)
-            return Status.NOTENOUGHBALANCE;
-        return Status.TRUE;
+        Status correctness = centerConsole.enterCardId(cardId, centerId, addingMoneyToCard);
+        return correctness;
     }
 
     public Status startAddingMoneyToCenter(int id, double amount, double payment){
@@ -77,25 +74,40 @@ public class WholeSystem {
         if(amount > payment)
             return Status.PAYMENTNOTENOUGH;
         Status correctness = cityCardConsole.enterCenterId(id, new AddingMoneyToCenter());
-        if(correctness == Status.CENTERNULL)
-            return Status.CENTERNULL;
-        return Status.TRUE;
+        return correctness;
     }
 
     public Status startAddingCard(int cardId, String name, String surname, CardType type){
-        Status correctness;
-        cityCardConsole.getAddingCard().setCardId(cardId);
-        cityCardConsole.getAddingCard().setName(name);
-        cityCardConsole.getAddingCard().setSurname(surname);
-        cityCardConsole.getAddingCard().setType(type);
-        return correctness = cityCardConsole.enterCardInfo(new AddingCard());
+        Status correctness = cityCardConsole.enterCardInfo(name, surname, cardId, type, new AddingCard());
+        return correctness;
     }
-    public void startAddingCenter(){ cityCardConsole.enterCenterInfo(new AddingCenter());}
-    public void startAddingDriver(){cityCardConsole.enterDriverInfo(new AddingDriver());}
-    public void startRemovingDriver(){
-        cityCardConsole.deleteDriver();
+
+    public Status startAddingCenter(String name, String address, int centerId){
+        Status correctness = cityCardConsole.enterCenterInfo(name, address, centerId, new AddingCenter());
+        return correctness;
     }
-    public void startRemovingCenter(){ cityCardConsole.deleteCenter();}
+
+    public Status startAddingDriver(String name, String surname, int driverId){
+        Status correctness = cityCardConsole.enterDriverInfo(name, surname, driverId, new AddingDriver());
+        return correctness;
+    }
+
+    public Status startRemovingDriver(int driverId){
+        Status correctness = cityCardConsole.deleteDriver(driverId);
+        if(correctness == Status.TRUE){
+            Driver driver = (Driver) dbFacade.get(driverId, Driver.class);
+            this.driver = driver;
+        }
+        return correctness;
+    }
+    public Status startRemovingCenter(int centerId){
+        Status correctness = cityCardConsole.deleteCenter(centerId);
+        if(correctness == Status.TRUE){
+            CenterConsole centerConsole = (CenterConsole) dbFacade.get(centerId, CenterConsole.class);
+            this.centerConsole = centerConsole;
+        }
+        return correctness;
+    }
 
 
     public void setDbFacade(DBFacade dbFacade) {
@@ -133,6 +145,12 @@ public class WholeSystem {
     }
     public void setCenterId(int centerId) {
         this.centerId = centerId;
+    }
+    public Driver getDriver() {
+        return driver;
+    }
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
 }
