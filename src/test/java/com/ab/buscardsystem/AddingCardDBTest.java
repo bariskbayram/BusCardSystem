@@ -1,5 +1,10 @@
 package com.ab.buscardsystem;
 
+import com.ab.buscardsystem.BusinessLayer.AddingCard;
+import com.ab.buscardsystem.DataLayer.AddingCardDB;
+import com.ab.buscardsystem.DataLayer.DBFacade;
+import com.ab.buscardsystem.DataLayer.SqliteDB;
+import com.ab.buscardsystem.DataLayer.TableMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,11 +12,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -66,13 +73,13 @@ class AddingCardDBTest {
         verify(connection).prepareStatement(query);
         verify(preparedStatement).executeUpdate();
         verify(sqliteDB).closeDB();
-        verify(preparedStatement, times(1)).setString(1,String.valueOf(addingCard.getCardId()));
-        verify(preparedStatement, times(1)).setString(2,String.valueOf(addingCard.getLocalDate()));
-        verify(preparedStatement, times(1)).setString(3,String.valueOf(addingCard.getLocalTime()));
-        verify(preparedStatement, times(1)).setString(4,String.valueOf(addingCard.getName()));
-        verify(preparedStatement, times(1)).setString(5,String.valueOf(addingCard.getSurname()));
-        verify(preparedStatement, times(1)).setString(6,String.valueOf(addingCard.getType()));
-        verify(preparedStatement, times(6)).setString(anyInt(),anyString());
+        verify(preparedStatement, times(1)).setString(1, String.valueOf(addingCard.getCardId()));
+        verify(preparedStatement, times(1)).setString(2, String.valueOf(addingCard.getLocalDate()));
+        verify(preparedStatement, times(1)).setString(3, String.valueOf(addingCard.getLocalTime()));
+        verify(preparedStatement, times(1)).setString(4, String.valueOf(addingCard.getName()));
+        verify(preparedStatement, times(1)).setString(5, String.valueOf(addingCard.getSurname()));
+        verify(preparedStatement, times(1)).setString(6, String.valueOf(addingCard.getType()));
+        verify(preparedStatement, times(6)).setString(anyInt(), anyString());
     }
 
 }

@@ -1,11 +1,17 @@
 package com.ab.buscardsystem;
 
+import com.ab.buscardsystem.BusinessLayer.AddingCenter;
+import com.ab.buscardsystem.DataLayer.AddingCenterDB;
+import com.ab.buscardsystem.DataLayer.DBFacade;
+import com.ab.buscardsystem.DataLayer.SqliteDB;
+import com.ab.buscardsystem.DataLayer.TableMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -67,12 +73,12 @@ class AddingCenterDBTest {
         verify(connection).prepareStatement(query);
         verify(preparedStatement).executeUpdate();
         verify(sqliteDB).closeDB();
-        verify(preparedStatement, times(1)).setString(1,String.valueOf(addingCenter.getLocalDate()));
-        verify(preparedStatement, times(1)).setString(2,String.valueOf(addingCenter.getLocalTime()));
-        verify(preparedStatement, times(1)).setString(3,String.valueOf(addingCenter.getName()));
-        verify(preparedStatement, times(1)).setString(4,String.valueOf(addingCenter.getAddress()));
-        verify(preparedStatement, times(1)).setString(5,String.valueOf(addingCenter.getCenterId()));
-        verify(preparedStatement, times(5)).setString(anyInt(),anyString());
+        verify(preparedStatement, times(1)).setString(1, String.valueOf(addingCenter.getLocalDate()));
+        verify(preparedStatement, times(1)).setString(2, String.valueOf(addingCenter.getLocalTime()));
+        verify(preparedStatement, times(1)).setString(3, String.valueOf(addingCenter.getName()));
+        verify(preparedStatement, times(1)).setString(4, String.valueOf(addingCenter.getAddress()));
+        verify(preparedStatement, times(1)).setString(5, String.valueOf(addingCenter.getCenterId()));
+        verify(preparedStatement, times(5)).setString(anyInt(), anyString());
     }
 
 }

@@ -1,5 +1,7 @@
 package com.ab.buscardsystem;
 
+import com.ab.buscardsystem.BusinessLayer.AddingCenter;
+import com.ab.buscardsystem.BusinessLayer.CenterConsole;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,7 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -61,11 +64,11 @@ class AddingCenterTest {
 
     @Test
     @DisplayName("3 Times Incorrect Name Input With More Than 14 Letters")
-    void takeNameWithIncorrectInput3Times(){
+    void takeNameWithIncorrectInput3Times() {
         //Given
         when(factoryInput.inputStringName()).thenReturn("Muhammed Bekir Cinnah")
-                                            .thenReturn("Barış Kaan Bayram")
-                                            .thenReturn("Ata Osman Özgüz");
+                .thenReturn("Barış Kaan Bayram")
+                .thenReturn("Ata Osman Özgüz");
 
         //When
         addingCenter.takeName();
@@ -174,7 +177,7 @@ class AddingCenterTest {
 
     @Test
     @DisplayName("Correct CenterId Input")
-    void takeCenterIdWithCorrectInput(){
+    void takeCenterIdWithCorrectInput() {
         //Given
         when(factoryInput.inputIntegerId()).thenReturn(3);
         //When
@@ -186,7 +189,7 @@ class AddingCenterTest {
 
     @Test
     @DisplayName("InCorrect CenterId Input with Negative And Zero ")
-    void takeCenterIdWithInCorrectInputZeroAndNegative(){
+    void takeCenterIdWithInCorrectInputZeroAndNegative() {
         //Given
         when(factoryInput.inputIntegerId()).thenReturn(0).thenReturn(-5).thenReturn(-5000);
         //When
@@ -198,7 +201,7 @@ class AddingCenterTest {
 
     @Test
     @DisplayName("InCorrect CenterId Input with Too Big ")
-    void takeCenterIdWithInCorrectInputTooBig(){
+    void takeCenterIdWithInCorrectInputTooBig() {
         //Given
         when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(15000).thenReturn(10000000);
         //When
@@ -210,7 +213,7 @@ class AddingCenterTest {
 
     @Test
     @DisplayName("2 Times Incorrect Name Input ")
-    void takeCenterIdWithInCorrectInputTwoTimes(){
+    void takeCenterIdWithInCorrectInputTwoTimes() {
         //Given
         when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(15000).thenReturn(100);
         //When
@@ -222,7 +225,7 @@ class AddingCenterTest {
 
     @Test
     @DisplayName("1 Times Incorrect Name Input ")
-    void takeCenterIdWithInCorrectInputOneTimes(){
+    void takeCenterIdWithInCorrectInputOneTimes() {
         //Given
         when(factoryInput.inputIntegerId()).thenReturn(10000).thenReturn(5);
         //When
@@ -234,24 +237,24 @@ class AddingCenterTest {
 
     @Test
     @DisplayName("Verify SetCenterInfo Parameter with Null Throw Exception")
-    void verifySetCenterInfoParameterWithNullThrowException(){
+    void verifySetCenterInfoParameterWithNullThrowException() {
         //Given
         String expectedMassage = "CenterConsole is null";
         String actualMassage = null;
 
         //When - Then
-        try{
+        try {
             addingCenter.setCenterInfo(null);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             actualMassage = e.getMessage();
         }
-        assertEquals(expectedMassage,actualMassage);
+        assertEquals(expectedMassage, actualMassage);
     }
 
 
     @Test
     @DisplayName("Verify setCenterInfo Method Calls")
-    void setCenterInfoMethodCallsVerify(){
+    void setCenterInfoMethodCallsVerify() {
         //Given
         CenterConsole centerConsole = new CenterConsole();
         when(factoryInput.inputStringName()).thenReturn("muhsin");
@@ -264,11 +267,11 @@ class AddingCenterTest {
 
         //Then
         assertAll("SetUp CenterConsole's Info",
-                ()-> assertEquals(77, centerConsole.getId()),
-                ()-> assertEquals("muhsin", centerConsole.getName()),
-                ()->assertEquals("canakkale", centerConsole.getAddress()),
-                ()->assertEquals(addingCenter.getCenterConsole(), centerConsole),
-                ()->assertEquals(1, addingCenter.getIsCorrect())
+                () -> assertEquals(77, centerConsole.getId()),
+                () -> assertEquals("muhsin", centerConsole.getName()),
+                () -> assertEquals("canakkale", centerConsole.getAddress()),
+                () -> assertEquals(addingCenter.getCenterConsole(), centerConsole),
+                () -> assertEquals(1, addingCenter.getIsCorrect())
         );
 
         verify(factoryInput).inputStringName();
@@ -278,7 +281,7 @@ class AddingCenterTest {
 
     @Test
     @DisplayName("Verify setCenterInfo Method Calls With 3 Wrong Name Input")
-    void setCenterInfoMethodCallsVerify3WrongNameInput(){
+    void setCenterInfoMethodCallsVerify3WrongNameInput() {
         //Given
         CenterConsole centerConsole = new CenterConsole();
         when(factoryInput.inputStringName()).thenReturn("").thenReturn(" ").thenReturn("IncorrectNameIncorrectName");
@@ -292,7 +295,7 @@ class AddingCenterTest {
 
     @Test
     @DisplayName("Verify setCenterInfo Method Calls With 3 Wrong Address Input")
-    void setCenterInfoMethodCallsVerify3WrongAddressInput(){
+    void setCenterInfoMethodCallsVerify3WrongAddressInput() {
         //Given
         CenterConsole centerConsole = new CenterConsole();
         when(factoryInput.inputStringName()).thenReturn("muhsin");
@@ -313,7 +316,7 @@ class AddingCenterTest {
 
     @Test
     @DisplayName("Verify setCenterInfo Method Calls With 3 Wrong ID Input")
-    void setCenterInfoMethodCallsVerify3WrongIdInput(){
+    void setCenterInfoMethodCallsVerify3WrongIdInput() {
         //Given
         CenterConsole centerConsole = new CenterConsole();
         when(factoryInput.inputStringName()).thenReturn("muhsin");
@@ -328,7 +331,6 @@ class AddingCenterTest {
         verify(factoryInput).inputStringAddress();
         verify(factoryInput, times(3)).inputIntegerId();
     }
-
 
 
 }

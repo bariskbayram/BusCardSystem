@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.ab.buscardsystem.UILayer.NewCardFrame">
+  <grid id="27dc6" binding="panel1" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="20" y="20" width="580" height="400"/>
+    </constraints>
+    <properties>
+      <background color="-9771790"/>
+      <inheritsPopupMenu value="false"/>
+      <maximumSize width="580" height="360"/>
+      <minimumSize width="580" height="360"/>
+      <preferredSize width="580" height="360"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="392cc" class="javax.swing.JTextField" binding="enterNameTextField">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag top="0" left="30" bottom="0" right="30" weightx="0.25" weighty="0.25"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="87e60" class="javax.swing.JTextField" binding="enterSurnameTextField">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag top="0" left="30" bottom="0" right="30" weightx="0.25" weighty="0.25"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="83b0f" class="javax.swing.JTextField" binding="enterCardIDTextField">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag top="0" left="30" bottom="0" right="30" weightx="0.25" weighty="0.25"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="9c295" class="javax.swing.JComboBox" binding="selectTypeComboBox">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="30" bottom="0" right="30" weightx="0.25" weighty="0.25"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="9dfde" class="javax.swing.JButton" binding="GoBack">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.25" weighty="0.25"/>
+        </constraints>
+        <properties>
+          <maximumSize width="100" height="50"/>
+          <minimumSize width="100" height="50"/>
+          <preferredSize width="100" height="50"/>
+          <text value="GoBack"/>
+        </properties>
+      </component>
+      <component id="2c580" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.25" weighty="0.5"/>
+        </constraints>
+        <properties>
+          <text value="Enter CardID"/>
+        </properties>
+      </component>
+      <grid id="7c9cb" layout-manager="GridBagLayout">
+        <constraints>
+          <grid row="0" column="0" row-span="5" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.5"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="7f05a" class="javax.swing.JLabel" binding="cardIdLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <text value="CardID: -"/>
+            </properties>
+          </component>
+          <component id="e8e1f" class="javax.swing.JLabel" binding="nameLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <text value="Name: -"/>
+            </properties>
+          </component>
+          <component id="dc65b" class="javax.swing.JLabel" binding="surnameLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <text value="Surname: -"/>
+            </properties>
+          </component>
+          <component id="608ef" class="javax.swing.JLabel" binding="cardTypeLabel">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <text value="CardType: -"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <component id="2ad0" class="javax.swing.JButton" binding="ADDButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.25" weighty="0.5"/>
+        </constraints>
+        <properties>
+          <maximumSize width="100" height="50"/>
+          <minimumSize width="100" height="50"/>
+          <preferredSize width="100" height="50"/>
+          <text value="ADD"/>
+        </properties>
+      </component>
+      <component id="31120" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.25" weighty="0.5"/>
+        </constraints>
+        <properties>
+          <text value="Enter Name"/>
+        </properties>
+      </component>
+      <component id="1b8ed" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.25" weighty="0.5"/>
+        </constraints>
+        <properties>
+          <text value="Enter Surname"/>
+        </properties>
+      </component>
+      <component id="7c0b1" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.25" weighty="0.5"/>
+        </constraints>
+        <properties>
+          <text value="Select Type"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

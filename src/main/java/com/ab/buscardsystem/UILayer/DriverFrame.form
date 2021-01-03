@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.ab.buscardsystem.UILayer.DriverFrame">
+  <grid id="27dc6" binding="panel1" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="51" y="20" width="580" height="400"/>
+    </constraints>
+    <properties>
+      <background color="-9771790"/>
+      <maximumSize width="580" height="360"/>
+      <minimumSize width="580" height="360"/>
+      <preferredSize width="580" height="360"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="461dd" class="javax.swing.JButton" binding="studentButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.5"/>
+        </constraints>
+        <properties>
+          <maximumSize width="100" height="50"/>
+          <minimumSize width="100" height="50"/>
+          <preferredSize width="100" height="50"/>
+          <text value="Student"/>
+        </properties>
+      </component>
+      <component id="5c102" class="javax.swing.JButton" binding="exitButton">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.5"/>
+        </constraints>
+        <properties>
+          <horizontalAlignment value="0"/>
+          <horizontalTextPosition value="11"/>
+          <maximumSize width="100" height="50"/>
+          <minimumSize width="100" height="50"/>
+          <preferredSize width="100" height="50"/>
+          <text value="Exit"/>
+        </properties>
+      </component>
+      <grid id="cd4b5" binding="CardPanel" layout-manager="GridBagLayout">
+        <constraints>
+          <grid row="0" column="0" row-span="4" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.0"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="fa605" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <horizontalAlignment value="10"/>
+              <horizontalTextPosition value="11"/>
+              <text value="READY!"/>
+            </properties>
+          </component>
+          <hspacer id="85b62">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </hspacer>
+          <vspacer id="5769e">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </vspacer>
+        </children>
+      </grid>
+      <component id="b7db0" class="javax.swing.JButton" binding="normalButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.5"/>
+        </constraints>
+        <properties>
+          <maximumSize width="100" height="50"/>
+          <minimumSize width="100" height="50"/>
+          <preferredSize width="100" height="50"/>
+          <text value="Normal"/>
+        </properties>
+      </component>
+      <component id="2eb9a" class="javax.swing.JButton" binding="campusButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.5" weighty="0.5"/>
+        </constraints>
+        <properties>
+          <maximumSize width="100" height="50"/>
+          <minimumSize width="100" height="50"/>
+          <preferredSize width="100" height="50"/>
+          <text value="Campus"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

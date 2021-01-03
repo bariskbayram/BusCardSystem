@@ -1,13 +1,13 @@
 package com.ab.buscardsystem;
 
-import org.junit.jupiter.api.Disabled;
+import com.ab.buscardsystem.BusinessLayer.*;
+import com.ab.buscardsystem.DataLayer.DBFacade;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.sqlite.core.DB;
 
 import java.time.LocalTime;
 import java.util.HashMap;
@@ -50,7 +50,7 @@ class BusConsoleTest {
         verify(tappingCard).set(card);
         verify(tappingCard).setCardId(card.getId());
         verify(tappingCard).setBusConsoleId(anyInt());
-        verify(dbFacade).get(card.getId(),Card.class);
+        verify(dbFacade).get(card.getId(), Card.class);
         verify(tappingCard).getBusConsoleId();
         verify(dbFacade).update(card);
         verify(dbFacade).put(tappingCard);
@@ -82,7 +82,7 @@ class BusConsoleTest {
         verify(tappingCard).set(card);
         verify(tappingCard).setCardId(card.getId());
         verify(tappingCard).setBusConsoleId(anyInt());
-        verify(dbFacade).get(card.getId(),Card.class);
+        verify(dbFacade).get(card.getId(), Card.class);
         verify(tappingCard).getBusConsoleId();
         verify(dbFacade).update(card);
         verify(dbFacade).put(tappingCard);
@@ -91,7 +91,7 @@ class BusConsoleTest {
 
     @Test
     @DisplayName("Verify enterCardId method's Call With Default Type Already Tapped")
-    void enterCardIdDefaultTypeWithAlreadyTapped(){
+    void enterCardIdDefaultTypeWithAlreadyTapped() {
 
         Card card = new Card(41);
         HashMap<Integer, LocalTime> invalidList = new HashMap<>();
@@ -111,7 +111,7 @@ class BusConsoleTest {
 
     @Test
     @DisplayName("Verify enterCardId method's Call With Default Type Tapped But Not in 45 Minutes")
-    void enterCardIdDefaultTypeWithTappedButNotIn45Minutes(){
+    void enterCardIdDefaultTypeWithTappedButNotIn45Minutes() {
 
         Card card = new Card(41);
         HashMap<Integer, LocalTime> invalidList = new HashMap<>();
@@ -135,7 +135,7 @@ class BusConsoleTest {
         verify(tappingCard).set(card);
         verify(tappingCard).setCardId(card.getId());
         verify(tappingCard).setBusConsoleId(anyInt());
-        verify(dbFacade).get(card.getId(),Card.class);
+        verify(dbFacade).get(card.getId(), Card.class);
         verify(tappingCard).getBusConsoleId();
         verify(dbFacade).update(card);
         verify(dbFacade).put(tappingCard);
@@ -143,7 +143,7 @@ class BusConsoleTest {
 
     @Test
     @DisplayName("Card Is Not Tapped")
-    void isCardAlreadyTappedNotTapped(){
+    void isCardAlreadyTappedNotTapped() {
 
         //Given
         HashMap<Integer, LocalTime> invalidList = new HashMap<>();
@@ -160,7 +160,7 @@ class BusConsoleTest {
 
     @Test
     @DisplayName("Card Tapped But Not In 45 Minute")
-    void isCardAlreadyTappedNotTappedIn(){
+    void isCardAlreadyTappedNotTappedIn() {
 
         //Given
         HashMap<Integer, LocalTime> invalidList = new HashMap<>();
@@ -179,7 +179,7 @@ class BusConsoleTest {
 
     @Test
     @DisplayName("Card Tapped In 45 Minute")
-    void isCardAlreadyTappedIn45Minute(){
+    void isCardAlreadyTappedIn45Minute() {
 
         //Given
         HashMap<Integer, LocalTime> invalidList = new HashMap<>();
@@ -198,7 +198,7 @@ class BusConsoleTest {
 
     @Test
     @DisplayName("Verify enterCardId Parameter with Null Throw Exception")
-    void verifyEntertCardIdParameterWithNullThrowException(){
+    void verifyEntertCardIdParameterWithNullThrowException() {
         //Given
         String expectedMessage = "TappingCard is null";
         String actualMessage = null;
@@ -206,7 +206,7 @@ class BusConsoleTest {
         //When
         try {
             busConsole.enterCardId(32, false, null);
-        }catch (Exception e){
+        } catch (Exception e) {
             actualMessage = e.getMessage();
         }
 
@@ -216,7 +216,7 @@ class BusConsoleTest {
 
     @Test
     @DisplayName("Verify enterDriverId With Success Senario")
-    void enterDriverIdVerifySuccessSenario(){
+    void enterDriverIdVerifySuccessSenario() {
         //Given
         Driver driver = new Driver(14);
         DriverLogIn driverLogIn = new DriverLogIn();
@@ -231,7 +231,7 @@ class BusConsoleTest {
         //Then
         assertEquals(1, busConsole.getIsCorrect());
         assertTrue(busConsole.isBusConsoleExist);
-        assertEquals(32,driverLogIn.getBusConsoleId());
+        assertEquals(32, driverLogIn.getBusConsoleId());
         assertEquals(32, busConsole.getId());
         assertEquals(14, driverLogIn.getDriverId());
         assertEquals(busConsole.getDriverLogIn(), driverLogIn);
@@ -242,7 +242,7 @@ class BusConsoleTest {
 
     @Test
     @DisplayName("Verify enterDriverId With Wrong BusConsoleId 3 Times")
-    void verifyEnterDriverIdWithWrongBusConsoleId3Times(){
+    void verifyEnterDriverIdWithWrongBusConsoleId3Times() {
         //Given
         when(factoryInput.inputIntegerId()).thenReturn(-3).thenReturn(-52).thenReturn(0);
 
@@ -256,7 +256,7 @@ class BusConsoleTest {
 
     @Test
     @DisplayName("Verify enterDriverId With Wrong DriverId 3 Times")
-    void verifyEnterDriverIdWithWrongDriverId3Times(){
+    void verifyEnterDriverIdWithWrongDriverId3Times() {
         //Given
         when(factoryInput.inputIntegerId()).thenReturn(-1).thenReturn(23242423).thenReturn(0);
 
@@ -270,7 +270,7 @@ class BusConsoleTest {
 
     @Test
     @DisplayName("Verify enterDriverId Parameter with Null Throw Exception")
-    void verifyEnterDriverIdParameterWithNullThrowException(){
+    void verifyEnterDriverIdParameterWithNullThrowException() {
         //Given
         String expectedMessage = "DriverLogIn is null";
         String actualMessage = null;
@@ -278,7 +278,7 @@ class BusConsoleTest {
         //When
         try {
             busConsole.enterDriverId(null);
-        }catch (Exception e){
+        } catch (Exception e) {
             actualMessage = e.getMessage();
         }
 
@@ -288,7 +288,7 @@ class BusConsoleTest {
 
     @Test
     @DisplayName("Verify getAndEquals Method with Null BusConsole")
-    void verifyGetAndEqualsMethodWithNullBusConsole(){
+    void verifyGetAndEqualsMethodWithNullBusConsole() {
 
         //Given
         DriverLogIn driverLogIn = new DriverLogIn();
@@ -301,8 +301,6 @@ class BusConsoleTest {
         assertFalse(busConsole.isBusConsoleExist);
 
     }
-
-
 
 
 }

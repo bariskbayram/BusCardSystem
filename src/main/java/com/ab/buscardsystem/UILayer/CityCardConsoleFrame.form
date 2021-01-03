@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.ab.buscardsystem.UILayer.CityCardConsoleFrame">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="123" y="36" width="643" height="640"/>
+    </constraints>
+    <properties>
+      <alignmentX value="1.0"/>
+      <alignmentY value="1.0"/>
+      <autoscrolls value="false"/>
+      <background color="-9771790"/>
+      <focusCycleRoot value="false"/>
+      <foreground color="-16777216"/>
+      <maximumSize width="580" height="360"/>
+      <minimumSize width="580" height="360"/>
+      <preferredSize width="580" height="360"/>
+      <visible value="true"/>
+    </properties>
+    <border type="none" title-justification="2" title-position="2">
+      <font size="28"/>
+      <title-color color="-16777216"/>
+    </border>
+    <children>
+      <component id="10eb9" class="javax.swing.JButton" binding="addNewCardButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="180" height="30"/>
+          </grid>
+          <gridbag top="20" left="20" bottom="0" right="0" weightx="1.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <hideActionText value="false"/>
+          <horizontalAlignment value="0"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="200" height="50"/>
+          <minimumSize width="200" height="50"/>
+          <preferredSize width="200" height="50"/>
+          <text value="Add New Card"/>
+          <verticalAlignment value="0"/>
+        </properties>
+      </component>
+      <component id="dbb9e" class="javax.swing.JButton" binding="addCenterButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="180" height="30"/>
+          </grid>
+          <gridbag top="0" left="20" bottom="0" right="0" weightx="1.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <hideActionText value="false"/>
+          <horizontalAlignment value="0"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="200" height="50"/>
+          <minimumSize width="200" height="50"/>
+          <preferredSize width="200" height="50"/>
+          <text value="Add Center"/>
+          <verticalAlignment value="0"/>
+        </properties>
+      </component>
+      <component id="65320" class="javax.swing.JButton" binding="addDriverButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="180" height="30"/>
+          </grid>
+          <gridbag top="0" left="20" bottom="0" right="0" weightx="1.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <hideActionText value="false"/>
+          <horizontalAlignment value="0"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="200" height="50"/>
+          <minimumSize width="200" height="50"/>
+          <preferredSize width="200" height="50"/>
+          <text value="Add Driver"/>
+          <verticalAlignment value="0"/>
+        </properties>
+      </component>
+      <component id="7ee83" class="javax.swing.JButton" binding="addMoneyToCenterButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag top="20" left="0" bottom="0" right="20" weightx="1.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <hideActionText value="false"/>
+          <horizontalAlignment value="0"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="200" height="50"/>
+          <minimumSize width="200" height="50"/>
+          <preferredSize width="200" height="50"/>
+          <text value="Add Money To Center"/>
+          <verticalAlignment value="0"/>
+        </properties>
+      </component>
+      <component id="262a5" class="javax.swing.JButton" binding="deleteDriverButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="0" bottom="0" right="20" weightx="1.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <hideActionText value="false"/>
+          <horizontalAlignment value="0"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="200" height="50"/>
+          <minimumSize width="200" height="50"/>
+          <preferredSize width="200" height="50"/>
+          <text value="Delete Driver"/>
+          <verticalAlignment value="0"/>
+        </properties>
+      </component>
+      <component id="b57fb" class="javax.swing.JButton" binding="deleteCenterButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="0" bottom="0" right="20" weightx="1.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <hideActionText value="false"/>
+          <horizontalAlignment value="0"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="200" height="50"/>
+          <minimumSize width="200" height="50"/>
+          <preferredSize width="200" height="50"/>
+          <text value="Delete Center"/>
+          <verticalAlignment value="0"/>
+        </properties>
+      </component>
+      <component id="7949d" class="javax.swing.JButton" binding="goBackButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="10" bottom="0" right="10" weightx="1.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <hideActionText value="false"/>
+          <horizontalAlignment value="0"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="200" height="50"/>
+          <minimumSize width="200" height="50"/>
+          <preferredSize width="200" height="50"/>
+          <text value="GoBack"/>
+          <verticalAlignment value="0"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
