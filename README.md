@@ -20,4 +20,4 @@ https://drive.google.com/file/d/1uMVPcJUOmDEwrIAh_eqDbtErTQ2cBvwW/view?usp=shari
 [linkedin-shield]: https://img.shields.io/static/v1?label=LINKEDIN&message=BKB&color=<COLOR>
 [linkedin-url]: https://www.linkedin.com/in/bar%C4%B1%C5%9F-kaan-bayram-121850101
 [license-shield]: https://img.shields.io/static/v1?label=LICENCE&message=Apache-2.0&color=<COLOR>
-[license-url]: https://github.com/bariskbayram/hibernate-jpa-example/blob/master/LICENSE
+[license-url]: https://github.com/bariskbayram/BusCardSystem/blob/master/LICENSE
